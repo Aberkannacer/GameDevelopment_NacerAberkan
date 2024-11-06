@@ -21,14 +21,14 @@ namespace DoorHop
         {
             playerTexture = texture;
             animatie = new Animatie();
-            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(128, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(192, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(256, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(320, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(384, 0, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(448, 0, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(256, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
         }
 
         public void Update()
