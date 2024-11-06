@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace DoorHop
 {
@@ -11,8 +12,7 @@ namespace DoorHop
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        private Rectangle deelRectangle;
-        private int schijfOp_X = 0;
+        Player player;
 
         public Game1()
         {
@@ -25,7 +25,6 @@ namespace DoorHop
         {
             // TODO: Add your initialization logic here
 
-            deelRectangle = new Rectangle(schijfOp_X, 0, 64, 64);
 
             base.Initialize();
         }
@@ -35,7 +34,14 @@ namespace DoorHop
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             shardsoulTexture = Content.Load<Texture2D>("Shardsoul Slayer Sprite Sheet");
 
+
+            InitializeGameObjects();
             // TODO: use this.Content to load your game content here
+        }
+
+        private void InitializeGameObjects()
+        {
+            player = new Player(shardsoulTexture);
         }
 
         protected override void Update(GameTime gameTime)
@@ -44,6 +50,7 @@ namespace DoorHop
                 Exit();
 
             // TODO: Add your update logic here
+            player.Update();
 
             base.Update(gameTime);
         }
@@ -53,16 +60,12 @@ namespace DoorHop
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            _spriteBatch.Draw(shardsoulTexture, new Vector2(0, 0),deelRectangle, Color.White);
+
+            player.Draw(_spriteBatch);
+
             _spriteBatch.End();
 
-            schijfOp_X = 64;
-            if (schijfOp_X > 448)
-            {
-                schijfOp_X = 0;
-            }
-
-            deelRectangle.X = schijfOp_X;
+            
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
