@@ -31,9 +31,9 @@ namespace DoorHop
             animatie.AddFrame(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            animatie.Update();
+            animatie.Update(gameTime);
         }
 
         public void Draw(SpriteBatch spriteBatch)

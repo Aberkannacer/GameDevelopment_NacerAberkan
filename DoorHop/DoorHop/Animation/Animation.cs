@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Design;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace DoorHop.Animation
 
         private int counter;
 
+        private double frameMovement = 0;
+
         public Animatie()
         {
             frames = new List<AnimationFrame>();
@@ -26,10 +29,20 @@ namespace DoorHop.Animation
             CurrentFrame = frames[0];
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
-            counter++;
+
+            frameMovement += CurrentFrame.SourceRecatangle.Width * gameTime.ElapsedGameTime.TotalSeconds;
+            
+            if (frameMovement >= CurrentFrame.SourceRecatangle.Width/20) //20 keer sneller lopen. Je kan dit nog aanpassen
+            {
+                counter++;
+                frameMovement = 0;
+            }
+            {
+
+            }
 
             if (counter >= frames.Count)
             {

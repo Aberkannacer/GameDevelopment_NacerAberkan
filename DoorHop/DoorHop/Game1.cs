@@ -50,7 +50,7 @@ namespace DoorHop
                 Exit();
 
             // TODO: Add your update logic here
-            player.Update();
+            player.Update(gameTime);
 
             base.Update(gameTime);
         }
