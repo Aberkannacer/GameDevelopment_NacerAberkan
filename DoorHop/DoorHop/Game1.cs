@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoorHop.Input;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -41,7 +42,7 @@ namespace DoorHop
 
         private void InitializeGameObjects()
         {
-            player = new Player(shardsoulTexture);
+            player = new Player(shardsoulTexture, new KeyBoardReader());
         }
 
         protected override void Update(GameTime gameTime)

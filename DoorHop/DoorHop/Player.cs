@@ -1,4 +1,5 @@
 ﻿using DoorHop.Animation;
+using DoorHop.Input;
 using DoorHop.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,9 +21,10 @@ namespace DoorHop
         private Vector2 speed;
         private Vector2 acceleration;
         private Vector2 mouseVector;
+        IInputReader inputReader;
         
 
-        public Player(Texture2D texture)
+        public Player(Texture2D texture, IInputReader reader)
         {
             playerTexture = texture;
             animatie = new Animatie();
@@ -37,11 +39,19 @@ namespace DoorHop
             position = new Vector2(10, 10);
             speed = new Vector2(1, 1);
             acceleration = new Vector2(0.1f, 0.1f);
+
+            //read input for my hero class
+            this.inputReader = reader;
         }
 
         public void Update(GameTime gameTime)
         {
-            Move(GetMouseState());
+            var direction = inputReader.ReadInput();
+
+            direction *= 4;
+            position += direction;
+
+            //Move(GetMouseState());
             animatie.Update(gameTime);
         }
 
@@ -89,7 +99,7 @@ namespace DoorHop
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(playerTexture, position, animatie.CurrentFrame.SourceRecatangle , Color.White, 0, new Vector2(0,0), 0.5f, SpriteEffects.None, 0);
+            spriteBatch.Draw(playerTexture, position, animatie.CurrentFrame.SourceRecatangle , Color.White, 0, new Vector2(0,0), 1.2f, SpriteEffects.None, 0);
 
         }
 
