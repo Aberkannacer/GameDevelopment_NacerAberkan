@@ -41,3 +41,5 @@ C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tiles\Tile2.xnb
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile1.xnb
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile2.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile3.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile4.xnb

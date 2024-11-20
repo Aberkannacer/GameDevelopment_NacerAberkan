@@ -4,13 +4,11 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Shardsoul Slayer Sprite Sheet.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile1.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Shardsoul Slayer Sprite Sheet.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile2.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
   </DestFiles>
 </SourceFileCollection>
