@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DoorHop.TileMap
 {
-    internal class Tiles
+    class Tiles
     {
         protected Texture2D texture;
 
