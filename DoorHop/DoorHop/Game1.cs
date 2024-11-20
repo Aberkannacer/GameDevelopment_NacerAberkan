@@ -1,4 +1,5 @@
 ﻿using DoorHop.Input;
+using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +13,7 @@ namespace DoorHop
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Map map;
 
         Player player;
 
@@ -25,7 +27,7 @@ namespace DoorHop
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            map = new Map();
 
             base.Initialize();
         }
@@ -36,8 +38,19 @@ namespace DoorHop
             shardsoulTexture = Content.Load<Texture2D>("Shardsoul Slayer Sprite Sheet");
 
 
-            InitializeGameObjects();
+
+            Tiles.Content = Content;
+
+            map.Generate(new int[,]
+            {
+                { 0,1,2,0 }
+                
+
+            }, 64);
             // TODO: use this.Content to load your game content here
+
+            InitializeGameObjects();
+
         }
 
         private void InitializeGameObjects()
@@ -63,6 +76,7 @@ namespace DoorHop
             _spriteBatch.Begin();
 
             player.Draw(_spriteBatch);
+            map.Draw(_spriteBatch);
 
             _spriteBatch.End();
 

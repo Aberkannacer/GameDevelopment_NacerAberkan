@@ -39,7 +39,7 @@ namespace DoorHop.TileMap
     {
         public CollisionTiles(int i, Rectangle newRectangle)
         {
-            texture = Content.Load<Texture2D>("Tile" + 1);
+            texture = Content.Load<Texture2D>("Tile" + i);
             this.Rectangle = newRectangle;
         }
     }

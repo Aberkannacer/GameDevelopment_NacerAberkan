@@ -37,3 +37,7 @@ C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\obj\Debug\
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\obj\Debug\net6.0-windows\DoorHop.genruntimeconfig.cache
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\obj\Debug\net6.0-windows\ref\DoorHop.dll
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Shardsoul Slayer Sprite Sheet.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tiles\Tile1.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tiles\Tile2.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile1.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile2.xnb

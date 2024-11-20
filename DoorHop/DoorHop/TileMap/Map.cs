@@ -19,12 +19,12 @@ namespace DoorHop.TileMap
         }
         
         public int Width 
-        { 
-            get => width; 
+        {
+            get { return width; } 
         }
         public int Height 
-        { 
-            get => height; 
+        {
+            get { return height; } 
         }
 
         public Map()
@@ -34,19 +34,19 @@ namespace DoorHop.TileMap
 
         public void Generate(int[,] map, int size)
         {
-            for (int i = 0; i < map.Length; i++)
+            for (int a = 0; a < map.GetLength(1); a++)
             {
-                for (int y = 0; y < map.GetLength(0); y++)
+                for (int b = 0; b < map.GetLength(0); b++)
                 {
-                    int number = map[i, y];
+                    int number = map[b, a];
 
                     if (number>0)
                     {
-                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(i * size, y * size, size, size)));
+                        collisionTiles.Add(new CollisionTiles(number, new Rectangle(a * size, b * size, size, size)));
                     }
 
-                    width = (i + 1) * size;
-                    height = (y + 1) * size;
+                    width = (a + 1) * size;
+                    height = (b + 1) * size;
                 }
             }
         }
