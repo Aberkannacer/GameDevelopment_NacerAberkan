@@ -41,14 +41,8 @@ namespace DoorHop
             
             // Animatie setup
             animatie = new Animatie();
-            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(256, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
+            animatie.AddFrame();
+            
         }
 
         public void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
@@ -59,13 +53,15 @@ namespace DoorHop
             // Pas zwaartekracht toe
             velocity.Y += gravity;
             
-            // Update positie
-            position += velocity;
+            // Update positie voor X en Y apart
+            position.X += velocity.X;
+            CheckXCollision(tiles);  // Check horizontale collision eerst
+            
+            position.Y += velocity.Y;
+            CheckYCollision(tiles);  // Check verticale collision daarna
 
-            // Check beweging voor animatie
+            // Animatie update
             isMoving = Math.Abs(velocity.X) > 0.1f;
-
-            // Update animatie
             if (isMoving)
             {
                 animatie.Update(gameTime);
@@ -74,17 +70,50 @@ namespace DoorHop
             {
                 animatie.Reset();
             }
+        }
 
-            // Collision detectie
+        private void CheckXCollision(List<TileMap.CollisionTiles> tiles)
+        {
+            Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
+            
             foreach (var tile in tiles)
             {
-                if (tile.Rectangle.Intersects(new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight)))
+                if (playerRect.Intersects(tile.Rectangle))
                 {
-                    if (velocity.Y > 0) // Als we naar beneden vallen
+                    // Als we tegen een muur aanlopen
+                    if (velocity.X > 0) // Beweging naar rechts
+                    {
+                        position.X = tile.Rectangle.Left - frameWidth;
+                        velocity.X = 0;
+                    }
+                    else if (velocity.X < 0) // Beweging naar links
+                    {
+                        position.X = tile.Rectangle.Right;
+                        velocity.X = 0;
+                    }
+                }
+            }
+        }
+
+        private void CheckYCollision(List<TileMap.CollisionTiles> tiles)
+        {
+            Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
+            
+            foreach (var tile in tiles)
+            {
+                if (playerRect.Intersects(tile.Rectangle))
+                {
+                    // Verticale collision
+                    if (velocity.Y > 0) // Val naar beneden
                     {
                         position.Y = tile.Rectangle.Top - frameHeight;
                         velocity.Y = 0;
-                        isJumping = false; // Reset jumping state als we landen
+                        isJumping = false;
+                    }
+                    else if (velocity.Y < 0) // Spring omhoog
+                    {
+                        position.Y = tile.Rectangle.Bottom;
+                        velocity.Y = 0;
                     }
                 }
             }
@@ -92,11 +121,9 @@ namespace DoorHop
 
         private void HandleInput()
         {
-            // Horizontale beweging
             Vector2 direction = inputReader.ReadInput();
             velocity.X = direction.X * moveSpeed;
 
-            // Spring logica - alleen springen als we niet al aan het springen zijn
             if (inputReader.IsJumpKeyPressed() && !isJumping)
             {
                 velocity.Y = jumpForce;

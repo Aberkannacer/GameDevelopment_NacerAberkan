@@ -25,10 +25,19 @@ namespace DoorHop.Animation
             frames = new List<AnimationFrame>();
         }
 
-        public void AddFrame(AnimationFrame animationFrame)
+        public void AddFrame()
         {
-            frames.Add(animationFrame);
+            
+            frames.Add(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(256, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
+            frames.Add(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
             CurrentFrame = frames[0];
+            
         }
 
         public void Update(GameTime gameTime)
@@ -69,5 +78,7 @@ namespace DoorHop.Animation
         {
             speed = newSpeed;
         }
+
+      
     }
 }

@@ -27,7 +27,7 @@ namespace DoorHop
             player = new Player(Content);
             player.SetAnimationSpeed(1f);//animation speed variable
             player.SetMoveSpeed(3.5f);//speed variable
-            player.SetJumpForce(10f); //jump variable
+            player.SetJumpForce(12f); //jump variable
 
             map = new Map();
             map.Generate(new int[,]
