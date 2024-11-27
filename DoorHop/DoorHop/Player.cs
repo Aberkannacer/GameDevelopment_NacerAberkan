@@ -15,104 +15,88 @@ using System.Threading.Tasks;
 
 namespace DoorHop
 {
-    public class Player:IGameObject
+    public class Player : IGameObject
     {
         private Texture2D playerTexture;
         private Animatie animatie;
         private Vector2 position;
-        //private Vector2 speed;
         private Vector2 velocity;
         private IInputReader inputReader;
-        private Rectangle rectangle;
-        private bool hasJumped = false;
-        private float gravity = 0.5f;
         private int frameWidth = 64;
         private int frameHeight = 64;
-        private int currentFrame = 0;
-        private int totalFrames = 8;
-        private float frameTime = 0.1f;
-        private float currentFrameTime = 0;
         private float moveSpeed = 5f;
         private float jumpForce = -12f;
+        private float gravity = 0.5f;
+        private bool isMoving;
+        private float movementThreshold = 0.1f;
+        private float animationSpeed = 0.1f;
         private bool isJumping = false;
 
-        public Vector2 Position 
-        {
-            get { return position; }
-            set { position = value; }
-        }
-
-        public Vector2 Velocity 
-        {
-            get { return velocity; }
-            set { velocity = value; }
-        }
-
         public Player(ContentManager content)
-        {      
-            playerTexture = content.Load<Texture2D>("Player"); // Controleer of dit bestand bestaat
-            inputReader = new KeyBoardReader();
-            position = new Vector2(100, 100); // Zet de startpositie hoger
-            
-                        
-            // Initialiseer de animatie
-            animatie = new Animatie();
-            
-            // Voeg eerste frame toe
-            animatie.AddFrame(new AnimationFrame(
-                new Rectangle(0, 0, frameWidth, frameHeight)
-            ));
-
-            rectangle = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
-        }
-
-        public void Load(ContentManager content)
         {
             playerTexture = content.Load<Texture2D>("Player");
-        }
-
-        public void Update(GameTime gameTime, List<CollisionTiles> tiles)
-        {
-            position += velocity;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
-
-            Input(gameTime);
-            animatie.Update(gameTime);
+            position = new Vector2(100, 100);
+            velocity = Vector2.Zero;
+            inputReader = new KeyBoardReader();
             
-            if (velocity.Y < 10)
-                velocity.Y += gravity;
+            // Animatie setup
+            animatie = new Animatie();
+            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(256, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
+            animatie.AddFrame(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
+        }
 
-            CheckCollision(tiles);
+        public void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
+        {
+            Vector2 oldPosition = position;
+            HandleInput();
+            
+            // Pas zwaartekracht toe
+            velocity.Y += gravity;
+            
+            // Update positie
+            position += velocity;
 
-            // Update de animatie
-            currentFrameTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (currentFrameTime >= frameTime)
+            // Check beweging voor animatie
+            isMoving = Math.Abs(velocity.X) > 0.1f;
+
+            // Update animatie
+            if (isMoving)
             {
-                currentFrameTime = 0;
-                currentFrame = (currentFrame + 1) % totalFrames;
+                animatie.Update(gameTime);
+            }
+            else
+            {
+                animatie.Reset();
             }
 
-            // Als de speler niet beweegt, gebruik het eerste frame
-            if (velocity.X == 0)
+            // Collision detectie
+            foreach (var tile in tiles)
             {
-                currentFrame = 0;
-            }
-
-            // Grond check (pas aan naar je werkelijke grond Y-positie)
-            if (position.Y >= 400) // Voorbeeld grondniveau
-            {
-                position.Y = 400;
-                velocity.Y = 0;
-                isJumping = false;
+                if (tile.Rectangle.Intersects(new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight)))
+                {
+                    if (velocity.Y > 0) // Als we naar beneden vallen
+                    {
+                        position.Y = tile.Rectangle.Top - frameHeight;
+                        velocity.Y = 0;
+                        isJumping = false; // Reset jumping state als we landen
+                    }
+                }
             }
         }
 
-        public void Input(GameTime gameTime)
+        private void HandleInput()
         {
+            // Horizontale beweging
             Vector2 direction = inputReader.ReadInput();
             velocity.X = direction.X * moveSpeed;
 
-            // Spring logica
+            // Spring logica - alleen springen als we niet al aan het springen zijn
             if (inputReader.IsJumpKeyPressed() && !isJumping)
             {
                 velocity.Y = jumpForce;
@@ -122,91 +106,26 @@ namespace DoorHop
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            // 2de rij = 64px
-            Rectangle sourceRectangle = new Rectangle(
-                currentFrame * frameWidth,  // X: 0, 64, 128, 192, etc.
-                64,                         // Y: altijd 64 voor deze animatie rij
-                frameWidth,                 // 64 pixels breed
-                frameHeight                 // 64 pixels hoog
+            SpriteEffects effect = velocity.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            
+            spriteBatch.Draw(
+                playerTexture, 
+                position, 
+                animatie.CurrentFrame.SourceRecatangle, 
+                Color.White,
+                0f,
+                Vector2.Zero,
+                1f,
+                effect,
+                0f
             );
-
-            spriteBatch.Draw(playerTexture,position,sourceRectangle,Color.White
-            );
-        }
-
-        public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
-        {
-            if (rectangle.TouchTopOf(newRectangle))
-            {
-                rectangle.Y = newRectangle.Y - rectangle.Height;
-                velocity.Y = 0f;
-                hasJumped = false;
-            }
-
-            if (rectangle.TouchLeftOf(newRectangle))
-            {
-                position.X = newRectangle.X - rectangle.Width - 2;
-
-            }
-            if (rectangle.TouchRightOf(newRectangle))
-            {
-                position.X = newRectangle.X + rectangle.Width + 2;
-
-            }
-            if (rectangle.TouchBottomOf(newRectangle))
-            {
-                velocity.Y = 1f;
-            }
-
-            if (Position.X < 0)
-            {
-                position.X = 0;
-            }
-            if (Position.X>xOffset - rectangle.Width)
-            {
-                position.X = xOffset - rectangle.Width;
-            }
-            if (Position.Y < 0)
-            {
-                velocity.Y = 1f;
-            }
-            if (Position.Y > yOffset - rectangle.Height)
-            {
-                position.Y = yOffset - rectangle.Height;
-            }
-
-        }
-
-        public void CheckCollision(List<CollisionTiles> tiles)
-        {
-            foreach (var tile in tiles)
-            {
-                if (rectangle.TouchTopOf(tile.Rectangle))
-                {
-                    position.Y = tile.Rectangle.Y - rectangle.Height;
-                    velocity.Y = 0f;
-                    hasJumped = false;
-                }
-                if (rectangle.TouchLeftOf(tile.Rectangle))
-                {
-                    position.X = tile.Rectangle.X - rectangle.Width - 2;
-                }
-                if (rectangle.TouchRightOf(tile.Rectangle))
-                {
-                    position.X = tile.Rectangle.X + tile.Rectangle.Width + 2;
-                }
-                if (rectangle.TouchBottomOf(tile.Rectangle))
-                {
-                    velocity.Y = 1f;
-                }
-            }
         }
 
         public void SetAnimationSpeed(float speed)
         {
-            // Lagere waarde = snellere animatie
-            // Hogere waarde = tragere animatie
-            frameTime = speed;
+            animationSpeed = speed;
+            // Als je Animatie klasse een methode heeft om de snelheid in te stellen, roep die hier aan
+            animatie.SetSpeed(animationSpeed);
         }
 
         public void SetMoveSpeed(float speed)
@@ -216,8 +135,7 @@ namespace DoorHop
 
         public void SetJumpForce(float force)
         {
-            jumpForce = -Math.Abs(force); // Zorg ervoor dat het altijd negatief is
+            jumpForce = -Math.Abs(force); // Zorg ervoor dat jumpForce negatief blijft
         }
-
     }
 }
