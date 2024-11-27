@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DoorHop.TileMap
 {
-    class Map
+    public class Map
     {
         private int width, height;
         private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();

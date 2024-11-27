@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoorHop.TileMap;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace DoorHop.Interfaces
 {
     internal interface IGameObject
     {
-        void Update(GameTime gameTime);
+        void Update(GameTime gameTime, List<CollisionTiles> tiles);
 
         void Draw(SpriteBatch spriteBatch);
     }

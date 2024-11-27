@@ -1,7 +1,9 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
+using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -15,92 +17,206 @@ namespace DoorHop
 {
     public class Player:IGameObject
     {
-        Texture2D playerTexture;
-        Animatie animatie;
+        private Texture2D playerTexture;
+        private Animatie animatie;
         private Vector2 position;
-        private Vector2 speed;
-        private Vector2 acceleration;
-        private Vector2 mouseVector;
-        IInputReader inputReader;
-        
+        //private Vector2 speed;
+        private Vector2 velocity;
+        private IInputReader inputReader;
+        private Rectangle rectangle;
+        private bool hasJumped = false;
+        private float gravity = 0.5f;
+        private int frameWidth = 64;
+        private int frameHeight = 64;
+        private int currentFrame = 0;
+        private int totalFrames = 8;
+        private float frameTime = 0.1f;
+        private float currentFrameTime = 0;
+        private float moveSpeed = 5f;
+        private float jumpForce = -12f;
+        private bool isJumping = false;
 
-        public Player(Texture2D texture, IInputReader reader)
+        public Vector2 Position 
         {
-            playerTexture = texture;
+            get { return position; }
+            set { position = value; }
+        }
+
+        public Vector2 Velocity 
+        {
+            get { return velocity; }
+            set { velocity = value; }
+        }
+
+        public Player(ContentManager content)
+        {      
+            playerTexture = content.Load<Texture2D>("Player"); // Controleer of dit bestand bestaat
+            inputReader = new KeyBoardReader();
+            position = new Vector2(100, 100); // Zet de startpositie hoger
+            
+                        
+            // Initialiseer de animatie
             animatie = new Animatie();
-            animatie.AddFrame(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(256, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
-            animatie.AddFrame(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
-            position = new Vector2(10, 10);
-            speed = new Vector2(1, 1);
-            acceleration = new Vector2(0.1f, 0.1f);
+            
+            // Voeg eerste frame toe
+            animatie.AddFrame(new AnimationFrame(
+                new Rectangle(0, 0, frameWidth, frameHeight)
+            ));
 
-            //read input for my hero class
-            this.inputReader = reader;
+            rectangle = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
         }
 
-        public void Update(GameTime gameTime)
+        public void Load(ContentManager content)
         {
-            var direction = inputReader.ReadInput();
+            playerTexture = content.Load<Texture2D>("Player");
+        }
 
-            direction *= 4;
-            position += direction;
+        public void Update(GameTime gameTime, List<CollisionTiles> tiles)
+        {
+            position += velocity;
+            rectangle = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
 
-            //Move(GetMouseState());
+            Input(gameTime);
             animatie.Update(gameTime);
-        }
-
-        private Vector2 GetMouseState()
-        {
-            MouseState state = Mouse.GetState();
-            mouseVector = new Vector2(state.X, state.Y);
-            return mouseVector;
-        }
-
-        private void Move(Vector2 mouse)
-        {
-            var direction = Vector2.Add(mouse, -position);
-            direction.Normalize();
-            direction = Vector2.Multiply(direction, 1f);// adding speed to follow mouse
-
-            position += direction;
-            speed += acceleration;
-            speed = Limit(speed, 10);
             
-            float tmp = speed.Length();
-            
-            if (position.X > 600 || position.X <0)
+            if (velocity.Y < 10)
+                velocity.Y += gravity;
+
+            CheckCollision(tiles);
+
+            // Update de animatie
+            currentFrameTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (currentFrameTime >= frameTime)
             {
-                speed.X *= -1;
-                acceleration.X *= -1;
+                currentFrameTime = 0;
+                currentFrame = (currentFrame + 1) % totalFrames;
             }
-            if (position.Y > 480 || position.Y < 0)
+
+            // Als de speler niet beweegt, gebruik het eerste frame
+            if (velocity.X == 0)
             {
-                speed.Y *= -1;
-                acceleration *= -1;
+                currentFrame = 0;
+            }
+
+            // Grond check (pas aan naar je werkelijke grond Y-positie)
+            if (position.Y >= 400) // Voorbeeld grondniveau
+            {
+                position.Y = 400;
+                velocity.Y = 0;
+                isJumping = false;
             }
         }
 
-        private Vector2 Limit(Vector2 v, float max)
+        public void Input(GameTime gameTime)
         {
-            if (v.Length() > max)
+            Vector2 direction = inputReader.ReadInput();
+            velocity.X = direction.X * moveSpeed;
+
+            // Spring logica
+            if (inputReader.IsJumpKeyPressed() && !isJumping)
             {
-                var ratio = max / v.Length();
-                v.X *= ratio;
-                v.Y *= ratio;
+                velocity.Y = jumpForce;
+                isJumping = true;
             }
-            return v;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(playerTexture, position, animatie.CurrentFrame.SourceRecatangle , Color.White, 0, new Vector2(0,0), 1.2f, SpriteEffects.None, 0);
+            // 2de rij = 64px
+            Rectangle sourceRectangle = new Rectangle(
+                currentFrame * frameWidth,  // X: 0, 64, 128, 192, etc.
+                64,                         // Y: altijd 64 voor deze animatie rij
+                frameWidth,                 // 64 pixels breed
+                frameHeight                 // 64 pixels hoog
+            );
 
+            spriteBatch.Draw(playerTexture,position,sourceRectangle,Color.White
+            );
+        }
+
+        public void Collision(Rectangle newRectangle, int xOffset, int yOffset)
+        {
+            if (rectangle.TouchTopOf(newRectangle))
+            {
+                rectangle.Y = newRectangle.Y - rectangle.Height;
+                velocity.Y = 0f;
+                hasJumped = false;
+            }
+
+            if (rectangle.TouchLeftOf(newRectangle))
+            {
+                position.X = newRectangle.X - rectangle.Width - 2;
+
+            }
+            if (rectangle.TouchRightOf(newRectangle))
+            {
+                position.X = newRectangle.X + rectangle.Width + 2;
+
+            }
+            if (rectangle.TouchBottomOf(newRectangle))
+            {
+                velocity.Y = 1f;
+            }
+
+            if (Position.X < 0)
+            {
+                position.X = 0;
+            }
+            if (Position.X>xOffset - rectangle.Width)
+            {
+                position.X = xOffset - rectangle.Width;
+            }
+            if (Position.Y < 0)
+            {
+                velocity.Y = 1f;
+            }
+            if (Position.Y > yOffset - rectangle.Height)
+            {
+                position.Y = yOffset - rectangle.Height;
+            }
+
+        }
+
+        public void CheckCollision(List<CollisionTiles> tiles)
+        {
+            foreach (var tile in tiles)
+            {
+                if (rectangle.TouchTopOf(tile.Rectangle))
+                {
+                    position.Y = tile.Rectangle.Y - rectangle.Height;
+                    velocity.Y = 0f;
+                    hasJumped = false;
+                }
+                if (rectangle.TouchLeftOf(tile.Rectangle))
+                {
+                    position.X = tile.Rectangle.X - rectangle.Width - 2;
+                }
+                if (rectangle.TouchRightOf(tile.Rectangle))
+                {
+                    position.X = tile.Rectangle.X + tile.Rectangle.Width + 2;
+                }
+                if (rectangle.TouchBottomOf(tile.Rectangle))
+                {
+                    velocity.Y = 1f;
+                }
+            }
+        }
+
+        public void SetAnimationSpeed(float speed)
+        {
+            // Lagere waarde = snellere animatie
+            // Hogere waarde = tragere animatie
+            frameTime = speed;
+        }
+
+        public void SetMoveSpeed(float speed)
+        {
+            moveSpeed = speed;
+        }
+
+        public void SetJumpForce(float force)
+        {
+            jumpForce = -Math.Abs(force); // Zorg ervoor dat het altijd negatief is
         }
 
     }

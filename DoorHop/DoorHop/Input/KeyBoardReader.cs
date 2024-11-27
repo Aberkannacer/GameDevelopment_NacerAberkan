@@ -22,7 +22,12 @@ namespace DoorHop.Input
             {
                 direction = new Vector2(1, 0);
             }
+            
             return direction;
+        }
+        public bool IsJumpKeyPressed()
+        {
+            return Keyboard.GetState().IsKeyDown(Keys.Space);
         }
     }
 }

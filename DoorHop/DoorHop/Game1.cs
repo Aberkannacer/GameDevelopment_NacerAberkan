@@ -1,21 +1,17 @@
-﻿using DoorHop.Input;
-using DoorHop.TileMap;
+﻿using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System;
 
 namespace DoorHop
 {
     public class Game1 : Game
     {
-        Texture2D shardsoulTexture;
-
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Player player;
         private Map map;
-
-        Player player;
+        
 
         public Game1()
         {
@@ -26,21 +22,21 @@ namespace DoorHop
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-            map = new Map();
-
             base.Initialize();
+
+            player = new Player(Content);
+            player.SetAnimationSpeed(0.07f);
+            player.SetMoveSpeed(5f);
+            player.SetJumpForce(12f);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            shardsoulTexture = Content.Load<Texture2D>("Shardsoul Slayer Sprite Sheet");
-
-
-
-            Tiles.Content = Content;
-
+            
+            // Laad eerst de tiles
+            Tiles.Content = this.Content;
+            map = new Map();
             map.Generate(new int[,]
             {
                 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
@@ -53,20 +49,11 @@ namespace DoorHop
                 { 0,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0 },
                 { 0,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0 },
                 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
-
-
-
-
             }, 48);
-            // TODO: use this.Content to load your game content here
 
-            InitializeGameObjects();
-
-        }
-
-        private void InitializeGameObjects()
-        {
-            player = new Player(shardsoulTexture, new KeyBoardReader());
+            // Dan de player
+            player = new Player(this.Content);
+            player.SetMoveSpeed(2f);
         }
 
         protected override void Update(GameTime gameTime)
@@ -74,8 +61,7 @@ namespace DoorHop
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-            player.Update(gameTime);
+            player.Update(gameTime, map.CollisionTiles);
 
             base.Update(gameTime);
         }
@@ -85,14 +71,14 @@ namespace DoorHop
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-
-            player.Draw(_spriteBatch);
-            map.Draw(_spriteBatch);
-
-            _spriteBatch.End();
-
             
-            // TODO: Add your drawing code here
+            // Debug info
+            //Console.WriteLine($"Drawing at position: {player?.Position}");
+            
+            map.Draw(_spriteBatch);
+            player.Draw(_spriteBatch);
+            
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }

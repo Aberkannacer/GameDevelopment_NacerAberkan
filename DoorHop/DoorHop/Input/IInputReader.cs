@@ -10,5 +10,6 @@ namespace DoorHop.Input
     public interface IInputReader
     {
         Vector2 ReadInput();
+        bool IsJumpKeyPressed();
     }
 }

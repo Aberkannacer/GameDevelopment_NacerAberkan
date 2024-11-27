@@ -3,16 +3,44 @@
   "WorkspaceRootPath": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\input\\keyboardreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\input\\keyboardreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\input\\iinputreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\input\\iinputreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\animation\\animationframe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\animation\\animationframe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\animation\\animation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\animation\\animation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\interfaces\\igameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\interfaces\\igameobject.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\tilemap\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\tilemap\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\tilemap\\tiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\tilemap\\tiles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\tilemap\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\tilemap\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\tilemap\\rectanglehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\tilemap\\rectanglehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +62,131 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Tiles.cs",
-              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Tiles.cs",
-              "RelativeDocumentMoniker": "DoorHop\\TileMap\\Tiles.cs",
-              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Tiles.cs",
-              "RelativeToolTip": "DoorHop\\TileMap\\Tiles.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAvwCkAAAAMAAAA",
+              "DocumentIndex": 5,
+              "Title": "Animation.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Animation\\Animation.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Animation\\Animation.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Animation\\Animation.cs",
+              "RelativeToolTip": "DoorHop\\Animation\\Animation.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T14:30:26.613Z",
+              "WhenOpened": "2024-11-27T14:19:33.362Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "AnimationFrame.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Animation\\AnimationFrame.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Animation\\AnimationFrame.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Animation\\AnimationFrame.cs",
+              "RelativeToolTip": "DoorHop\\Animation\\AnimationFrame.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T14:19:32.402Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Game1.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Game1.cs",
               "RelativeDocumentMoniker": "DoorHop\\Game1.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Game1.cs",
               "RelativeToolTip": "DoorHop\\Game1.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAYwC8AAAAtAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T14:29:21.596Z",
+              "WhenOpened": "2024-11-27T14:03:07.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Player.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Player.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Player.cs",
+              "RelativeToolTip": "DoorHop\\Player.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAiwBEAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T15:36:08.557Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IInputReader.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Input\\IInputReader.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Input\\IInputReader.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Input\\IInputReader.cs",
+              "RelativeToolTip": "DoorHop\\Input\\IInputReader.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T13:34:17.509Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "KeyBoardReader.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Input\\KeyBoardReader.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Input\\KeyBoardReader.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Input\\KeyBoardReader.cs",
+              "RelativeToolTip": "DoorHop\\Input\\KeyBoardReader.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAUwBsAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T13:34:18.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Map.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Map.cs",
               "RelativeDocumentMoniker": "DoorHop\\TileMap\\Map.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Map.cs",
               "RelativeToolTip": "DoorHop\\TileMap\\Map.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAowCQAAAA2AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T14:29:16.837Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "IGameObject.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Interfaces\\IGameObject.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Interfaces\\IGameObject.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Interfaces\\IGameObject.cs",
+              "RelativeToolTip": "DoorHop\\Interfaces\\IGameObject.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA0AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-27T13:34:29.295Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RectangleHelper.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\RectangleHelper.cs",
+              "RelativeDocumentMoniker": "DoorHop\\TileMap\\RectangleHelper.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\RectangleHelper.cs",
+              "RelativeToolTip": "DoorHop\\TileMap\\RectangleHelper.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAUwCMAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T15:23:22.737Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Tiles.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Tiles.cs",
+              "RelativeDocumentMoniker": "DoorHop\\TileMap\\Tiles.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Tiles.cs",
+              "RelativeToolTip": "DoorHop\\TileMap\\Tiles.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACkAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T14:30:26.613Z",
               "EditorCaption": ""
             }
           ]

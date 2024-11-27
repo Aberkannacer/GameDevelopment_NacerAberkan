@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DoorHop.TileMap
 {
-    class Tiles
+    public class Tiles
     {
         protected Texture2D texture;
 
@@ -35,7 +35,7 @@ namespace DoorHop.TileMap
 
     }
 
-    class CollisionTiles: Tiles
+    public class CollisionTiles : Tiles
     {
         public CollisionTiles(int i, Rectangle newRectangle)
         {
