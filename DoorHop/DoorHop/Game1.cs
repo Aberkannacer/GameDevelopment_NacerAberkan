@@ -1,4 +1,6 @@
-﻿using DoorHop.TileMap;
+﻿using DoorHop.Players;
+using DoorHop.Players.Enemys;
+using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +14,8 @@ namespace DoorHop
         private SpriteBatch _spriteBatch;
         private Player player;
         private Map map;
+
+       
 
         public Game1()
         {

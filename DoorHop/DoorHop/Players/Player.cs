@@ -1,6 +1,7 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
+using DoorHop.Players.Enemys;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -13,7 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DoorHop
+namespace DoorHop.Players
 {
     public class Player : IGameObject
     {
@@ -28,9 +29,10 @@ namespace DoorHop
         private float jumpForce = -12f;
         private float gravity = 0.5f;
         private bool isMoving;
-        private float movementThreshold = 0.1f;
         private float animationSpeed = 0.1f;
         private bool isJumping = false;
+
+        
 
         public Player(ContentManager content)
         {
@@ -38,25 +40,25 @@ namespace DoorHop
             position = new Vector2(100, 100);
             velocity = Vector2.Zero;
             inputReader = new KeyBoardReader();
-            
+
             // Animatie setup
             animatie = new Animatie();
             animatie.AddFrame();
-            
+
         }
 
         public void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
             Vector2 oldPosition = position;
             HandleInput();
-            
+
             // Pas zwaartekracht toe
             velocity.Y += gravity;
-            
+
             // Update positie voor X en Y apart
             position.X += velocity.X;
             CheckXCollision(tiles);  // Check horizontale collision eerst
-            
+
             position.Y += velocity.Y;
             CheckYCollision(tiles);  // Check verticale collision daarna
 
@@ -75,7 +77,7 @@ namespace DoorHop
         private void CheckXCollision(List<TileMap.CollisionTiles> tiles)
         {
             Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
-            
+
             foreach (var tile in tiles)
             {
                 if (playerRect.Intersects(tile.Rectangle))
@@ -98,7 +100,7 @@ namespace DoorHop
         private void CheckYCollision(List<TileMap.CollisionTiles> tiles)
         {
             Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
-            
+
             foreach (var tile in tiles)
             {
                 if (playerRect.Intersects(tile.Rectangle))
@@ -134,11 +136,11 @@ namespace DoorHop
         public void Draw(SpriteBatch spriteBatch)
         {
             SpriteEffects effect = velocity.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            
+
             spriteBatch.Draw(
-                playerTexture, 
-                position, 
-                animatie.CurrentFrame.SourceRecatangle, 
+                playerTexture,
+                position,
+                animatie.CurrentFrame.SourceRecatangle,
                 Color.White,
                 0f,
                 Vector2.Zero,
