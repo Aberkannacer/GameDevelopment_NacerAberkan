@@ -45,10 +45,19 @@ namespace DoorHop.Players.Hero
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-           
+            if (animatie?.CurrentFrame != null)
+            {
+                // Teken de sprite
                 spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
                     Color.White,0f,Vector2.Zero,0.7f,SpriteEffects.None,0f);
-            
+
+                // Debug: teken de collision box (rood transparant vierkant)
+                #if DEBUG
+                Texture2D debugTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+                debugTexture.SetData(new[] { Color.White });
+                spriteBatch.Draw(debugTexture, CollisionBox, Color.Red * 0.3f);
+                #endif
+            }
         }
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)

@@ -25,6 +25,25 @@ namespace DoorHop.Players
         protected bool isMoving;
         protected bool isJumping = false;
 
+        // Collision box grootte en offset
+        protected int collisionWidth = 23;    // Maak dit kleiner voor een kleinere collider
+        protected int collisionHeight = 26;   // Maak dit kleiner voor een kleinere collider
+        protected int collisionOffsetX = 10;  // Pas dit aan om de collider horizontaal te centreren
+        protected int collisionOffsetY = 19;   // Pas dit aan om de collider verticaal te centreren
+
+        protected Rectangle CollisionBox
+        {
+            get
+            {
+                return new Rectangle(
+                    (int)position.X + collisionOffsetX,
+                    (int)position.Y + collisionOffsetY,
+                    collisionWidth,
+                    collisionHeight
+                );
+            }
+        }
+
         protected Player(ContentManager content, IInputReader inputReader)
         {
             position = new Vector2(100, 300);
@@ -67,23 +86,21 @@ namespace DoorHop.Players
         {
             if (tiles == null) return;
 
-            Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
-
+            Rectangle playerRect = CollisionBox;
+            
             foreach (var tile in tiles)
             {
                 if (playerRect.Intersects(tile.Rectangle))
                 {
-                    // Als we tegen een muur aanlopen
-                    if (velocity.X > 0) // Beweging naar rechts
+                    if (velocity.X > 0)
                     {
-                        position.X = tile.Rectangle.Left - frameWidth;
-                        velocity.X = 0;
+                        position.X = tile.Rectangle.Left - (collisionWidth + collisionOffsetX);
                     }
-                    else if (velocity.X < 0) // Beweging naar links
+                    else if (velocity.X < 0)
                     {
-                        position.X = tile.Rectangle.Right;
-                        velocity.X = 0;
+                        position.X = tile.Rectangle.Right - collisionOffsetX;
                     }
+                    velocity.X = 0;
                 }
             }
         }
@@ -92,24 +109,22 @@ namespace DoorHop.Players
         {
             if (tiles == null) return;
 
-            Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
-
+            Rectangle playerRect = CollisionBox;
+            
             foreach (var tile in tiles)
             {
                 if (playerRect.Intersects(tile.Rectangle))
                 {
-                    // Verticale collision
-                    if (velocity.Y > 0) // Val naar beneden
+                    if (velocity.Y > 0)
                     {
-                        position.Y = tile.Rectangle.Top - frameHeight;
-                        velocity.Y = 0;
+                        position.Y = tile.Rectangle.Top - (collisionHeight + collisionOffsetY);
                         isJumping = false;
                     }
-                    else if (velocity.Y < 0) // Spring omhoog
+                    else if (velocity.Y < 0)
                     {
-                        position.Y = tile.Rectangle.Bottom;
-                        velocity.Y = 0;
+                        position.Y = tile.Rectangle.Bottom - collisionOffsetY;
                     }
+                    velocity.Y = 0;
                 }
             }
         }
