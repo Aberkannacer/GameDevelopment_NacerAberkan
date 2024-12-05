@@ -14,55 +14,38 @@ namespace DoorHop.Players.Hero
 {
     public class Hero : Player
     {
-        private Animatie animatie;
-        public Hero(ContentManager content, IInputReader inputReader) : base(content, inputReader)
-        {
+        //private float animationSpeed = 100f;
 
+        public Hero(ContentManager content) : base(content, new KeyBoardReader())
+        {
+            LoadContent(content);
+            SetAnimationSpeed(0.6f); //om de snelheid van de animatie aan te passen
+            SetMoveSpeed(3.5f);// om de snelheid van de hero aan te passen
+            SetJumpForce(13f);//om de spring hoogt aan te passen
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void SetAnimationSpeed(float speed)
         {
-            base.Draw(spriteBatch);
-        }
-
-        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
-        {
-            base.Update(gameTime, tiles);
-        }
-
-        protected override void CheckXCollision(List<TileMap.CollisionTiles> tiles)
-        {
-            base.CheckXCollision(tiles);
-        }
-
-        protected override void CheckYCollision(List<TileMap.CollisionTiles> tiles)
-        {
-            base.CheckYCollision(tiles);
-        }
-
-        protected override void HandleInput()
-        {
-            base.HandleInput();
+            animatie?.SetSpeed(speed);
         }
 
         protected override void LoadContent(ContentManager contentManager)
         {
-            animatie = new Animatie(contentManager.Load<Texture2D>("Player"), true);
+            playerTexture = contentManager.Load<Texture2D>("Player");
+            animatie = new Animatie(playerTexture, true);
+            animatie.AddFrame();
+            
+            // Test: teken de hero op een vaste positie
+            position = new Vector2(200, 200);
         }
 
-        protected override void SetAnimationSpeed(float speed)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            base.SetAnimationSpeed(speed);
-        }
-
-        protected override void SetJumpForce(float force)
-        {
-            base.SetJumpForce(force);
-        }
-
-        protected override void SetMoveSpeed(float speed)
-        {
-            base.SetMoveSpeed(speed);
+            if (animatie != null && animatie.CurrentFrame != null)
+            {
+                spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
+                    Color.White,0f,Vector2.Zero,1f,SpriteEffects.None,0f);
+            }
         }
     }
 

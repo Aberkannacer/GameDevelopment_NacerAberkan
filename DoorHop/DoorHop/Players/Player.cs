@@ -18,26 +18,23 @@ namespace DoorHop.Players
 {
     public abstract class Player : IGameObject
     {
-        private Texture2D playerTexture;
-        private Animatie animatie;
-        private Vector2 position;
-        private Vector2 velocity;
-        private IInputReader inputReader;
-        private int frameWidth = 64;
-        private int frameHeight = 64;
-        private float moveSpeed = 5f;
-        private float jumpForce = -12f;
-        private float gravity = 0.5f;
-        private bool isMoving;
-        private float animationSpeed = 0.1f;
-        private bool isJumping = false;
-
-        
+        protected Texture2D playerTexture;
+        protected Animatie animatie;
+        protected Vector2 position;
+        protected Vector2 velocity;
+        protected IInputReader inputReader;
+        protected int frameWidth = 64;
+        protected int frameHeight = 64;
+        protected float moveSpeed = 5f;
+        protected float jumpForce = -12f;
+        protected float gravity = 0.5f;
+        protected bool isMoving;
+        protected bool isJumping = false;
 
         protected Player(ContentManager content, IInputReader inputReader)
         {
             //playerTexture = content.Load<Texture2D>("Player");
-            position = new Vector2(100, 100);
+            position = new Vector2(100, 300);
             velocity = Vector2.Zero;
             this.inputReader = inputReader;
 
@@ -81,6 +78,8 @@ namespace DoorHop.Players
 
         protected virtual void CheckXCollision(List<TileMap.CollisionTiles> tiles)
         {
+            if (tiles == null) return;
+
             Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
 
             foreach (var tile in tiles)
@@ -104,6 +103,8 @@ namespace DoorHop.Players
 
         protected virtual void CheckYCollision(List<TileMap.CollisionTiles> tiles)
         {
+            if (tiles == null) return;
+
             Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
 
             foreach (var tile in tiles)
@@ -140,25 +141,23 @@ namespace DoorHop.Players
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            SpriteEffects effect = velocity.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+                SpriteEffects effect = velocity.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+               
+                
+                spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
+                    Color.White,0f,Vector2.Zero,1f,effect,0f);
 
-            spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,Color.White,0f, Vector2.Zero, 1f, effect, 0f);
+
         }
 
-        //virtual klasse om snelheid van animatie te veranderen
-        protected virtual void SetAnimationSpeed(float speed)
-        {
-            animationSpeed = speed;
-            // Als je Animatie klasse een methode heeft om de snelheid in te stellen, roep die hier aan
-            animatie.SetSpeed(animationSpeed);
-        }
+        public abstract void SetAnimationSpeed(float speed);
 
-        protected virtual void SetMoveSpeed(float speed)
+        public virtual void SetMoveSpeed(float speed)
         {
             moveSpeed = speed;
         }
 
-        protected virtual void SetJumpForce(float force)
+        public virtual void SetJumpForce(float force)
         {
             jumpForce = -Math.Abs(force); // Zorg ervoor dat jumpForce negatief blijft
         }

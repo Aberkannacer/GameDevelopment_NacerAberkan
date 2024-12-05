@@ -10,21 +10,21 @@ namespace DoorHop.Animation
         private List<AnimationFrame> frames;
         private int counter;
         private double frameMovement = 0;
-        private float speed = 0.1f;
+        private float speed;
         private Texture2D texture;
-        private float frameTime;
         private bool isLooping;
 
         public Animatie(Texture2D texture, bool isLooping)
         {
             frames = new List<AnimationFrame>();
             this.texture = texture;
-            //this.frameTime = frameTime;
             this.isLooping = isLooping;
+            this.speed = 1f;
         }
 
         public void AddFrame()
         {
+            // Voeg de frames toe met de juiste coördinaten van je spritesheet
             frames.Add(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
@@ -33,23 +33,27 @@ namespace DoorHop.Animation
             frames.Add(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
-            CurrentFrame = frames[0];
+
+            CurrentFrame = frames[0]; // Zet het eerste frame als het huidige frame
         }
 
         public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
-            frameMovement += CurrentFrame.SourceRecatangle.Width * gameTime.ElapsedGameTime.TotalSeconds * speed;
+            frameMovement += gameTime.ElapsedGameTime.TotalSeconds * speed;
 
-            if (frameMovement >= CurrentFrame.SourceRecatangle.Width / 20)
+            if (frameMovement >= 0.1f)
             {
                 counter++;
                 frameMovement = 0;
-            }
 
-            if (counter >= frames.Count)
-            {
-                counter = 0;
+                if (counter >= frames.Count)
+                {
+                    if (isLooping)
+                        counter = 0;
+                    else
+                        counter = frames.Count - 1;
+                }
             }
         }
 
@@ -62,7 +66,8 @@ namespace DoorHop.Animation
 
         public void SetSpeed(float newSpeed)
         {
-            speed = newSpeed;
+            speed = 1f / newSpeed;
+            
         }
     }
 }

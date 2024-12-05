@@ -1,5 +1,6 @@
 ﻿using DoorHop.Players;
 using DoorHop.Players.Enemys;
+using DoorHop.Players.Hero;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,10 +13,8 @@ namespace DoorHop
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Player player;
+        private Hero hero;
         private Map map;
-
-       
 
         public Game1()
         {
@@ -27,16 +26,10 @@ namespace DoorHop
         protected override void Initialize()
         {
             base.Initialize();
-
-            player = new Player(Content);
-            player.SetAnimationSpeed(1f);//animation speed variable
-            player.SetMoveSpeed(3.5f);//speed variable
-            player.SetJumpForce(12f); //jump variable
-
+            
             map = new Map();
             map.Generate(new int[,]
             {
-                { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
                 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
                 { 0,0,0,4,4,4,0,0,0,0,4,4,4,4,0,0,0 },
                 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 },
@@ -47,14 +40,29 @@ namespace DoorHop
                 { 0,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0 },
                 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
             }, 48);
+
+            hero = new Hero(Content);
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            Tiles.Content = Content;
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            _spriteBatch.Begin();
             
-            // Laad eerst de tiles
-            Tiles.Content = this.Content;
+            map?.Draw(_spriteBatch);
+            
+            hero?.Draw(_spriteBatch);
+            
+            _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         protected override void Update(GameTime gameTime)
@@ -63,22 +71,12 @@ namespace DoorHop
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // Update de player met de collision tiles van de map
-            player.Update(gameTime, map.CollisionTiles);
+            if (hero != null && map != null)
+            {
+                hero.Update(gameTime, map.CollisionTiles);
+            }
 
             base.Update(gameTime);
-        }
-
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            _spriteBatch.Begin();
-            map.Draw(_spriteBatch);
-            player.Draw(_spriteBatch);
-            _spriteBatch.End();
-
-            base.Draw(gameTime);
         }
     }
 }

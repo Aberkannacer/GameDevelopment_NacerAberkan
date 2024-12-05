@@ -11,11 +11,11 @@ namespace DoorHop.TileMap
     public class Map
     {
         private int width, height;
-        private List<CollisionTiles> collisionTiles = new List<CollisionTiles>();
+        private List<CollisionTiles> collisionTiles;
 
         public List<CollisionTiles> CollisionTiles
         {
-            get { return collisionTiles; }
+            get { return collisionTiles ?? new List<CollisionTiles>(); }
         }
         
         public int Width 
@@ -29,7 +29,7 @@ namespace DoorHop.TileMap
 
         public Map()
         {
-
+            collisionTiles = new List<CollisionTiles>();
         }
 
         public void Generate(int[,] map, int size)
