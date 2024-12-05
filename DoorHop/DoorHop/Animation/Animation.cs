@@ -1,33 +1,30 @@
 ﻿using Microsoft.Xna.Framework;
-using System;
+using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Drawing.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Animation
 {
     public class Animatie
     {
-        public AnimationFrame CurrentFrame { get; set; }
-
+        public AnimationFrame CurrentFrame { get; private set; }
         private List<AnimationFrame> frames;
-
         private int counter;
-
         private double frameMovement = 0;
-
         private float speed = 0.1f;
+        private Texture2D texture;
+        private float frameTime;
+        private bool isLooping;
 
-        public Animatie()
+        public Animatie(Texture2D texture, float frameTime, bool isLooping)
         {
             frames = new List<AnimationFrame>();
+            this.texture = texture;
+            this.frameTime = frameTime;
+            this.isLooping = isLooping;
         }
 
         public void AddFrame()
         {
-            
             frames.Add(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
@@ -37,15 +34,13 @@ namespace DoorHop.Animation
             frames.Add(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
             frames.Add(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
             CurrentFrame = frames[0];
-            
         }
 
         public void Update(GameTime gameTime)
         {
             CurrentFrame = frames[counter];
-
             frameMovement += CurrentFrame.SourceRecatangle.Width * gameTime.ElapsedGameTime.TotalSeconds * speed;
-            
+
             if (frameMovement >= CurrentFrame.SourceRecatangle.Width / 20)
             {
                 counter++;
@@ -56,15 +51,6 @@ namespace DoorHop.Animation
             {
                 counter = 0;
             }
-        }
-
-        public AnimationFrame GetFrame(int index)
-        {
-            if (index >= 0 && index < frames.Count)
-            {
-                return frames[index];
-            }
-            return frames[0]; // Retourneer het eerste frame als fallback
         }
 
         public void Reset()
@@ -78,7 +64,5 @@ namespace DoorHop.Animation
         {
             speed = newSpeed;
         }
-
-      
     }
 }

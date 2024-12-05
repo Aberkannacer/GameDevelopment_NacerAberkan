@@ -42,7 +42,7 @@ namespace DoorHop.Players
             inputReader = new KeyBoardReader();
 
             // Animatie setup
-            animatie = new Animatie();
+            animatie = new Animatie(playerTexture, 5f, false);
             animatie.AddFrame();
 
         }
