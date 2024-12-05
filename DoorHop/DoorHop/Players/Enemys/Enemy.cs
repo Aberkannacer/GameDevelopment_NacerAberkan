@@ -10,79 +10,43 @@ using System.Threading.Tasks;
 
 namespace DoorHop.Players.Enemys
 {
-    internal abstract class Enemy: IGameObject
+    internal abstract class Enemy : IGameObject
     {
         protected Texture2D texture;
         protected Animatie animatie;
         protected Rectangle rectangle;
         protected Vector2 position;
-        bool IsAlive;
+        protected bool IsAlive;
 
         protected Enemy(Texture2D texture, int row, int col, int width, int height)
         {
             IsAlive = true;
             Width = width;
             Height = height;
-            //this.rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
-            //this.position = CalculatePositionInMap.CalculatePosition(row, col, width, height);
-
+            position = new Vector2(400, 200); // Default positie
         }
 
-        private int score;
-        public int Score
-        {
-            get
-            {
-                return score;
-            }
-            protected set
-            {
-                score = value;
-            }
-        }
-
-        protected int Width 
-        { 
-            get; 
-            set; 
-        }
-        protected int Height 
-        { 
-            get; 
-            set; 
-        }
+        protected int Width { get; set; }
+        protected int Height { get; set; }
 
         public virtual Rectangle HitBox
         {
-            get
-            {
-                return rectangle;
-            }
-            protected set
-            {
-                rectangle = value;
-            }
+            get { return rectangle; }
+            protected set { rectangle = value; }
         }
-
-
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            //tekenen als de enemy nog leeft
-            if (IsAlive)
-            {
-
-                spriteBatch.Draw(texture, rectangle, Color.White);
-            }
+            // Verwijder de base Draw implementatie
+            // Laat het over aan de child classes
         }
 
         public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles);
 
-
-        public void Die()
+        public void SetPosition(Vector2 newPosition)
         {
-            //Enemy is dood
-            IsAlive = false;
+            position = newPosition;
+            rectangle = new Rectangle((int)position.X, (int)position.Y, Width, Height);
         }
     }
 }
