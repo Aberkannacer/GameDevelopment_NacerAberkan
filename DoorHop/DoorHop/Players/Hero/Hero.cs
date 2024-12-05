@@ -14,7 +14,6 @@ namespace DoorHop.Players.Hero
 {
     public class Hero : Player
     {
-        //private float animationSpeed = 100f;
 
         public Hero(ContentManager content) : base(content, new KeyBoardReader())
         {

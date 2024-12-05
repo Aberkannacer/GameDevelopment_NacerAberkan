@@ -1,18 +1,12 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
-using DoorHop.Players.Enemys;
-using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace DoorHop.Players
 {
@@ -33,16 +27,9 @@ namespace DoorHop.Players
 
         protected Player(ContentManager content, IInputReader inputReader)
         {
-            //playerTexture = content.Load<Texture2D>("Player");
             position = new Vector2(100, 300);
             velocity = Vector2.Zero;
             this.inputReader = inputReader;
-
-            /*
-            // Animatie setup
-            animatie = new Animatie(playerTexture, false);
-            animatie.AddFrame();
-            */
         }
 
         //voor de content van de players
@@ -159,7 +146,8 @@ namespace DoorHop.Players
 
         public virtual void SetJumpForce(float force)
         {
-            jumpForce = -Math.Abs(force); // Zorg ervoor dat jumpForce negatief blijft
+            // Zorg ervoor dat jumpForce negatief blijft
+            jumpForce = -Math.Abs(force); 
         }
     }
 }

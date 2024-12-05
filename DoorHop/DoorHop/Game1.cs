@@ -27,6 +27,7 @@ namespace DoorHop
         {
             base.Initialize();
             
+            //map tekeken 
             map = new Map();
             map.Generate(new int[,]
             {
@@ -41,6 +42,7 @@ namespace DoorHop
                 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
             }, 48);
 
+            //hero tekenen 
             hero = new Hero(Content);
         }
 
