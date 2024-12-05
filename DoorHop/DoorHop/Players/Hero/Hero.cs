@@ -32,13 +32,14 @@ namespace DoorHop.Players.Hero
         {
             playerTexture = contentManager.Load<Texture2D>("Player");
             animatie = new Animatie(playerTexture, true);
-            //heel de sprite
-            animatie.AddFrames(
-                row: 1,           // Tweede rij in de sprite sheet (y=64)
-                frameWidth: 60,   // Breedte van elk frame
-                frameHeight: 65,  // Hoogte van elk frame
-                numberOfFrames: 8 // Aantal frames in de animatie
-            );
+
+            // Voeg verschillende animaties toe
+            animatie.AddAnimation("Idle", 0, 64, 65, 8);
+            animatie.AddAnimation("Walk", 1, 64, 65, 8);
+            animatie.AddAnimation("Attack", 2, 64, 65, 5);
+            animatie.AddAnimation("Jump", 3, 64, 65, 4);
+            animatie.AddAnimation("Dead", 4, 64, 65, 6);
+
             position = new Vector2(200, 200);
         }
 
@@ -48,6 +49,26 @@ namespace DoorHop.Players.Hero
                 spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
                     Color.White,0f,Vector2.Zero,0.7f,SpriteEffects.None,0f);
             
+        }
+
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
+        {
+            // Bepaal welke animatie moet worden afgespeeld
+            if (isJumping)
+            {
+                animatie.Play("Jump");
+            }
+            else if (isMoving)
+            {
+                animatie.Play("Walk");
+            }
+            else
+            {
+                animatie.Play("Idle");
+            }
+
+            animatie.Update(gameTime);
+            base.Update(gameTime, tiles);
         }
     }
 

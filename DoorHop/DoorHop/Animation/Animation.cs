@@ -6,26 +6,27 @@ namespace DoorHop.Animation
 {
     public class Animatie
     {
-        public AnimationFrame CurrentFrame { get; private set; }
-        private List<AnimationFrame> frames;
+        private Dictionary<string, List<AnimationFrame>> animations;
+        private string currentAnimation;
         private int counter;
         private double frameMovement = 0;
         private float speed;
-        private Texture2D texture;
         private bool isLooping;
+        private Texture2D texture;
+
+        public AnimationFrame CurrentFrame { get; private set; }
 
         public Animatie(Texture2D texture, bool isLooping)
         {
-            frames = new List<AnimationFrame>();
+            animations = new Dictionary<string, List<AnimationFrame>>();
             this.texture = texture;
             this.isLooping = isLooping;
             this.speed = 1f;
         }
 
-        public void AddFrames(int row, int frameWidth, int frameHeight, int numberOfFrames)
+        public void AddAnimation(string name, int row, int frameWidth, int frameHeight, int numberOfFrames)
         {
-            frames.Clear();
-            
+            var frames = new List<AnimationFrame>();
             for (int i = 0; i < numberOfFrames; i++)
             {
                 frames.Add(new AnimationFrame(new Rectangle(
@@ -35,12 +36,36 @@ namespace DoorHop.Animation
                     frameHeight
                 )));
             }
+            animations[name] = frames;
 
-            CurrentFrame = frames[0];
+            if (currentAnimation == null)
+            {
+                Play(name);
+            }
+        }
+
+        public void Play(string name)
+        {
+            if (!animations.ContainsKey(name))
+            {
+                
+                return;
+            }
+
+            if (currentAnimation != name)
+            {
+                currentAnimation = name;
+                counter = 0;
+                frameMovement = 0;
+                CurrentFrame = animations[name][0];
+            }
         }
 
         public void Update(GameTime gameTime)
         {
+            if (string.IsNullOrEmpty(currentAnimation)) return;
+
+            var frames = animations[currentAnimation];
             CurrentFrame = frames[counter];
             frameMovement += gameTime.ElapsedGameTime.TotalSeconds * speed;
 
@@ -59,17 +84,19 @@ namespace DoorHop.Animation
             }
         }
 
-        public void Reset()
-        {
-            counter = 0;
-            CurrentFrame = frames[0];
-            frameMovement = 0;
-        }
-
         public void SetSpeed(float newSpeed)
         {
             speed = 1f / newSpeed;
-            
+        }
+
+        public void Reset()
+        {
+            counter = 0;
+            frameMovement = 0;
+            if (!string.IsNullOrEmpty(currentAnimation))
+            {
+                CurrentFrame = animations[currentAnimation][0];
+            }
         }
     }
 }

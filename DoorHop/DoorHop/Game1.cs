@@ -61,14 +61,7 @@ namespace DoorHop
             
             try
             {
-                WalkEnemy walkEnemy = new WalkEnemy(
-                    Content,
-                    null,
-                    0,
-                    0,
-                    64,
-                    64
-                );
+                WalkEnemy walkEnemy = new WalkEnemy(Content,null,0,0,64,64);
                 enemies.Add(walkEnemy);
                 Console.WriteLine("Enemy added to game");
             }
