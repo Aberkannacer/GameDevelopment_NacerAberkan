@@ -1,15 +1,17 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 using System.Collections.Generic;
 
 namespace DoorHop.Animation
 {
+
     public class Animatie
     {
-        private Dictionary<string, List<AnimationFrame>> animations;
-        private string currentAnimation;
+        private List<AnimationFrame> animations;
+        private int currentAnimation;
         private int counter;
-        private double frameMovement = 0;
+        private float timer;
         private float speed;
         private bool isLooping;
         private Texture2D texture;
@@ -18,85 +20,62 @@ namespace DoorHop.Animation
 
         public Animatie(Texture2D texture, bool isLooping)
         {
-            animations = new Dictionary<string, List<AnimationFrame>>();
+            animations = new List<AnimationFrame>();
             this.texture = texture;
             this.isLooping = isLooping;
             this.speed = 1f;
+            currentAnimation = 0;
+            timer = 0;
         }
 
-        public void AddAnimation(string name, int row, int frameWidth, int frameHeight, int numberOfFrames)
+        public void AddAnimationFrames(int row, int frameWidth, int frameHeight, int numberOfFrames)
         {
-            var frames = new List<AnimationFrame>();
+            animations.Clear();
+
+            
             for (int i = 0; i < numberOfFrames; i++)
             {
-                frames.Add(new AnimationFrame(new Rectangle(
+                animations.Add(new AnimationFrame(new Rectangle(
                     i * frameWidth,
                     row * frameHeight,
                     frameWidth,
                     frameHeight
                 )));
             }
-            animations[name] = frames;
+            CurrentFrame = animations[0];
 
-            if (currentAnimation == null)
-            {
-                Play(name);
-            }
+            
         }
 
-        public void Play(string name)
-        {
-            if (!animations.ContainsKey(name))
-            {
-                
-                return;
-            }
-
-            if (currentAnimation != name)
-            {
-                currentAnimation = name;
-                counter = 0;
-                frameMovement = 0;
-                CurrentFrame = animations[name][0];
-            }
-        }
 
         public void Update(GameTime gameTime)
         {
-            if (string.IsNullOrEmpty(currentAnimation)) return;
+            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            var frames = animations[currentAnimation];
-            CurrentFrame = frames[counter];
-            frameMovement += gameTime.ElapsedGameTime.TotalSeconds * speed;
-
-            if (frameMovement >= 0.1f)
+            if (timer >= 0.1f * speed)
             {
-                counter++;
-                frameMovement = 0;
+                currentAnimation++;
+                timer = 0;
 
-                if (counter >= frames.Count)
+                if (currentAnimation >= animations.Count)
                 {
-                    if (isLooping)
-                        counter = 0;
-                    else
-                        counter = frames.Count - 1;
+                    currentAnimation = isLooping ? 0 : animations.Count - 1;
                 }
+
+                CurrentFrame = animations[currentAnimation];
             }
         }
 
         public void SetSpeed(float newSpeed)
         {
-            speed = 1f / newSpeed;
+            speed = newSpeed;
         }
 
         public void Reset()
         {
-            counter = 0;
-            frameMovement = 0;
-            if (!string.IsNullOrEmpty(currentAnimation))
-            {
-                CurrentFrame = animations[currentAnimation][0];
-            }
+            currentAnimation = 0;
+            CurrentFrame = animations[0];
+            timer = 0;
         }
     }
 }

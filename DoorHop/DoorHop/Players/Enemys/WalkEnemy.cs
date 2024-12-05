@@ -23,10 +23,10 @@ namespace DoorHop.Players.Enemys
                 animatie = new Animatie(this.texture, true);
                 
                 // Voeg verschillende animaties toe
-                
+                /*
                 animatie.AddAnimation("Idle", 0, width, height, 4);
                 animatie.AddAnimation("Walk", 1, width, height, 8);
-                animatie.AddAnimation("Attack", 2, width, height, 12);
+                animatie.AddAnimation("Attack", 2, width, height, 12);*/
 
                 SetPosition(new Vector2(320, 360));
             }
@@ -43,7 +43,7 @@ namespace DoorHop.Players.Enemys
             try
             {
                 // Standaard walking animatie
-                animatie.Play("Walk");
+                //animatie.Play("Walk");
                 animatie.Update(gameTime);
             }
             catch (Exception ex)

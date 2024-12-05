@@ -14,6 +14,9 @@ namespace DoorHop.Players.Hero
 {
     public class Hero : Player
     {
+        private Animatie currentAnimation;
+        private Animatie runAnimation;
+        private Animatie idleAnimation;
 
         public Hero(ContentManager content) : base(content, new KeyBoardReader())
         {
@@ -31,14 +34,23 @@ namespace DoorHop.Players.Hero
         protected override void LoadContent(ContentManager contentManager)
         {
             playerTexture = contentManager.Load<Texture2D>("Player");
-            animatie = new Animatie(playerTexture, true);
+            runAnimation = new Animatie(playerTexture, true);
+            idleAnimation = new Animatie(playerTexture, true);
 
             // Voeg verschillende animaties toe
-            animatie.AddAnimation("Idle", 0, 64, 65, 8);
-            animatie.AddAnimation("Walk", 1, 64, 65, 8);
-            animatie.AddAnimation("Attack", 2, 64, 65, 5);
-            animatie.AddAnimation("Jump", 3, 64, 65, 4);
-            animatie.AddAnimation("Dead", 4, 64, 65, 6);
+            runAnimation.AddAnimationFrames(
+                row: 1,
+                frameWidth: 64,
+                frameHeight: 64,
+                numberOfFrames: 8);
+            idleAnimation.AddAnimationFrames(
+                row: 0,
+                frameWidth: 64,
+                frameHeight: 64,
+                numberOfFrames: 8);
+
+            //beginsituatie begint met de idle dus stilstaan
+            currentAnimation = idleAnimation;
 
             position = new Vector2(200, 200);
         }
@@ -62,21 +74,18 @@ namespace DoorHop.Players.Hero
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
-            // Bepaal welke animatie moet worden afgespeeld
-            if (isJumping)
+            if (isMoving)
             {
-                animatie.Play("Jump");
-            }
-            else if (isMoving)
-            {
-                animatie.Play("Walk");
+                currentAnimation = runAnimation;
             }
             else
             {
-                animatie.Play("Idle");
+                currentAnimation = idleAnimation;
             }
 
-            animatie.Update(gameTime);
+
+
+            currentAnimation.Update(gameTime);
             base.Update(gameTime, tiles);
         }
     }
