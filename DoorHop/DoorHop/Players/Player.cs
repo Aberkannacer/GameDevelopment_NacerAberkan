@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace DoorHop.Players
 {
-    public class Player : IGameObject
+    public abstract class Player : IGameObject
     {
         private Texture2D playerTexture;
         private Animatie animatie;
@@ -34,20 +34,25 @@ namespace DoorHop.Players
 
         
 
-        public Player(ContentManager content)
+        protected Player(ContentManager content, IInputReader inputReader)
         {
-            playerTexture = content.Load<Texture2D>("Player");
+            //playerTexture = content.Load<Texture2D>("Player");
             position = new Vector2(100, 100);
             velocity = Vector2.Zero;
-            inputReader = new KeyBoardReader();
+            this.inputReader = inputReader;
 
+            /*
             // Animatie setup
             animatie = new Animatie(playerTexture, false);
             animatie.AddFrame();
-
+            */
         }
 
-        public void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
+        //voor de content van de players
+        protected abstract void LoadContent(ContentManager contentManager);
+
+
+        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
             Vector2 oldPosition = position;
             HandleInput();
@@ -74,7 +79,7 @@ namespace DoorHop.Players
             }
         }
 
-        private void CheckXCollision(List<TileMap.CollisionTiles> tiles)
+        protected virtual void CheckXCollision(List<TileMap.CollisionTiles> tiles)
         {
             Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
 
@@ -97,7 +102,7 @@ namespace DoorHop.Players
             }
         }
 
-        private void CheckYCollision(List<TileMap.CollisionTiles> tiles)
+        protected virtual void CheckYCollision(List<TileMap.CollisionTiles> tiles)
         {
             Rectangle playerRect = new Rectangle((int)position.X, (int)position.Y, frameWidth, frameHeight);
 
@@ -121,7 +126,7 @@ namespace DoorHop.Players
             }
         }
 
-        private void HandleInput()
+        protected virtual void HandleInput()
         {
             Vector2 direction = inputReader.ReadInput();
             velocity.X = direction.X * moveSpeed;
@@ -133,36 +138,27 @@ namespace DoorHop.Players
             }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             SpriteEffects effect = velocity.X < 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
 
-            spriteBatch.Draw(
-                playerTexture,
-                position,
-                animatie.CurrentFrame.SourceRecatangle,
-                Color.White,
-                0f,
-                Vector2.Zero,
-                1f,
-                effect,
-                0f
-            );
+            spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,Color.White,0f, Vector2.Zero, 1f, effect, 0f);
         }
 
-        public void SetAnimationSpeed(float speed)
+        //virtual klasse om snelheid van animatie te veranderen
+        protected virtual void SetAnimationSpeed(float speed)
         {
             animationSpeed = speed;
             // Als je Animatie klasse een methode heeft om de snelheid in te stellen, roep die hier aan
             animatie.SetSpeed(animationSpeed);
         }
 
-        public void SetMoveSpeed(float speed)
+        protected virtual void SetMoveSpeed(float speed)
         {
             moveSpeed = speed;
         }
 
-        public void SetJumpForce(float force)
+        protected virtual void SetJumpForce(float force)
         {
             jumpForce = -Math.Abs(force); // Zorg ervoor dat jumpForce negatief blijft
         }
