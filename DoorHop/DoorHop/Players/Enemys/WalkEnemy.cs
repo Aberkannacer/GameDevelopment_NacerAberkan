@@ -44,16 +44,8 @@ namespace DoorHop.Players.Enemys
             {
                 if (animatie?.CurrentFrame != null)
                 {
-                    spriteBatch.Draw(
-                        texture,
-                        position,
-                        animatie.CurrentFrame.SourceRecatangle,
-                        Color.White,
-                        0f,
-                        Vector2.Zero,
-                        1f,
-                        SpriteEffects.None,
-                        0f
+                    spriteBatch.Draw(texture,position,animatie.CurrentFrame.SourceRecatangle,
+                        Color.White,0f,Vector2.Zero,1f,SpriteEffects.None,0f
                     );
                 }
                 else
