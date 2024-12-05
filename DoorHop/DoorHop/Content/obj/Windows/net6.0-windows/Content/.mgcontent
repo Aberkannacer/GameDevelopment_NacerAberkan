@@ -5,6 +5,7 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Player.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Ratfolk Axe Sprite Sheet.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile1.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile2.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile3.png</File>
@@ -12,6 +13,7 @@
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
+    <File>WalkingEnemy.png</File>
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
