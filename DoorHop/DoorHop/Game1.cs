@@ -15,12 +15,14 @@ namespace DoorHop
         private SpriteBatch _spriteBatch;
         private Hero hero;
         private Map map;
+        private List<Enemy> enemies;
 
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            enemies = new List<Enemy>();
         }
 
         protected override void Initialize()
@@ -44,6 +46,10 @@ namespace DoorHop
 
             //hero tekenen 
             hero = new Hero(Content);
+
+            WalkEnemy walkEnemy = new WalkEnemy(Content, null, 0, 0, 64, 64);
+            walkEnemy.SetPosisition(new Vector2(400, 200));
+            enemies.Add(walkEnemy);
         }
 
         protected override void LoadContent()
@@ -62,6 +68,11 @@ namespace DoorHop
             
             hero?.Draw(_spriteBatch);
             
+            foreach (var enemy in enemies)
+            {
+                enemy.Draw(_spriteBatch);
+            }
+            
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -76,6 +87,11 @@ namespace DoorHop
             if (hero != null && map != null)
             {
                 hero.Update(gameTime, map.CollisionTiles);
+                
+                foreach (var enemy in enemies)
+                {
+                    enemy.Update(gameTime, map.CollisionTiles);
+                }
             }
 
             base.Update(gameTime);

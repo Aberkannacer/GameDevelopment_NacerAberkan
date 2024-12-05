@@ -22,19 +22,21 @@ namespace DoorHop.Animation
             this.speed = 1f;
         }
 
-        public void AddFrame()
+        public void AddFrames(int row, int frameWidth, int frameHeight, int numberOfFrames)
         {
-            // Voeg de frames toe met de juiste coördinaten van je spritesheet
-            frames.Add(new AnimationFrame(new Rectangle(0, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(64, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(128, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(192, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(256, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(320, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(384, 64, 64, 64)));
-            frames.Add(new AnimationFrame(new Rectangle(448, 64, 64, 64)));
+            frames.Clear();
+            
+            for (int i = 0; i < numberOfFrames; i++)
+            {
+                frames.Add(new AnimationFrame(new Rectangle(
+                    i * frameWidth,
+                    row * frameHeight,
+                    frameWidth,
+                    frameHeight
+                )));
+            }
 
-            CurrentFrame = frames[0]; // Zet het eerste frame als het huidige frame
+            CurrentFrame = frames[0];
         }
 
         public void Update(GameTime gameTime)

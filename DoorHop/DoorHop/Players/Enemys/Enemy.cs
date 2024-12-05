@@ -13,6 +13,7 @@ namespace DoorHop.Players.Enemys
     internal abstract class Enemy: IGameObject
     {
         protected Texture2D texture;
+        protected Animatie animatie;
         protected Rectangle rectangle;
         protected Vector2 position;
         bool IsAlive;
@@ -20,8 +21,9 @@ namespace DoorHop.Players.Enemys
         protected Enemy(Texture2D texture, int row, int col, int width, int height)
         {
             IsAlive = true;
-            this.texture = texture;
-            this.rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
+            Width = width;
+            Height = height;
+            //this.rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
             //this.position = CalculatePositionInMap.CalculatePosition(row, col, width, height);
 
         }

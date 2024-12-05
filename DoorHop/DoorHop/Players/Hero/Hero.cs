@@ -32,19 +32,22 @@ namespace DoorHop.Players.Hero
         {
             playerTexture = contentManager.Load<Texture2D>("Player");
             animatie = new Animatie(playerTexture, true);
-            animatie.AddFrame();
-            
-            // Test: teken de hero op een vaste positie
+            //heel de sprite
+            animatie.AddFrames(
+                row: 1,           // Tweede rij in de sprite sheet (y=64)
+                frameWidth: 64,   // Breedte van elk frame
+                frameHeight: 65,  // Hoogte van elk frame
+                numberOfFrames: 8 // Aantal frames in de animatie
+            );
             position = new Vector2(200, 200);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (animatie != null && animatie.CurrentFrame != null)
-            {
+           
                 spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
                     Color.White,0f,Vector2.Zero,1f,SpriteEffects.None,0f);
-            }
+            
         }
     }
 
