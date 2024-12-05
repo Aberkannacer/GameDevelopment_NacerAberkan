@@ -35,7 +35,7 @@ namespace DoorHop.Players.Hero
             //heel de sprite
             animatie.AddFrames(
                 row: 1,           // Tweede rij in de sprite sheet (y=64)
-                frameWidth: 64,   // Breedte van elk frame
+                frameWidth: 60,   // Breedte van elk frame
                 frameHeight: 65,  // Hoogte van elk frame
                 numberOfFrames: 8 // Aantal frames in de animatie
             );
@@ -46,7 +46,7 @@ namespace DoorHop.Players.Hero
         {
            
                 spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
-                    Color.White,0f,Vector2.Zero,1f,SpriteEffects.None,0f);
+                    Color.White,0f,Vector2.Zero,0.7f,SpriteEffects.None,0f);
             
         }
     }
