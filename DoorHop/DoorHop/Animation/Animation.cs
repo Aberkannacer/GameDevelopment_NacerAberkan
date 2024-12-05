@@ -15,11 +15,11 @@ namespace DoorHop.Animation
         private float frameTime;
         private bool isLooping;
 
-        public Animatie(Texture2D texture, float frameTime, bool isLooping)
+        public Animatie(Texture2D texture, bool isLooping)
         {
             frames = new List<AnimationFrame>();
             this.texture = texture;
-            this.frameTime = frameTime;
+            //this.frameTime = frameTime;
             this.isLooping = isLooping;
         }
 
