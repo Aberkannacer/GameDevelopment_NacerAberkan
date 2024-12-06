@@ -10,18 +10,15 @@ namespace DoorHop.Animation
     {
         private List<AnimationFrame> animations;
         private int currentAnimation;
-        private int counter;
         private float timer;
         private float speed;
         private bool isLooping;
-        private Texture2D texture;
 
         public AnimationFrame CurrentFrame { get; private set; }
 
         public Animatie(Texture2D texture, bool isLooping)
         {
             animations = new List<AnimationFrame>();
-            this.texture = texture;
             this.isLooping = isLooping;
             this.speed = 1f;
             currentAnimation = 0;
@@ -31,8 +28,6 @@ namespace DoorHop.Animation
         public void AddAnimationFrames(int row, int frameWidth, int frameHeight, int numberOfFrames)
         {
             animations.Clear();
-
-            
             for (int i = 0; i < numberOfFrames; i++)
             {
                 animations.Add(new AnimationFrame(new Rectangle(
@@ -43,39 +38,19 @@ namespace DoorHop.Animation
                 )));
             }
             CurrentFrame = animations[0];
-
-            
         }
-
 
         public void Update(GameTime gameTime)
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
             if (timer >= 0.1f * speed)
             {
-                currentAnimation++;
+                currentAnimation = (currentAnimation + 1) % animations.Count;
                 timer = 0;
-
-                if (currentAnimation >= animations.Count)
-                {
-                    currentAnimation = isLooping ? 0 : animations.Count - 1;
-                }
-
                 CurrentFrame = animations[currentAnimation];
             }
         }
 
-        public void SetSpeed(float newSpeed)
-        {
-            speed = newSpeed;
-        }
-
-        public void Reset()
-        {
-            currentAnimation = 0;
-            CurrentFrame = animations[0];
-            timer = 0;
-        }
+        public void SetSpeed(float newSpeed) => speed = newSpeed;
     }
 }

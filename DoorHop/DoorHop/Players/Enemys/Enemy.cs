@@ -1,5 +1,6 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Interfaces;
+using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,82 +14,38 @@ namespace DoorHop.Players.Enemys
     internal abstract class Enemy : IGameObject
     {
         protected Texture2D texture;
-        protected Animatie currentAnimatie;
-        protected Rectangle rectangle;
+        protected Animatie currentAnimation;
         protected Vector2 position;
-        protected Vector2 velocity;
         protected bool isAlive;
-        protected int width;
-        protected int height;
+        protected Rectangle bounds;
         protected float moveSpeed;
 
-        protected Enemy(Texture2D texture, int width, int height)
+        protected Enemy(int width, int height)
         {
             isAlive = true;
-            this.width = width;
-            this.height = height;
-            this.texture = texture;
-            position = new Vector2(400, 200);
-            velocity = Vector2.Zero;
+            position = new Vector2(400, 386);
             moveSpeed = 2f;
-
-            UpdateRectangle();
+            bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
-        protected int Width { get; set; }
-        protected int Height { get; set; }
-
-        public Rectangle HitBox
+        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
-            get { return rectangle; }
+            if (!isAlive) return;
+            position.X += moveSpeed;
+            if (position.X > 400 || position.X < 0) moveSpeed = -moveSpeed;
+            bounds = new Rectangle((int)position.X, (int)position.Y, bounds.Width, bounds.Height);
+            currentAnimation?.Update(gameTime);
         }
 
-        public abstract void Draw(SpriteBatch spriteBatch);
-
-        public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles);
-
-        public void SetPosition(Vector2 newPosition)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            position = newPosition;
-            rectangle = new Rectangle((int)position.X, (int)position.Y, Width, Height);
+            if (!isAlive || currentAnimation?.CurrentFrame == null) return;
+            spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.SourceRecatangle,
+                Color.White, 0f, Vector2.Zero, 2f,
+                moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
         }
 
-        protected void UpdateRectangle()
-        {
-            rectangle = new Rectangle(
-                (int)position.X,
-                (int)position.Y,
-                width,
-                height
-            );
-        }
-
-        protected virtual void CheckCollision(List<TileMap.CollisionTiles> tiles)
-        {
-            if (tiles == null) return;
-
-            foreach (var tile in tiles)
-            {
-                if (rectangle.Intersects(tile.Rectangle))
-                {
-                    HandleCollision(tile);
-                }
-            }
-        }
-
-        protected virtual void HandleCollision(TileMap.CollisionTiles tile)
-        {
-            velocity = Vector2.Zero;
-        }
-        public bool IsAlive()
-        {
-            return isAlive;
-        }
-
-        public void SetAlive(bool alive)
-        {
-            isAlive = alive;
-        }
-
+        public Rectangle Bounds => bounds;
+        public virtual void TakeDamage() => isAlive = false;
     }
 }

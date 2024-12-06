@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using DoorHop.Input;
 
 namespace DoorHop
 {
@@ -18,6 +19,7 @@ namespace DoorHop
         private Hero hero;
         private Map map;
         private List<Enemy> enemies;
+        private IInputReader inputReader;
 
         public Game1()
         {
@@ -45,30 +47,24 @@ namespace DoorHop
                 { 0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,0,0  },
                 { 4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
                 { 0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,0,0,0,0,0,0,0,0,0,0  },
-                { 0,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0  },
-                { 0,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0  },
-                { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
-                { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
-                { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4  },
-                { 0,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0  },
-                { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,4,0,0,0,0  },
-                { 0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0 },
-                { 0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0 },
+                { 4,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4  },
+                { 4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,4,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0 },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0 },
                 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
             }, 30);
 
-            hero = new Hero(Content);
-            
-            try
-            {
-                WalkEnemy walkEnemy = new WalkEnemy(Content,64,64);
-                enemies.Add(walkEnemy);
-                Console.WriteLine("Enemy added to game");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error creating enemy: {ex.Message}");
-            }
+            inputReader = new KeyBoardReader();
+            hero = new Hero(Content, inputReader);
+
+            WalkEnemy walkEnemy = new WalkEnemy(Content,64,64);
+            enemies.Add(walkEnemy);
+
         }
 
         protected override void LoadContent()
@@ -81,23 +77,27 @@ namespace DoorHop
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            _spriteBatch.Begin(
+                SpriteSortMode.BackToFront,
+                BlendState.AlphaBlend,
+                SamplerState.PointClamp,
+                null,
+                null,
+                null,
+                null
+            );
             
-            map?.Draw(_spriteBatch);
-            hero?.Draw(_spriteBatch);
+            map.Draw(_spriteBatch);
+            hero.Draw(_spriteBatch);
             
             if (enemies != null)
             {
                 foreach (var enemy in enemies.Where(e => e != null))
                 {
-                    try
-                    {
-                        enemy.Draw(_spriteBatch);
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Error drawing enemy: {ex.Message}");
-                    }
+                    
+                    enemy.Draw(_spriteBatch);
+                    
+                    
                 }
             }
             
@@ -119,6 +119,19 @@ namespace DoorHop
                 foreach (var enemy in enemies)
                 {
                     enemy.Update(gameTime, map.CollisionTiles);
+                    
+                    if (hero.Bounds.Intersects(enemy.Bounds))
+                    {
+                        if (hero.Bounds.TouchTopOf(enemy.Bounds))
+                        {
+                            hero.Bounce();
+                            enemy.TakeDamage();
+                        }
+                        else
+                        {
+                            hero.TakeDamage();
+                        }
+                    }
                 }
             }
 

@@ -14,72 +14,68 @@ namespace DoorHop.Players.Hero
 {
     public class Hero : Player
     {
-        private Animatie currentAnimation;
-        private Animatie runAnimation;
-        private Animatie idleAnimation;
+        private const int SPRITE_WIDTH = 64;
+        private const int SPRITE_HEIGHT = 64;
 
-        public Hero(ContentManager content) : base(content, new KeyBoardReader())
+        public Hero(ContentManager content, IInputReader inputReader) 
+            : base(content, inputReader)
         {
             LoadContent(content);
-            SetAnimationSpeed(0.6f, 0.4f); ; //om de snelheid van de animatie aan te passen
-            SetMoveSpeed(3.5f);// om de snelheid van de hero aan te passen
-            SetJumpForce(13f);//om de spring hoogt aan te passen
+            UpdateBounds();
+            
+            // Start waardes instellen
+            SetAnimationSpeed(1f, 1f);  // Run sneller, idle langzamer
+            SetMoveSpeed(3.5f);               // Bewegingssnelheid
+            SetJumpForce(-15f);             // Sprongkracht
         }
 
-        public override void SetAnimationSpeed(float speedRun, float speedIdle)
+        public void SetJumpForce(float force)
         {
-            runAnimation.SetSpeed(speedRun);
-            idleAnimation.SetSpeed(speedIdle);
+            jumpForce = force;  // Gebruikt nu de protected variable van Player
         }
 
-        protected override void LoadContent(ContentManager contentManager)
+        protected override void LoadContent(ContentManager content)
         {
-            playerTexture = contentManager.Load<Texture2D>("Player");
+            playerTexture = content.Load<Texture2D>("Player");
+            
             runAnimation = new Animatie(playerTexture, true);
+            runAnimation.AddAnimationFrames(row: 1, frameWidth: 64, frameHeight: 64, numberOfFrames: 8);
+            
             idleAnimation = new Animatie(playerTexture, true);
-
-            // Voeg verschillende animaties toe
-            runAnimation.AddAnimationFrames(
-                row: 1,
-                frameWidth: 64,
-                frameHeight: 64,
-                numberOfFrames: 8);
-            idleAnimation.AddAnimationFrames(
-                row: 0,
-                frameWidth: 64,
-                frameHeight: 64,
-                numberOfFrames: 8);
-
-            //beginsituatie begint met de idle dus stilstaan
+            idleAnimation.AddAnimationFrames(row: 0, frameWidth: 64, frameHeight: 64, numberOfFrames: 4);
+            
             currentAnimation = idleAnimation;
-
-            position = new Vector2(200, 200);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        protected override void UpdateBounds()
         {
-            if (currentAnimation.CurrentFrame != null)
-            {
-                // Teken de sprite
-                spriteBatch.Draw(playerTexture,position, currentAnimation.CurrentFrame.SourceRecatangle,
-                    Color.White,0f,Vector2.Zero,0.7f,SpriteEffects.None,0f);
+            int boundsWidth = (int)(SPRITE_WIDTH * 0.8f);
+            int boundsHeight = SPRITE_HEIGHT;
+            int boundsX = (int)(position.X + (SPRITE_WIDTH - boundsWidth) / 2);
+            int boundsY = (int)position.Y;
 
-            }
+            bounds = new Rectangle(boundsX, boundsY, boundsWidth, boundsHeight);
         }
 
-        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
+        protected virtual void UpdateAnimation(GameTime gameTime)
         {
-            if (isMoving)
-            {
-                currentAnimation = runAnimation;
-            }
-            else
-            {
-                currentAnimation = idleAnimation;
-            }
+            // Kies animatie gebaseerd op beweging
+            currentAnimation = isMoving ? runAnimation : idleAnimation;
+            
+            // Update huidige animatie frame
+            if (currentAnimation != null)
+                currentAnimation.Update(gameTime);
+        }
 
-            currentAnimation.Update(gameTime);
-            base.Update(gameTime, tiles);
+        public void SetAnimationSpeed(float runSpeed, float idleSpeed)
+        {
+            runAnimation?.SetSpeed(runSpeed);
+            idleAnimation?.SetSpeed(idleSpeed);
+        }
+
+        public void SetMoveSpeed(float speed)
+        {
+            moveSpeed = speed;
         }
     }
 
