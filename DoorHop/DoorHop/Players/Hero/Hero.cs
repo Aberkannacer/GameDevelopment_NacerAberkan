@@ -21,14 +21,15 @@ namespace DoorHop.Players.Hero
         public Hero(ContentManager content) : base(content, new KeyBoardReader())
         {
             LoadContent(content);
-            SetAnimationSpeed(0.6f); //om de snelheid van de animatie aan te passen
+            SetAnimationSpeed(0.6f, 0.4f); ; //om de snelheid van de animatie aan te passen
             SetMoveSpeed(3.5f);// om de snelheid van de hero aan te passen
             SetJumpForce(13f);//om de spring hoogt aan te passen
         }
 
-        public override void SetAnimationSpeed(float speed)
+        public override void SetAnimationSpeed(float speedRun, float speedIdle)
         {
-            animatie?.SetSpeed(speed);
+            runAnimation.SetSpeed(speedRun);
+            idleAnimation.SetSpeed(speedIdle);
         }
 
         protected override void LoadContent(ContentManager contentManager)
@@ -57,18 +58,12 @@ namespace DoorHop.Players.Hero
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (animatie?.CurrentFrame != null)
+            if (currentAnimation.CurrentFrame != null)
             {
                 // Teken de sprite
-                spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
+                spriteBatch.Draw(playerTexture,position, currentAnimation.CurrentFrame.SourceRecatangle,
                     Color.White,0f,Vector2.Zero,0.7f,SpriteEffects.None,0f);
 
-                // Debug: teken de collision box (rood transparant vierkant)
-                #if DEBUG
-                Texture2D debugTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-                debugTexture.SetData(new[] { Color.White });
-                spriteBatch.Draw(debugTexture, CollisionBox, Color.Red * 0.3f);
-                #endif
             }
         }
 
@@ -82,8 +77,6 @@ namespace DoorHop.Players.Hero
             {
                 currentAnimation = idleAnimation;
             }
-
-
 
             currentAnimation.Update(gameTime);
             base.Update(gameTime, tiles);

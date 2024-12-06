@@ -13,25 +13,18 @@ namespace DoorHop.Players
     public abstract class Player : IGameObject
     {
         protected Texture2D playerTexture;
-        protected Animatie animatie;
+        protected Animatie currentAnimatie;
         protected Vector2 position;
         protected Vector2 velocity;
         protected IInputReader inputReader;
-        protected int frameWidth = 64;
-        protected int frameHeight = 64;
         protected float moveSpeed = 5f;
         protected float jumpForce = -12f;
         protected float gravity = 0.5f;
         protected bool isMoving;
         protected bool isJumping = false;
 
-        // Collision box grootte en offset
-        protected int collisionWidth = 23;    // Maak dit kleiner voor een kleinere collider
-        protected int collisionHeight = 26;   // Maak dit kleiner voor een kleinere collider
-        protected int collisionOffsetX = 10;  // Pas dit aan om de collider horizontaal te centreren
-        protected int collisionOffsetY = 19;   // Pas dit aan om de collider verticaal te centreren
-
-        protected Rectangle CollisionBox
+        
+        /*protected Rectangle CollisionBox
         {
             get
             {
@@ -42,7 +35,7 @@ namespace DoorHop.Players
                     collisionHeight
                 );
             }
-        }
+        }*/
 
         protected Player(ContentManager content, IInputReader inputReader)
         {
@@ -57,49 +50,29 @@ namespace DoorHop.Players
 
         public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
-            Vector2 oldPosition = position;
-            HandleInput();
-
-            // Pas zwaartekracht toe
+            Vector2 input = inputReader.ReadInput();
+            velocity.X = input.X * moveSpeed;
             velocity.Y += gravity;
 
-            // Update positie voor X en Y apart
-            position.X += velocity.X;
-            CheckXCollision(tiles);  // Check horizontale collision eerst
-
-            position.Y += velocity.Y;
-            CheckYCollision(tiles);  // Check verticale collision daarna
-
-            // Animatie update
-            isMoving = Math.Abs(velocity.X) > 0.1f;
-            if (isMoving)
+            if (isJumping && input.Y < 0)
             {
-                animatie.Update(gameTime);
+                velocity.Y = jumpForce;
+                isJumping = false;
             }
-            else
-            {
-                animatie.Reset();
-            }
+
+            position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Collision checks
+            CheckXCollision(tiles);
+            CheckYCollision(tiles);
         }
 
         protected virtual void CheckXCollision(List<TileMap.CollisionTiles> tiles)
         {
-            if (tiles == null) return;
-
-            Rectangle playerRect = CollisionBox;
-            
             foreach (var tile in tiles)
             {
-                if (playerRect.Intersects(tile.Rectangle))
+                if (new Rectangle((int)position.X, (int)position.Y, 64, 64).Intersects(tile.Rectangle))
                 {
-                    if (velocity.X > 0)
-                    {
-                        position.X = tile.Rectangle.Left - (collisionWidth + collisionOffsetX);
-                    }
-                    else if (velocity.X < 0)
-                    {
-                        position.X = tile.Rectangle.Right - collisionOffsetX;
-                    }
                     velocity.X = 0;
                 }
             }
@@ -107,24 +80,12 @@ namespace DoorHop.Players
 
         protected virtual void CheckYCollision(List<TileMap.CollisionTiles> tiles)
         {
-            if (tiles == null) return;
-
-            Rectangle playerRect = CollisionBox;
-            
             foreach (var tile in tiles)
             {
-                if (playerRect.Intersects(tile.Rectangle))
+                if (new Rectangle((int)position.X, (int)position.Y, 64, 64).Intersects(tile.Rectangle))
                 {
-                    if (velocity.Y > 0)
-                    {
-                        position.Y = tile.Rectangle.Top - (collisionHeight + collisionOffsetY);
-                        isJumping = false;
-                    }
-                    else if (velocity.Y < 0)
-                    {
-                        position.Y = tile.Rectangle.Bottom - collisionOffsetY;
-                    }
                     velocity.Y = 0;
+                    isJumping = false;
                 }
             }
         }
@@ -146,13 +107,13 @@ namespace DoorHop.Players
                 SpriteEffects effect = velocity.X > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
                
                 
-                spriteBatch.Draw(playerTexture,position,animatie.CurrentFrame.SourceRecatangle,
+                spriteBatch.Draw(playerTexture,position, currentAnimatie.CurrentFrame.SourceRecatangle,
                     Color.White,0f,Vector2.Zero,1f,effect,0f);
 
 
         }
 
-        public abstract void SetAnimationSpeed(float speed);
+        public abstract void SetAnimationSpeed(float runSpeed, float idleSpeed);
 
         public virtual void SetMoveSpeed(float speed)
         {
