@@ -18,7 +18,15 @@ namespace DoorHop.Animation
         public AnimationFrame(Rectangle rectangle)
         {
             sourceRecatangle = rectangle;
-            nonTransparentBoundingBox = RectangleBorderHelper.GetNonTransparentBoundingBox(texture, sourceRecatangle);
+            //nonTransparentBoundingBox = RectangleBorderHelper.GetNonTransparentBoundingBox(texture, sourceRecatangle);
+        }
+
+        public void SetTexture(Texture2D texture)
+        {
+            if (texture != null) //debug van null referentie
+            {
+                nonTransparentBoundingBox = RectangleBorderHelper.GetNonTransparentBoundingBox(texture, sourceRecatangle);
+            }
         }
     }
 }

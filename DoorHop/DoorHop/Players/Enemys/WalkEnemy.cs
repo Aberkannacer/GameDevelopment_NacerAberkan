@@ -16,12 +16,27 @@ namespace DoorHop.Players.Enemys
     {
         public WalkEnemy(ContentManager content, int width, int height):base(width, height)
         {
-            LoadContent(content);
+            
             position = new Vector2(400, 386);
             moveSpeed = 1.5f;
+            LoadContent(content);
             rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
+        private void LoadContent(ContentManager content)
+        {
+            texture = content.Load<Texture2D>("Player2");
+
+            currentAnimation = new Animatie(texture, true);
+            currentAnimation.AddAnimationFrames(
+                row: 1,
+                frameWidth: 64,
+                frameHeight: 32,
+                numberOfFrames: 8
+            );
+
+            currentAnimation.SetSpeed(1.0f);
+        }
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
             position.X += moveSpeed;
@@ -36,26 +51,9 @@ namespace DoorHop.Players.Enemys
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
-                Color.White, 0f, Vector2.Zero, 2f,
-                moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
-
-
+                Color.White, 0f, Vector2.Zero, 2f,moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
         }
 
-        private void LoadContent(ContentManager content)
-        {
-            texture = content.Load<Texture2D>("Player2");
-            
-            currentAnimation = new Animatie(texture, true);
-            currentAnimation.AddAnimationFrames(
-                row: 1,
-                frameWidth: 64,
-                frameHeight: 32,
-                numberOfFrames: 8
-            );
-            
-            currentAnimation.SetSpeed(1.0f);
-        }
 
         public override Rectangle HitBox
         {

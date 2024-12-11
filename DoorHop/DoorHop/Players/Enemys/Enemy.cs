@@ -23,6 +23,7 @@ namespace DoorHop.Players.Enemys
 
         protected Enemy(int width, int height)
         {
+            position = Vector2.Zero;
             isAlive = true;
             bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
         }

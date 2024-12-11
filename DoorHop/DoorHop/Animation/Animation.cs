@@ -8,7 +8,9 @@ namespace DoorHop.Animation
 
     public class Animatie
     {
+        private Texture2D texture;
         private List<AnimationFrame> animations;
+        private AnimationFrame animationFrame;
         private int currentAnimation;
         private float timer;
         private float speed;
@@ -18,6 +20,7 @@ namespace DoorHop.Animation
 
         public Animatie(Texture2D texture, bool isLooping)
         {
+            this.texture = texture;
             animations = new List<AnimationFrame>();
             this.isLooping = isLooping;
             this.speed = 1f;
@@ -30,13 +33,11 @@ namespace DoorHop.Animation
             animations.Clear();
             for (int i = 0; i < numberOfFrames; i++)
             {
-                animations.Add(new AnimationFrame(new Rectangle(
-                    i * frameWidth,
-                    row * frameHeight,
-                    frameWidth,
-                    frameHeight
-                )));
+                animationFrame = new AnimationFrame(new Rectangle(i * frameWidth, row * frameHeight, frameWidth, frameHeight));
+                animationFrame.SetTexture(texture);
+                animations.Add(animationFrame);
             }
+
             CurrentFrame = animations[0];
         }
 
