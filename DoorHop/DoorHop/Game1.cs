@@ -96,8 +96,6 @@ namespace DoorHop
                 {
                     
                     enemy.Draw(_spriteBatch);
-                    
-                    
                 }
             }
             

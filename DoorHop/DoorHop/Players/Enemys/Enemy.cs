@@ -23,27 +23,12 @@ namespace DoorHop.Players.Enemys
         protected Enemy(int width, int height)
         {
             isAlive = true;
-            position = new Vector2(400, 386);
-            moveSpeed = 2f;
             bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
-        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
-        {
-            if (!isAlive) return;
-            position.X += moveSpeed;
-            if (position.X > 400 || position.X < 0) moveSpeed = -moveSpeed;
-            bounds = new Rectangle((int)position.X, (int)position.Y, bounds.Width, bounds.Height);
-            currentAnimation?.Update(gameTime);
-        }
+        public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles);
 
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            if (!isAlive || currentAnimation?.CurrentFrame == null) return;
-            spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.SourceRecatangle,
-                Color.White, 0f, Vector2.Zero, 2f,
-                moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
-        }
+        public abstract void Draw(SpriteBatch spriteBatch);
 
         public Rectangle Bounds => bounds;
         public virtual void TakeDamage() => isAlive = false;
