@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoorHop.TileMap;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +11,14 @@ namespace DoorHop.Animation
 {
     public class AnimationFrame
     {
-        public Rectangle SourceRecatangle { get; set; }
+        public Rectangle sourceRecatangle { get; set; }
+        public Rectangle nonTransparentBoundingBox { get; set; }
+        public Texture2D texture { get; set; }
 
         public AnimationFrame(Rectangle rectangle)
         {
-            SourceRecatangle = rectangle;
+            sourceRecatangle = rectangle;
+            nonTransparentBoundingBox = RectangleBorderHelper.GetNonTransparentBoundingBox(texture, sourceRecatangle);
         }
     }
 }

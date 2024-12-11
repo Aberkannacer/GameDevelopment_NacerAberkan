@@ -19,6 +19,7 @@ namespace DoorHop.Players.Enemys
             LoadContent(content);
             position = new Vector2(400, 386);
             moveSpeed = 1.5f;
+            rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
@@ -34,7 +35,7 @@ namespace DoorHop.Players.Enemys
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.SourceRecatangle,
+            spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 2f,
                 moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 
@@ -54,6 +55,21 @@ namespace DoorHop.Players.Enemys
             );
             
             currentAnimation.SetSpeed(1.0f);
+        }
+
+        public override Rectangle HitBox
+        {
+            get { return GetAdjustedRectangle(); }
+        }
+
+        private Rectangle GetAdjustedRectangle()
+        {
+            return new Rectangle(
+                rectangle.X + currentAnimation.CurrentFrame.nonTransparentBoundingBox.X + 1,
+                rectangle.Y + currentAnimation.CurrentFrame.nonTransparentBoundingBox.Y + 1,
+                currentAnimation.CurrentFrame.nonTransparentBoundingBox.Width,
+                currentAnimation.CurrentFrame.nonTransparentBoundingBox.Height
+            );
         }
     }
 }

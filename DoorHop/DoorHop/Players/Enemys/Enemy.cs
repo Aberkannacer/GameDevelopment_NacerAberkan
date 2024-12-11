@@ -15,6 +15,7 @@ namespace DoorHop.Players.Enemys
     {
         protected Texture2D texture;
         protected Animatie currentAnimation;
+        protected Rectangle rectangle;
         protected Vector2 position;
         protected bool isAlive;
         protected Rectangle bounds;
@@ -25,6 +26,18 @@ namespace DoorHop.Players.Enemys
             isAlive = true;
             bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
+        public virtual Rectangle HitBox
+        {
+            get
+            {
+                return rectangle;
+            }
+            protected set
+            {
+                rectangle = value;
+            }
+        }
+
 
         public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles);
 

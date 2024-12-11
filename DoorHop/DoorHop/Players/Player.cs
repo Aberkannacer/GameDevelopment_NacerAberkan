@@ -153,7 +153,7 @@ namespace DoorHop.Players
                 spriteBatch.Draw(
                     playerTexture,
                     position,
-                    currentAnimation.CurrentFrame.SourceRecatangle,
+                    currentAnimation.CurrentFrame.sourceRecatangle,
                     Color.White,
                     0f,
                     Vector2.Zero,
