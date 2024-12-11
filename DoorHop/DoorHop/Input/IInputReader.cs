@@ -10,5 +10,6 @@ namespace DoorHop.Input
     {
         Vector2 ReadInput();
         bool IsJumpKeyPressed();
+        bool IsAttackButtonPressed();
     }
 }

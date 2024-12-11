@@ -27,7 +27,12 @@ namespace DoorHop.Players.Hero
             SetAnimationSpeed(1f, 1f);  // Run sneller, idle langzamer
             SetMoveSpeed(3.5f);               // Bewegingssnelheid
             SetJumpForce(-15f);             // Sprongkracht
+
+            //voor health
+            health = 5;
         }
+
+    
 
         public void SetJumpForce(float force)
         {
@@ -43,7 +48,10 @@ namespace DoorHop.Players.Hero
             
             idleAnimation = new Animatie(playerTexture, true);
             idleAnimation.AddAnimationFrames(row: 0, frameWidth: 64, frameHeight: 64, numberOfFrames: 4);
-            
+
+            attackAnimation = new Animatie(playerTexture, true);
+            attackAnimation.AddAnimationFrames(row: 2, frameWidth: 64, frameHeight: 64, numberOfFrames: 4);
+
             currentAnimation = idleAnimation;
         }
 
@@ -60,11 +68,15 @@ namespace DoorHop.Players.Hero
         protected virtual void UpdateAnimation(GameTime gameTime)
         {
             // Kies animatie gebaseerd op beweging
+            // Als de hero beweegt dan veranderd de animatie naar lopen
             currentAnimation = isMoving ? runAnimation : idleAnimation;
+            //als de hero gaat aanvallen dan gaat de hero de animatie van attacken tonen
+            currentAnimation = isAttacking ? attackAnimation : idleAnimation;
+
+            //NOG LATEN WERKEN DAT JE KAN KLIKKEN
             
             // Update huidige animatie frame
-            if (currentAnimation != null)
-                currentAnimation.Update(gameTime);
+            currentAnimation.Update(gameTime);
         }
 
         public void SetAnimationSpeed(float runSpeed, float idleSpeed)
@@ -76,6 +88,14 @@ namespace DoorHop.Players.Hero
         public void SetMoveSpeed(float speed)
         {
             moveSpeed = speed;
+        }
+
+        private void Attack()
+        {
+            if (!isAttacking)
+            {
+                isAttacking = true;
+            }
         }
     }
 

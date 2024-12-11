@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 
@@ -18,6 +19,9 @@ namespace DoorHop.Players
         protected Animatie currentAnimation;
         protected Animatie runAnimation;
         protected Animatie idleAnimation;
+        protected Animatie attackAnimation;
+        private KeyBoardReader keyBoardReader;
+
         protected Vector2 position;
         protected Vector2 velocity;
         protected IInputReader inputReader;
@@ -27,8 +31,14 @@ namespace DoorHop.Players
         protected bool isJumping;
         protected bool isGrounded;
         protected bool isFacingRight = true;
+        protected bool isAttacking;
         protected Rectangle bounds;
-        
+
+        //voor de health
+        public float health, healthMax;
+
+        public bool dead;
+
         protected const float gravity = 0.6f;
         protected const float maxFallSpeed = 12f;
         protected const int COLLISION_WIDTH = 48;
@@ -43,7 +53,12 @@ namespace DoorHop.Players
             isJumping = false;
             isMoving = false;
             isGrounded = false;
+
+            //voor health
+            health = 1;
+            healthMax = health;
         }
+        
 
         protected abstract void LoadContent(ContentManager content);
 
@@ -69,6 +84,12 @@ namespace DoorHop.Players
             if (!isGrounded)
             {
                 velocity.Y = Math.Min(velocity.Y + gravity, maxFallSpeed);
+            }
+
+            //attack logica
+            if (inputReader.IsAttackButtonPressed())
+            {
+                Attack();
             }
 
             // Handle collisions (beweging gebeurt nu in HandleCollisions)
@@ -195,5 +216,25 @@ namespace DoorHop.Players
         {
             // Implementeer hero damage logica
         }
+
+        public virtual void GetHit(float damage)
+        {
+            health -= damage;
+
+            if (health <= 0)
+            {
+                dead = true;
+            }
+        }
+
+        private void Attack()
+        {
+            if (!isAttacking)
+            {
+                isAttacking = true;
+            }
+        }
+
+
     }
 }

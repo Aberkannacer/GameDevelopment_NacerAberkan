@@ -1,4 +1,5 @@
 ﻿using DoorHop.Animation;
+using DoorHop.Players.Hero;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,7 +23,7 @@ namespace DoorHop.Players.Enemys
             LoadContent(content);
             rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
-
+        
         private void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("Player2");
@@ -68,6 +69,11 @@ namespace DoorHop.Players.Enemys
                 currentAnimation.CurrentFrame.nonTransparentBoundingBox.Width,
                 currentAnimation.CurrentFrame.nonTransparentBoundingBox.Height
             );
+        }
+
+        public void DistanceDamage()
+        {
+
         }
     }
 }

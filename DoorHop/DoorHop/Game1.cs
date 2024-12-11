@@ -16,7 +16,7 @@ namespace DoorHop
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Hero hero;
+        private Players.Hero.Hero hero;
         private Map map;
         private List<Enemy> enemies;
         private IInputReader inputReader;
@@ -60,7 +60,7 @@ namespace DoorHop
             }, 30);
 
             inputReader = new KeyBoardReader();
-            hero = new Hero(Content, inputReader);
+            hero = new Players.Hero.Hero(Content, inputReader);
 
             WalkEnemy walkEnemy = new WalkEnemy(Content,64,64);
             enemies.Add(walkEnemy);

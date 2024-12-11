@@ -13,17 +13,28 @@ namespace DoorHop.Input
         public Vector2 ReadInput()
         {
             KeyboardState state = Keyboard.GetState();
+            MouseState mouseState = Mouse.GetState();
             Vector2 direction = Vector2.Zero;
 
             if (state.IsKeyDown(Keys.Left)) direction.X = -1;
             else if (state.IsKeyDown(Keys.Right)) direction.X = 1;
+
+            if (mouseState.RightButton == ButtonState.Pressed) ;
 
             return direction;
         }
 
         public bool IsJumpKeyPressed()
         {
-            return Keyboard.GetState().IsKeyDown(Keys.Space);
+            KeyboardState keyboardState = Keyboard.GetState();
+            //NOG AANPASSEN //Keyboard.GetState().IsKeyDown(Keys.Space)
+            return keyboardState.IsKeyDown(Keys.Space);
+        }
+
+        public bool IsAttackButtonPressed()
+        {
+            MouseState mouseState = Mouse.GetState();
+            return mouseState.LeftButton == ButtonState.Pressed;
         }
     }
 }
