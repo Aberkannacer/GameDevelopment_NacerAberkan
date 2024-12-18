@@ -10,16 +10,21 @@ namespace DoorHop.Input
 {
     class KeyBoardReader : IInputReader
     {
+        private KeyboardState previousKeyboardState;
+
+        public KeyBoardReader()
+        {
+            previousKeyboardState = Keyboard.GetState();
+        }
+
         public Vector2 ReadInput()
         {
             KeyboardState state = Keyboard.GetState();
-            MouseState mouseState = Mouse.GetState();
             Vector2 direction = Vector2.Zero;
 
             if (state.IsKeyDown(Keys.Left)) direction.X = -1;
             else if (state.IsKeyDown(Keys.Right)) direction.X = 1;
 
-            if (mouseState.RightButton == ButtonState.Pressed) ;
 
             return direction;
         }
@@ -27,14 +32,19 @@ namespace DoorHop.Input
         public bool IsJumpKeyPressed()
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            //NOG AANPASSEN //Keyboard.GetState().IsKeyDown(Keys.Space)
             return keyboardState.IsKeyDown(Keys.Space);
         }
 
         public bool IsAttackButtonPressed()
         {
-            MouseState mouseState = Mouse.GetState();
-            return mouseState.LeftButton == ButtonState.Pressed;
+            KeyboardState currentKeyboardState = Keyboard.GetState();
+            
+            // Alleen true als de toets NET is ingedrukt (was niet ingedrukt in vorige frame)
+            bool isPressed = currentKeyboardState.IsKeyDown(Keys.E) && 
+                            !previousKeyboardState.IsKeyDown(Keys.E);
+            
+            previousKeyboardState = currentKeyboardState;
+            return isPressed;
         }
     }
 }

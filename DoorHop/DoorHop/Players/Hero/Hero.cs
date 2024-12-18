@@ -49,8 +49,9 @@ namespace DoorHop.Players.Hero
             idleAnimation = new Animatie(playerTexture, true);
             idleAnimation.AddAnimationFrames(row: 0, frameWidth: 64, frameHeight: 64, numberOfFrames: 4);
 
-            attackAnimation = new Animatie(playerTexture, true);
+            attackAnimation = new Animatie(playerTexture, false);
             attackAnimation.AddAnimationFrames(row: 2, frameWidth: 64, frameHeight: 64, numberOfFrames: 4);
+            attackAnimation.SetSpeed(1f);
 
             currentAnimation = idleAnimation;
         }
@@ -65,18 +66,32 @@ namespace DoorHop.Players.Hero
             bounds = new Rectangle(boundsX, boundsY, boundsWidth, boundsHeight);
         }
 
-        protected virtual void UpdateAnimation(GameTime gameTime)
+        protected override void UpdateAnimation(GameTime gameTime)
         {
-            // Kies animatie gebaseerd op beweging
-            // Als de hero beweegt dan veranderd de animatie naar lopen
-            currentAnimation = isMoving ? runAnimation : idleAnimation;
-            //als de hero gaat aanvallen dan gaat de hero de animatie van attacken tonen
-            currentAnimation = isAttacking ? attackAnimation : idleAnimation;
+            if (isAttacking)
+            {
+                currentAnimation = attackAnimation;
+                
+                // Reset isAttacking when the animation is finished
+                if (currentAnimation.IsAnimationFinished())
+                {
+                    isAttacking = false;
+                }
+            }
+            else if (isJumping)
+            {
+                currentAnimation = jumpAnimation;
+            }
+            else if (isMoving)
+            {
+                currentAnimation = runAnimation;
+            }
+            else
+            {
+                currentAnimation = idleAnimation;
+            }
 
-            //NOG LATEN WERKEN DAT JE KAN KLIKKEN
-            
-            // Update huidige animatie frame
-            currentAnimation.Update(gameTime);
+            currentAnimation?.Update(gameTime);
         }
 
         public void SetAnimationSpeed(float runSpeed, float idleSpeed)

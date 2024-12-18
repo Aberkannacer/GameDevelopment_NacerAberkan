@@ -20,6 +20,7 @@ namespace DoorHop.Players
         protected Animatie runAnimation;
         protected Animatie idleAnimation;
         protected Animatie attackAnimation;
+        protected Animatie jumpAnimation;
         private KeyBoardReader keyBoardReader;
 
         protected Vector2 position;
@@ -232,6 +233,7 @@ namespace DoorHop.Players
             if (!isAttacking)
             {
                 isAttacking = true;
+                attackAnimation.Reset();
             }
         }
 

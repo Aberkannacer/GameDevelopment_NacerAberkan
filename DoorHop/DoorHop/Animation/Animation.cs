@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
+using System;
 using System.Collections.Generic;
 
 namespace DoorHop.Animation
@@ -33,25 +34,61 @@ namespace DoorHop.Animation
             animations.Clear();
             for (int i = 0; i < numberOfFrames; i++)
             {
-                animationFrame = new AnimationFrame(new Rectangle(i * frameWidth, row * frameHeight, frameWidth, frameHeight));
-                animationFrame.SetTexture(texture);
-                animations.Add(animationFrame);
+                var frame = new AnimationFrame(new Rectangle(
+                    i * frameWidth,
+                    row * frameHeight,
+                    frameWidth,
+                    frameHeight
+                ));
+                frame.SetTexture(texture);
+                animations.Add(frame);
             }
 
+            CurrentFrame = animations[0];
+        }
+
+        public void Reset()
+        {
+            currentAnimation = 0;
+            timer = 0;
             CurrentFrame = animations[0];
         }
 
         public void Update(GameTime gameTime)
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            
             if (timer >= 0.1f * speed)
             {
-                currentAnimation = (currentAnimation + 1) % animations.Count;
                 timer = 0;
+                
+                if (!isLooping && currentAnimation >= animations.Count - 1)
+                {
+                    // Blijf op het laatste frame voor non-looping animaties
+                    return;
+                }
+
+                // Update naar het volgende frame
+                currentAnimation++;
+                if (isLooping)
+                {
+                    currentAnimation %= animations.Count;
+                }
+                else
+                {
+                    currentAnimation = Math.Min(currentAnimation, animations.Count - 1);
+                }
+
                 CurrentFrame = animations[currentAnimation];
             }
         }
 
         public void SetSpeed(float newSpeed) => speed = newSpeed;
+        public bool IsAnimationFinished()
+        {
+            System.Diagnostics.Debug.WriteLine($"Current frame: {currentAnimation}, Total frames: {animations.Count}");
+            return !isLooping && currentAnimation >= animations.Count - 1;
+        }
+
     }
 }
