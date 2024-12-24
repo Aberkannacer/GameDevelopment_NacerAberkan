@@ -15,14 +15,15 @@ namespace DoorHop.Players.Enemys
 {
     internal class WalkEnemy : Enemy
     {
+        private const int ENEMY_WIDTH = 38;
+        private const int ENEMY_HEIGHT = 64;
         public WalkEnemy(ContentManager content, int width, int height):base(width, height)
         {
-            
-            position = new Vector2(400, 386);
+            position = new Vector2(300, 386);
             moveSpeed = 1.5f;
             LoadContent(content);
             rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
-            bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+            
         }
         
         private void LoadContent(ContentManager content)
@@ -40,16 +41,37 @@ namespace DoorHop.Players.Enemys
             {
                 moveSpeed = -moveSpeed;
             }
-            bounds = new Rectangle((int)position.X, (int)position.Y, bounds.Width, bounds.Height);
-            currentAnimation.Update(gameTime);
 
+            // Update bounds met dezelfde offsets als in de constructor
+            int collisionBoxWidth = ENEMY_WIDTH;
+            int collisionBoxHeight = ENEMY_HEIGHT/2;
+            int xOffset;
+            if (moveSpeed > 0)
+            {
+                xOffset = (ENEMY_WIDTH - collisionBoxWidth) + 37;
+            }
+            else
+            {
+                xOffset = ENEMY_WIDTH+16;
+            }
+            
+            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight);
+
+            bounds = new Rectangle(
+                (int)position.X + xOffset,
+                (int)position.Y + yOffset,
+                collisionBoxWidth,
+                collisionBoxHeight
+            );
+
+            currentAnimation?.Update(gameTime);
         }
 
 
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
+            spriteBatch.Draw(texture, position, currentAnimation?.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 2f,moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
 
             // Debug collision bounds
@@ -58,6 +80,8 @@ namespace DoorHop.Players.Enemys
             boundTexture.SetData(new[] { Color.Yellow * 1f });
             spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
 #endif
+
+            
         }
 
         public override Rectangle HitBox
