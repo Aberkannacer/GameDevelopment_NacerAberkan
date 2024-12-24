@@ -1,6 +1,6 @@
 ﻿using DoorHop.Players;
 using DoorHop.Players.Enemys;
-using DoorHop.Players.Hero;
+using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,7 +16,8 @@ namespace DoorHop
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Players.Hero.Hero hero;
+        private Hero hero;
+        private WalkEnemy walkEnemy;
         private Map map;
         private List<Enemy> enemies;
         private IInputReader inputReader;
@@ -60,9 +61,9 @@ namespace DoorHop
             }, 30);
 
             inputReader = new KeyBoardReader();
-            hero = new Players.Hero.Hero(Content, inputReader);
+            hero = new Hero(Content, inputReader, this);
 
-            WalkEnemy walkEnemy = new WalkEnemy(Content,64,64);
+            walkEnemy = new WalkEnemy(Content,64,64);
             enemies.Add(walkEnemy);
 
         }
@@ -127,11 +128,21 @@ namespace DoorHop
                         }
                         else
                         {
-                            hero.TakeDamage();
+                            
                         }
                     }
                 }
             }
+
+
+            //voor check van dat enemy die tegen elkaar botsen
+
+                if (walkEnemy.CollisionCheck(hero))
+                {
+                    hero.GetHit(1);
+                }
+            
+            
 
             base.Update(gameTime);
         }

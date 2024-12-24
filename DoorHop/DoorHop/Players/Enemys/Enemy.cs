@@ -1,5 +1,6 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Interfaces;
+using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,6 +16,7 @@ namespace DoorHop.Players.Enemys
     {
         protected Texture2D texture;
         protected Animatie currentAnimation;
+        protected Hero hero;
         protected Rectangle rectangle;
         protected Vector2 position;
         protected bool isAlive;
@@ -47,5 +49,7 @@ namespace DoorHop.Players.Enemys
 
         public Rectangle Bounds => bounds;
         public virtual void TakeDamage() => isAlive = false;
+
+        
     }
 }

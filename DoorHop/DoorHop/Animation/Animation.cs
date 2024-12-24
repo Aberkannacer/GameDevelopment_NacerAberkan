@@ -86,7 +86,6 @@ namespace DoorHop.Animation
         public void SetSpeed(float newSpeed) => speed = newSpeed;
         public bool IsAnimationFinished()
         {
-            System.Diagnostics.Debug.WriteLine($"Current frame: {currentAnimation}, Total frames: {animations.Count}");
             return !isLooping && currentAnimation >= animations.Count - 1;
         }
 

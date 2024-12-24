@@ -21,7 +21,8 @@ namespace DoorHop.Players
         protected Animatie idleAnimation;
         protected Animatie attackAnimation;
         protected Animatie jumpAnimation;
-        private KeyBoardReader keyBoardReader;
+        protected Animatie dieAnimation;
+        protected Game game;
 
         protected Vector2 position;
         protected Vector2 velocity;
@@ -33,6 +34,7 @@ namespace DoorHop.Players
         protected bool isGrounded;
         protected bool isFacingRight = true;
         protected bool isAttacking;
+        protected bool isDead;
         protected Rectangle bounds;
 
         //voor de health
@@ -45,7 +47,7 @@ namespace DoorHop.Players
         protected const int COLLISION_WIDTH = 48;
         protected const int COLLISION_HEIGHT = 48;
 
-        protected Player(ContentManager content, IInputReader inputReader)
+        protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
             position = new Vector2(200, 200);
@@ -56,10 +58,12 @@ namespace DoorHop.Players
             isGrounded = false;
 
             //voor health
-            health = 1;
-            healthMax = health;
+            health = 3;
+
+            this.game = game;
         }
         
+
 
         protected abstract void LoadContent(ContentManager content);
 
@@ -156,9 +160,21 @@ namespace DoorHop.Players
 
         protected virtual void UpdateAnimation(GameTime gameTime)
         {
+            if (isAttacking)
+            {
+                currentAnimation = attackAnimation;
+            }
             if (isMoving)
             {
                 currentAnimation = runAnimation;
+            }
+            if (isJumping)
+            {
+                currentAnimation = jumpAnimation;
+            }
+            if (isDead)
+            {
+                currentAnimation = dieAnimation;
             }
             else
             {
@@ -213,10 +229,6 @@ namespace DoorHop.Players
             isGrounded = false;
         }
 
-        public virtual void TakeDamage()
-        {
-            // Implementeer hero damage logica
-        }
 
         public virtual void GetHit(float damage)
         {
@@ -224,7 +236,7 @@ namespace DoorHop.Players
 
             if (health <= 0)
             {
-                dead = true;
+                Die();
             }
         }
 
@@ -236,6 +248,18 @@ namespace DoorHop.Players
                 attackAnimation.Reset();
             }
         }
+        public void Die()
+        {
+            if (!isDead)
+            {
+                isDead = true;
+                currentAnimation = dieAnimation;
+                game.Exit();
+            }
+
+        }
+
+        
 
 
     }
