@@ -19,6 +19,7 @@ namespace DoorHop
         private SpriteBatch _spriteBatch;
         private Hero hero;
         private WalkEnemy walkEnemy;
+        private ShootEnemy shootEnemy;
         private Map map;
         private List<Enemy> enemies;
         private IInputReader inputReader;
@@ -57,11 +58,11 @@ namespace DoorHop
                 { 4,0,0,0,0,4,4,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0  },
                 { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
                 { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
-                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4  },
-                { 4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0  },
-                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,4,0,0,0,0  },
-                { 4,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0 },
-                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0 },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4  },
+                { 4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0 },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0 },
                 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
             }, 30);
 
@@ -69,7 +70,9 @@ namespace DoorHop
             hero = new Hero(Content, inputReader, this);
 
             walkEnemy = new WalkEnemy(Content,64,64);
+            shootEnemy = new ShootEnemy(Content, 64, 64);
             enemies.Add(walkEnemy);
+            enemies.Add(shootEnemy);
 
 
 
@@ -143,7 +146,7 @@ namespace DoorHop
 
             //voor check van dat enemy die tegen elkaar botsen
 
-                if (walkEnemy.CollisionCheck(hero))
+                if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero))
                 {
                     if (!hero.isDead) // Alleen damage doen als de hero nog leeft
                     {

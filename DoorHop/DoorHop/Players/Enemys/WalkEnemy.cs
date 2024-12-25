@@ -84,20 +84,7 @@ namespace DoorHop.Players.Enemys
             
         }
 
-        public override Rectangle HitBox
-        {
-            get { return GetAdjustedRectangle(); }
-        }
-
-        private Rectangle GetAdjustedRectangle()
-        {
-            return new Rectangle(
-                rectangle.X + currentAnimation.CurrentFrame.nonTransparentBoundingBox.X + 1,
-                rectangle.Y + currentAnimation.CurrentFrame.nonTransparentBoundingBox.Y + 1,
-                currentAnimation.CurrentFrame.nonTransparentBoundingBox.Width,
-                currentAnimation.CurrentFrame.nonTransparentBoundingBox.Height
-            );
-        }
+        
 
         public bool CollisionCheck(Hero hero)
         {
