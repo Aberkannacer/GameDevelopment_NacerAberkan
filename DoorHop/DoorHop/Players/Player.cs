@@ -59,6 +59,7 @@ namespace DoorHop.Players
 
             //voor health
             health = 3;
+            healthMax = 3;
 
             this.game = game;
         }
@@ -232,7 +233,7 @@ namespace DoorHop.Players
 
         public virtual void GetHit(float damage)
         {
-            health -= damage;
+            health = Math.Max(0, health - damage);
 
             if (health <= 0)
             {

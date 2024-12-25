@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 using DoorHop.Input;
+using System.Diagnostics;
 
 namespace DoorHop
 {
@@ -21,6 +22,7 @@ namespace DoorHop
         private Map map;
         private List<Enemy> enemies;
         private IInputReader inputReader;
+        private HealthHeart healthHeart;
 
         public Game1()
         {
@@ -66,12 +68,20 @@ namespace DoorHop
             walkEnemy = new WalkEnemy(Content,64,64);
             enemies.Add(walkEnemy);
 
+
+            healthHeart = new HealthHeart(hero, new Vector2(20, 10));
+
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
+
+            if (healthHeart != null)  // Extra check voor veiligheid
+            {
+                healthHeart.LoadContent(Content);
+            }
         }
 
         protected override void Draw(GameTime gameTime)
@@ -99,7 +109,11 @@ namespace DoorHop
                     enemy.Draw(_spriteBatch);
                 }
             }
-            
+
+            if (healthHeart != null)
+            {
+                healthHeart.Draw(_spriteBatch);
+            }
             _spriteBatch.End();
 
             base.Draw(gameTime);
