@@ -30,7 +30,9 @@ namespace DoorHop.Players.Enemys
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(bulletTexture, positionBullet, Color.White);
+            //spriteBatch.Draw(bulletTexture, positionBullet, Color.White);
+            //voor te testen
+            //spriteBatch.Draw(bulletTexture, new Vector2(100, 100), Color.White);
         }
 
         public bool IsDeleted()

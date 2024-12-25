@@ -17,13 +17,18 @@ namespace DoorHop.Players.Enemys
     {
         private List<Bullet> bullets;
         private Texture2D bulletTexture;
+        private Animatie bulletAnimation;
         private const int ENEMY_WIDTH = 64;
         private const int ENEMY_HEIGHT = 64;
+
+        private Vector2 bulletPosition;
 
         public ShootEnemy(ContentManager content, int width, int height) : base(width, height)
         {
             LoadContent(content);
             position = new Vector2(740, 240);
+            //bulletPosition = new Vector2(100, 100);
+
             bullets = new List<Bullet>();
         }
         private void LoadContent(ContentManager content)
@@ -31,9 +36,14 @@ namespace DoorHop.Players.Enemys
             texture = content.Load<Texture2D>("ShootEnemy");
             bulletTexture = content.Load<Texture2D>("Bullet");
 
+            //voor shootenemy
             currentAnimation = new Animatie(texture, true);
             currentAnimation.AddAnimationFrames(0, 64, 64, 6);
             currentAnimation.SetSpeed(1.0f);
+
+            //voor bullet
+            bulletAnimation = new Animatie(bulletTexture, true);
+            bulletAnimation.AddAnimationFrames(16, 16, 16, 4);
         }
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
@@ -63,6 +73,11 @@ namespace DoorHop.Players.Enemys
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+
+            spriteBatch.Draw(bulletTexture, position, bulletAnimation.CurrentFrame.sourceRecatangle,
+                Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.FlipHorizontally, 0f);
+
+
             foreach (var item in bullets)
             {
                 item.Draw(spriteBatch);
@@ -77,6 +92,7 @@ namespace DoorHop.Players.Enemys
 
         private void Shoot()
         {
+
             Bullet bullet = new Bullet(bulletTexture, position);
             bullets.Add(bullet);
         }

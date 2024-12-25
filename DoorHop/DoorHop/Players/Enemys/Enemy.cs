@@ -28,6 +28,7 @@ namespace DoorHop.Players.Enemys
             position = Vector2.Zero;
             isAlive = true;
             //bounds = new Rectangle((int)position.X, (int)position.Y, width, height);
+            //MAG WEG --> test eerst
             this.rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
         }
         public virtual Rectangle HitBox
