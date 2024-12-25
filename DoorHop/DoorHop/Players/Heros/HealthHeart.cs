@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using DoorHop.Animation;
 
 namespace DoorHop.Players.Heros
 {
@@ -16,48 +17,47 @@ namespace DoorHop.Players.Heros
     {
         private Texture2D heartTexture;
         private Vector2 position;
-        private int heartSpacing = 40;
-        private Player player;
+        private int heartSpacing = 20;
+        private Hero hero;
+        private Rectangle[] heartFrames; // Array voor elke heart positie
 
-        public HealthHeart(Player player,Vector2 position)
+        public HealthHeart(ContentManager content, Hero hero, Vector2 startPosition)
         {
-            this.player = player;
-            this.position = position;
+            this.hero = hero;
+            this.position = startPosition;
+            LoadContent(content);
+            
+            // Maak rectangles voor elke heart in de sprite
+            heartFrames = new Rectangle[3];
+            int heartWidth = heartTexture.Width / 3;
+            int heartHeight = heartTexture.Height;
+            
+            for (int i = 0; i < 3; i++)
+            {
+                heartFrames[i] = new Rectangle(i * heartWidth, 0, heartWidth, heartHeight);
+            }
         }
 
         public void LoadContent(ContentManager content)
         {
-            try
-            {
-                heartTexture = content.Load<Texture2D>("Heart");
-                if (heartTexture == null)
-                {
-                    System.Diagnostics.Debug.WriteLine("Heart texture failed to load!");
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Heart texture loaded successfully!");
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error loading heart texture: {ex.Message}");
-            }
+            heartTexture = content.Load<Texture2D>("Heart");
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (heartTexture == null)
+            for (int i = 0; i < hero.Health; i++)
             {
-                System.Diagnostics.Debug.WriteLine("Heart texture is null in Draw method!");
-                return;
-            }
-
-            for (int i = 0; i < player.healthMax; i++)
-            {
-                Color heartColor = i < player.health ? Color.White : Color.Black;
-                Vector2 hearthPosition = new Vector2(position.X + (i * heartSpacing), position.Y);
-                spriteBatch.Draw(heartTexture, hearthPosition, null, heartColor, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.Draw(
+                    heartTexture,
+                    new Vector2(position.X + (heartFrames[0].Width + heartSpacing) * i, position.Y),
+                    heartFrames[0], // Gebruik de eerste heart uit de sprite
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    2f, // Scale voor betere zichtbaarheid
+                    SpriteEffects.None,
+                    0f
+                );
             }
         }
     }

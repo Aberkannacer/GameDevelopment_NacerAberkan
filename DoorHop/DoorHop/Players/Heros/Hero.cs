@@ -24,6 +24,9 @@ namespace DoorHop.Players.Heros
         public Hero(ContentManager content, IInputReader inputReader, Game game) 
             : base(content, inputReader, game)
         {
+            Health = 3;
+            health = 3;
+            healthMax = 3;
             playerTexture = Texture;
             LoadContent(content);
             UpdateBounds();
@@ -32,7 +35,6 @@ namespace DoorHop.Players.Heros
             SetAnimationSpeed(1f, 1f);  // Run sneller, idle langzamer
             SetMoveSpeed(3.5f);               // Bewegingssnelheid
             SetJumpForce(-15f);             // Sprongkracht
-
         }
 
 
@@ -123,9 +125,10 @@ namespace DoorHop.Players.Heros
             }
         }
 
-        public override void GetHit(float damage)
+        public override void GetHit(int damage)
         {
             base.GetHit(damage);
+            Health = (int)health;
         }
     }
 

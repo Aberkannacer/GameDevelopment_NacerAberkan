@@ -34,7 +34,7 @@ namespace DoorHop.Players
         protected bool isGrounded;
         protected bool isFacingRight = true;
         protected bool isAttacking;
-        protected bool isDead;
+        public bool isDead;
         protected Rectangle bounds;
 
         //voor de health
@@ -46,6 +46,10 @@ namespace DoorHop.Players
         protected const float maxFallSpeed = 12f;
         protected const int COLLISION_WIDTH = 48;
         protected const int COLLISION_HEIGHT = 48;
+
+        protected bool isInvulnerable = false;
+        protected float invulnerabilityTimer = 0f;
+        protected const float INVULNERABILITY_DURATION = 1.5f; // 1.5 seconden onkwetsbaar na hit
 
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
@@ -70,6 +74,16 @@ namespace DoorHop.Players
 
         public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
+            // Update invulnerability timer
+            if (isInvulnerable)
+            {
+                invulnerabilityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (invulnerabilityTimer <= 0)
+                {
+                    isInvulnerable = false;
+                }
+            }
+
             Vector2 input = inputReader.ReadInput();
             velocity.X = input.X * moveSpeed;
             
@@ -231,13 +245,19 @@ namespace DoorHop.Players
         }
 
 
-        public virtual void GetHit(float damage)
+        public virtual void GetHit(int damage)
         {
-            health = Math.Max(0, health - damage);
-
-            if (health <= 0)
+            if (!isInvulnerable)
             {
-                Die();
+                health -= damage;
+                isInvulnerable = true;
+                invulnerabilityTimer = INVULNERABILITY_DURATION;
+
+                if (health <= 0)
+                {
+                    health = 0;
+                    isDead = true;
+                }
             }
         }
 

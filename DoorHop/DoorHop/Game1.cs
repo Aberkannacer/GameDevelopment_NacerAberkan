@@ -68,7 +68,10 @@ namespace DoorHop
             walkEnemy = new WalkEnemy(Content,64,64);
             enemies.Add(walkEnemy);
 
-            healthHeart = new HealthHeart(hero, new Vector2(20, 20));
+
+
+            healthHeart = new HealthHeart(Content, hero, new Vector2(680, 0));
+
         }
 
         protected override void LoadContent()
@@ -76,14 +79,9 @@ namespace DoorHop
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
 
-            if (healthHeart != null)
-            {
-                healthHeart.LoadContent(Content);
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("healthHeart is null in LoadContent!");
-            }
+
+            
+            
         }
 
         protected override void Draw(GameTime gameTime)
@@ -112,10 +110,9 @@ namespace DoorHop
                 }
             }
 
-            if (healthHeart != null)
-            {
-                healthHeart.Draw(_spriteBatch);
-            }
+            healthHeart.Draw(_spriteBatch);
+
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -155,7 +152,15 @@ namespace DoorHop
 
                 if (walkEnemy.CollisionCheck(hero))
                 {
-                    hero.GetHit(1);
+                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
+                    {
+                        hero.GetHit(1);
+                        if (hero.isDead)
+                        {
+                            // Hier kun je game over logica toevoegen
+                            System.Diagnostics.Debug.WriteLine("Game Over!");
+                        }
+                    }
                 }
             
             
