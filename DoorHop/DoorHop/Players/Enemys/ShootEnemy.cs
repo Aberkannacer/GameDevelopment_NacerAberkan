@@ -62,7 +62,7 @@ namespace DoorHop.Players.Enemys
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
-                Color.White, 0f, Vector2.Zero, 1f, moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+                Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
             foreach (var item in bullets)
             {
                 item.Draw(spriteBatch);

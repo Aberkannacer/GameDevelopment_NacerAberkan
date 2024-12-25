@@ -22,7 +22,6 @@ namespace DoorHop.Players.Enemys
             position = new Vector2(300, 386);
             moveSpeed = 1.5f;
             LoadContent(content);
-            rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
             
         }
         
@@ -37,7 +36,7 @@ namespace DoorHop.Players.Enemys
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
             position.X += moveSpeed;
-            if (position.X > 560 || position.X < 0) //loopt 560 naar positie x rechts en keert terug als die naar links gaat: 0
+            if (position.X > 420 || position.X < 0) //loopt 560 naar positie x rechts en keert terug als die naar links gaat: 0
             {
                 moveSpeed = -moveSpeed;
             }
