@@ -68,9 +68,7 @@ namespace DoorHop
             walkEnemy = new WalkEnemy(Content,64,64);
             enemies.Add(walkEnemy);
 
-
-            healthHeart = new HealthHeart(hero, new Vector2(20, 10));
-
+            healthHeart = new HealthHeart(hero, new Vector2(20, 20));
         }
 
         protected override void LoadContent()
@@ -78,9 +76,13 @@ namespace DoorHop
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
 
-            if (healthHeart != null)  // Extra check voor veiligheid
+            if (healthHeart != null)
             {
                 healthHeart.LoadContent(Content);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("healthHeart is null in LoadContent!");
             }
         }
 
