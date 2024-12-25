@@ -23,6 +23,8 @@ namespace DoorHop
         private List<Enemy> enemies;
         private IInputReader inputReader;
         private HealthHeart healthHeart;
+        private Texture2D backgroundTexture;
+        private Rectangle backgroundRect;
 
         public Game1()
         {
@@ -70,7 +72,7 @@ namespace DoorHop
 
 
 
-            healthHeart = new HealthHeart(Content, hero, new Vector2(680, 0));
+            healthHeart = new HealthHeart(Content, hero, new Vector2(300, 386));
 
         }
 
@@ -79,39 +81,29 @@ namespace DoorHop
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
 
+            backgroundTexture = Content.Load<Texture2D>("background"); // Zorg dat je bestand "background.png" heet
+            backgroundRect = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
-            
-            
+
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin(
-                SpriteSortMode.BackToFront,
-                BlendState.AlphaBlend,
-                SamplerState.PointClamp,
-                null,
-                null,
-                null,
-                null
-            );
+            _spriteBatch.Begin();
             
+            // Teken eerst de achtergrond
+            _spriteBatch.Draw(backgroundTexture, backgroundRect, Color.White);
+            
+            // Dan de rest van je game elementen
             map.Draw(_spriteBatch);
             hero.Draw(_spriteBatch);
-            
-            if (enemies != null)
+            foreach (var enemy in enemies)
             {
-                foreach (var enemy in enemies.Where(e => e != null))
-                {
-                    
-                    enemy.Draw(_spriteBatch);
-                }
+                enemy.Draw(_spriteBatch);
             }
-
             healthHeart.Draw(_spriteBatch);
-
 
             _spriteBatch.End();
 
@@ -152,15 +144,7 @@ namespace DoorHop
 
                 if (walkEnemy.CollisionCheck(hero))
                 {
-                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
-                    {
-                        hero.GetHit(1);
-                        if (hero.isDead)
-                        {
-                            // Hier kun je game over logica toevoegen
-                            System.Diagnostics.Debug.WriteLine("Game Over!");
-                        }
-                    }
+                    hero.GetHit(1);
                 }
             
             
