@@ -25,6 +25,7 @@ namespace DoorHop
         private HealthHeart healthHeart;
         private Texture2D backgroundTexture;
         private Rectangle backgroundRect;
+        Game game;
 
         public Game1()
         {
@@ -72,7 +73,7 @@ namespace DoorHop
 
 
 
-            healthHeart = new HealthHeart(Content, hero, new Vector2(300, 386));
+            healthHeart = new HealthHeart(Content, hero, new Vector2(670, 10));
 
         }
 
@@ -81,7 +82,7 @@ namespace DoorHop
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Tiles.Content = Content;
 
-            backgroundTexture = Content.Load<Texture2D>("background"); // Zorg dat je bestand "background.png" heet
+            backgroundTexture = Content.Load<Texture2D>("background");
             backgroundRect = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
 
@@ -144,8 +145,16 @@ namespace DoorHop
 
                 if (walkEnemy.CollisionCheck(hero))
                 {
-                    hero.GetHit(1);
+                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
+                    {
+                        hero.GetHit(1);
+                    if (hero.isDead)
+                    {
+
+                        System.Diagnostics.Debug.WriteLine("Game Over!");
+                    }
                 }
+            }
             
             
 
