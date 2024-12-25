@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoorHop.Animation;
+using DoorHop.Players.Heros;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct3D9;
@@ -10,34 +12,52 @@ using System.Threading.Tasks;
 
 namespace DoorHop.Players.Enemys
 {
-    internal class Bullet
+    public class Bullet
     {
         public Texture2D bulletTexture;
         private Vector2 positionBullet;
 
-        public int bulletSpeed = 5;
+        private Animatie bulletAnimation; // Voeg animatie toe
+        public int bulletSpeed = 3;
 
         public Bullet(Texture2D texture, Vector2 startPosition)
         {
             this.positionBullet = startPosition;
             this.bulletTexture = texture;
+
+            //voor bullet
+            bulletAnimation = new Animatie(bulletTexture, true);
+            bulletAnimation.AddAnimationFrames(16, 16, 16, 5);
+            bulletAnimation.SetSpeed(1f);
+
         }
 
 
-        public void Update(GameTime gametime)
+        public void Update(GameTime gameTime)
         {
-            positionBullet.X += bulletSpeed;
+            positionBullet.X -= bulletSpeed;
+            bulletAnimation.Update(gameTime);
+
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(bulletTexture, positionBullet, Color.White);
-            //voor te testen
-            //spriteBatch.Draw(bulletTexture, new Vector2(100, 100), Color.White);
+            // Bepaal of de kogel naar links of rechts beweegt
+            SpriteEffects effects = bulletSpeed > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+
+            // Teken de kogel met de juiste effecten
+            spriteBatch.Draw(bulletTexture, positionBullet, bulletAnimation.CurrentFrame.sourceRecatangle, Color.White, 0f, Vector2.Zero, 1f, effects, 0f);
         }
 
         public bool IsDeleted()
         {
             return positionBullet.X > 800; // Verander dit naar de breedte van je scherm
+        }
+
+        public bool CollisionCheck(Hero hero)
+        {
+            if (hero == null) return false;
+            return hero.Bounds.Intersects(new Rectangle((int)positionBullet.X, (int)positionBullet.Y, bulletTexture.Width, bulletTexture.Height));
         }
     }
 }

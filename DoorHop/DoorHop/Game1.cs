@@ -26,6 +26,7 @@ namespace DoorHop
         private HealthHeart healthHeart;
         private Texture2D backgroundTexture;
         private Rectangle backgroundRect;
+
         Game game;
 
         public Game1()
@@ -135,9 +136,18 @@ namespace DoorHop
                             hero.Bounce();
                             enemy.TakeDamage();
                         }
-                        else
+                    }
+
+                    if (enemy is ShootEnemy shootEnemy)
+                    {
+                        for (int i = shootEnemy.Bullets.Count - 1; i >= 0; i--)
                         {
-                            
+                            var bullet = shootEnemy.Bullets[i];
+                            if (bullet.CollisionCheck(hero))
+                            {
+                                hero.GetHit(1);
+                                shootEnemy.RemoveBullet(bullet);
+                            }
                         }
                     }
                 }

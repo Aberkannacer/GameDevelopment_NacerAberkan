@@ -20,9 +20,13 @@ namespace DoorHop.Players.Enemys
         private Animatie bulletAnimation;
         private const int ENEMY_WIDTH = 64;
         private const int ENEMY_HEIGHT = 64;
+        private bool canShoot = true;
 
         private Vector2 bulletPosition;
 
+        private float shootTimer;
+        private const float shootInterval = 2.0f; // Interval in seconden
+        public List<Bullet> Bullets => bullets;
         public ShootEnemy(ContentManager content, int width, int height) : base(width, height)
         {
             LoadContent(content);
@@ -30,6 +34,8 @@ namespace DoorHop.Players.Enemys
             //bulletPosition = new Vector2(100, 100);
 
             bullets = new List<Bullet>();
+
+            shootTimer = 2f; // dit moet op 2 voor dat de kogel gelijk kan schieten
         }
         private void LoadContent(ContentManager content)
         {
@@ -41,18 +47,36 @@ namespace DoorHop.Players.Enemys
             currentAnimation.AddAnimationFrames(0, 64, 64, 6);
             currentAnimation.SetSpeed(1.0f);
 
-            //voor bullet
-            bulletAnimation = new Animatie(bulletTexture, true);
-            bulletAnimation.AddAnimationFrames(16, 16, 16, 4);
+            
         }
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
-            //om de 2 seconden schiet de enemy een bullet af
-            if (gameTime.TotalGameTime.Seconds % 2 ==0)
+            shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            // Controleer of de timer de shootInterval heeft overschreden
+            if (shootTimer >= shootInterval)
             {
                 Shoot();
+                shootTimer = 0f; // Reset de timer na het schieten
             }
+
+            foreach (var item in bullets)
+            {
+                item.Update(gameTime);
+
+                if (item.CollisionCheck(hero))
+                {
+                    hero.GetHit(1); // Geef 1 schade aan de hero
+                    bullets.Remove(item); // Verwijder de kogel
+                    break; // Stop met controleren na een botsing
+                }
+            }
+
+            bullets.RemoveAll(b => b.IsDeleted());
+
+            canShoot = bullets.Count == 1;
+
             // Update bounds met dezelfde offsets als in de constructor
             int collisionBoxWidth = ENEMY_WIDTH-5;
             int collisionBoxHeight = ENEMY_HEIGHT-20;
@@ -74,9 +98,6 @@ namespace DoorHop.Players.Enemys
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
 
-            spriteBatch.Draw(bulletTexture, position, bulletAnimation.CurrentFrame.sourceRecatangle,
-                Color.White, 0f, Vector2.Zero, 1.5f, SpriteEffects.FlipHorizontally, 0f);
-
 
             foreach (var item in bullets)
             {
@@ -93,7 +114,7 @@ namespace DoorHop.Players.Enemys
         private void Shoot()
         {
 
-            Bullet bullet = new Bullet(bulletTexture, position);
+            Bullet bullet = new Bullet(bulletTexture, position + new Vector2(20, 30));
             bullets.Add(bullet);
         }
 
@@ -103,6 +124,11 @@ namespace DoorHop.Players.Enemys
         {
             if (hero == null) return false;
             return bounds.Intersects(hero.Bounds);
+        }
+
+        public void RemoveBullet(Bullet bullet)
+        {
+            bullets.Remove(bullet);
         }
 
 
