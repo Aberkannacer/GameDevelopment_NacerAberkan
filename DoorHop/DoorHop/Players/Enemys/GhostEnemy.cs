@@ -17,24 +17,25 @@ namespace DoorHop.Players.Enemys
         private const int ENEMY_HEIGHT = 64;
         public GhostEnemy(ContentManager content,int width, int height) : base(width, height)
         {
-            position = new Vector2(500,500);
+            LoadContent(content);
+            position = new Vector2(500,300);
         }
         public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("GhostEnemy");
 
             currentAnimation = new Animatie(texture, true);
-            currentAnimation.AddAnimationFrames(0, 64, 64, 6);
+            currentAnimation.AddAnimationFrames(0, 32, 32, 4);
             currentAnimation.SetSpeed(1.0f);
         }
 
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
         {
-            int collisionBoxWidth = ENEMY_WIDTH - 5;
-            int collisionBoxHeight = ENEMY_HEIGHT - 20;
-            int xOffset = (ENEMY_WIDTH - collisionBoxWidth) + 5;
-            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight) - 5;
+            int collisionBoxWidth = ENEMY_WIDTH;
+            int collisionBoxHeight = ENEMY_HEIGHT;
+            int xOffset = (ENEMY_WIDTH - collisionBoxWidth);
+            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight);
 
             bounds = new Rectangle(
                 (int)position.X + xOffset,
@@ -49,7 +50,7 @@ namespace DoorHop.Players.Enemys
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
-                Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+                Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.FlipHorizontally, 0f);
 
 #if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
@@ -57,5 +58,12 @@ namespace DoorHop.Players.Enemys
             spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
 #endif
         }
+
+        public bool CollisionCheck(Hero hero)
+        {
+            if (hero == null) return false;
+            return bounds.Intersects(hero.Bounds);
+        }
+
     }
 }

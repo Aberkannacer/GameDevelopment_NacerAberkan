@@ -20,6 +20,7 @@ namespace DoorHop
         private Hero hero;
         private WalkEnemy walkEnemy;
         private ShootEnemy shootEnemy;
+        private GhostEnemy ghostEnemy;
         private Map map;
         private List<Enemy> enemies;
         private IInputReader inputReader;
@@ -74,8 +75,12 @@ namespace DoorHop
 
             walkEnemy = new WalkEnemy(Content, 64, 64);
             shootEnemy = new ShootEnemy(Content, 64, 64);
+            ghostEnemy = new GhostEnemy(Content, 64, 64);
+
+
             enemies.Add(walkEnemy);
             enemies.Add(shootEnemy);
+            enemies.Add(ghostEnemy);
 
 
 
@@ -160,7 +165,7 @@ namespace DoorHop
 
             //voor check van dat enemy die tegen elkaar botsen
 
-            if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero))
+            if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero) || ghostEnemy.CollisionCheck(hero))
             {
                 if (!hero.isDead) // Alleen damage doen als de hero nog leeft
                 {
