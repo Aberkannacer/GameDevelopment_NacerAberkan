@@ -3,6 +3,7 @@ using DoorHop.Interfaces;
 using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,7 @@ namespace DoorHop.Players.Enemys
             }
         }
 
+        public abstract void LoadContent(ContentManager content);
 
         public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero);
 

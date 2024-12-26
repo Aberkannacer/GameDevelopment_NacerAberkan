@@ -42,7 +42,7 @@ namespace DoorHop.Players.Heros
             jumpForce = force;
         }
 
-        protected override void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             playerTexture = content.Load<Texture2D>("Player");
 

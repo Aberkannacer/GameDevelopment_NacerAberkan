@@ -31,14 +31,14 @@ namespace DoorHop.Players.Enemys
         public ShootEnemy(ContentManager content, int width, int height) : base(width, height)
         {
             LoadContent(content);
-            position = new Vector2(740, 240);
+            position = new Vector2(500, 240);
             //bulletPosition = new Vector2(100, 100);
 
             bullets = new List<Bullet>();
 
             shootTimer = 2f; // dit moet op 2 voor dat de kogel gelijk kan schieten
         }
-        private void LoadContent(ContentManager content)
+        public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("ShootEnemy");
             bulletTexture = content.Load<Texture2D>("Bullet");

@@ -24,8 +24,8 @@ namespace DoorHop.Players.Enemys
             LoadContent(content);
             
         }
-        
-        private void LoadContent(ContentManager content)
+
+        public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("Player2");
 

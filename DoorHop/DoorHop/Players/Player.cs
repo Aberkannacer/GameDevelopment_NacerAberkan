@@ -70,8 +70,11 @@ namespace DoorHop.Players
         }
 
 
+        public virtual void LoadContent(ContentManager content)
+        {
+            throw new NotImplementedException();
+        }
 
-        protected abstract void LoadContent(ContentManager content);
 
         public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
         {
@@ -281,8 +284,6 @@ namespace DoorHop.Players
 
         }
 
-
-
-
+        
     }
 }
