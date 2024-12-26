@@ -17,7 +17,6 @@ namespace DoorHop.Players.Enemys
     {
         protected Texture2D texture;
         protected Animatie currentAnimation;
-        protected Hero hero;
         protected Rectangle rectangle;
         protected Vector2 position;
         protected bool isAlive;

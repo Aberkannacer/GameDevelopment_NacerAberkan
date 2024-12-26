@@ -83,9 +83,6 @@ namespace DoorHop.Players.Enemys
             return hero.Bounds.Intersects(new Rectangle((int)positionBullet.X, (int)positionBullet.Y, bulletWidth, bulletHeight));
         }
 
-        public void SetDirection(Vector2 direction)
-        {
-            directionHero = direction;
-        }
+        
     }
 }

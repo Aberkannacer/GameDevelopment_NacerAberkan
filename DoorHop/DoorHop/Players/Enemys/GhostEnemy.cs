@@ -15,10 +15,11 @@ namespace DoorHop.Players.Enemys
     {
         private const int ENEMY_WIDTH = 64;
         private const int ENEMY_HEIGHT = 64;
+        private float speedGhost = 2f;
         public GhostEnemy(ContentManager content,int width, int height) : base(width, height)
         {
             LoadContent(content);
-            position = new Vector2(500,300);
+            position = new Vector2(700,400);
         }
         public override void LoadContent(ContentManager content)
         {
@@ -32,6 +33,8 @@ namespace DoorHop.Players.Enemys
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
         {
+            Follow(hero);
+
             int collisionBoxWidth = ENEMY_WIDTH;
             int collisionBoxHeight = ENEMY_HEIGHT;
             int xOffset = (ENEMY_WIDTH - collisionBoxWidth);
@@ -64,6 +67,18 @@ namespace DoorHop.Players.Enemys
             if (hero == null) return false;
             return bounds.Intersects(hero.Bounds);
         }
+
+        private void Follow(Hero hero)
+        {
+            Vector2 direction = hero.position - position;
+            if (direction.Length() > 0)
+            {
+                direction.Normalize(); // Normaliseer de richting
+                position += direction * speedGhost; // Beweeg naar de hero
+            }
+        }
+
+        
 
     }
 }
