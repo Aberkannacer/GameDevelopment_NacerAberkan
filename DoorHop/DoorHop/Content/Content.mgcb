@@ -121,6 +121,13 @@
 /processorParam:TextureFormat=Color
 /build:Heart.png
 
+#begin MyFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:MyFont.spritefont
+
 #begin Player.png
 /importer:TextureImporter
 /processor:TextureProcessor

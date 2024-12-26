@@ -10,6 +10,7 @@ using System;
 using System.Linq;
 using DoorHop.Input;
 using System.Diagnostics;
+using DoorHop.Collectables;
 
 namespace DoorHop
 {
@@ -27,6 +28,13 @@ namespace DoorHop
         private HealthHeart healthHeart;
         private Texture2D backgroundTexture;
         private Rectangle backgroundRect;
+        //voor tekst
+        private SpriteFont font;
+
+        //voor coin
+        private List<Collectable> coins;
+        private Texture2D texture;
+        private int collectedCoins = 0; // Aantal verzamelde coins
 
         Game game;
 
@@ -86,6 +94,13 @@ namespace DoorHop
 
             healthHeart = new HealthHeart(Content, hero, new Vector2(670, 10));
 
+            
+            coins = new List<Collectable>();
+
+            // Voeg coins toe aan de lijst
+            coins.Add(new Collectable(Content, texture, new Vector2(100, 100))); // Voorbeeldpositie
+            coins.Add(new Collectable(Content, texture, new Vector2(200, 150)));
+
         }
 
         protected override void LoadContent()
@@ -95,6 +110,8 @@ namespace DoorHop
 
             backgroundTexture = Content.Load<Texture2D>("background");
             backgroundRect = new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
+            font = Content.Load<SpriteFont>("MyFont");
 
 
         }
@@ -117,6 +134,14 @@ namespace DoorHop
                 enemy.Draw(_spriteBatch);
             }
             healthHeart.Draw(_spriteBatch);
+
+            foreach (var coin in coins)
+            {
+                coin.Draw(_spriteBatch);
+            }
+
+            
+            _spriteBatch.DrawString(font, $"Open door: {collectedCoins}/{coins.Count}", new Vector2(50, 10), Color.White); // Gebruik coins.Count
 
             _spriteBatch.End();
 
@@ -178,7 +203,22 @@ namespace DoorHop
                 }
             }
 
+            foreach (var coin in coins.ToList()) // Gebruik ToList() voor veilige verwijdering
+            {
+                coin.Update(gameTime, hero); // Update de coin
 
+                if (coin.CollisionCheck(hero)) // Controleer of de hero de coin heeft verzameld
+                {
+                    collectedCoins++; // Verhoog het aantal verzamelde coins
+                    coins.Remove(coin); // Verwijder de coin uit de lijst
+                }
+            }
+
+            // Victory check
+            if (collectedCoins >= coins.Count()) // totalCoins kan nu ook coins.Count zijn
+            {
+                System.Diagnostics.Debug.WriteLine("Victory!");
+            }
 
             base.Update(gameTime);
         }
