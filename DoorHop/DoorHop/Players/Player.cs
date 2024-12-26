@@ -1,6 +1,7 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
+using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -67,12 +68,12 @@ namespace DoorHop.Players
 
             this.game = game;
         }
-        
+
 
 
         protected abstract void LoadContent(ContentManager content);
 
-        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
+        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
         {
             // Update invulnerability timer
             if (isInvulnerable)
@@ -86,10 +87,10 @@ namespace DoorHop.Players
 
             Vector2 input = inputReader.ReadInput();
             velocity.X = input.X * moveSpeed;
-            
+
             if (input.X < 0) isFacingRight = false;
             else if (input.X > 0) isFacingRight = true;
-            
+
             isMoving = Math.Abs(velocity.X) > 0;
 
             // Spring logica
@@ -217,11 +218,11 @@ namespace DoorHop.Players
             }
 
             // Debug collision bounds
-            #if DEBUG
+#if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             boundTexture.SetData(new[] { Color.Red * 0.5f });
             spriteBatch.Draw(boundTexture, bounds, Color.Red * 0.3f);
-            #endif
+#endif
         }
 
         public virtual void SetAnimationSpeed(float runSpeed, float idleSpeed)
@@ -280,7 +281,7 @@ namespace DoorHop.Players
 
         }
 
-        
+
 
 
     }

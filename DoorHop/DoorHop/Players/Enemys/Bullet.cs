@@ -19,6 +19,7 @@ namespace DoorHop.Players.Enemys
 
         private Animatie bulletAnimation; // Voeg animatie toe
         public int bulletSpeed = 3;
+        private Vector2 directionHero;
 
         public Bullet(Texture2D texture, Vector2 startPosition)
         {
@@ -35,7 +36,7 @@ namespace DoorHop.Players.Enemys
 
         public void Update(GameTime gameTime)
         {
-            positionBullet.X -= bulletSpeed;
+            positionBullet += directionHero * bulletSpeed; // Beweeg de kogel in de richting
             bulletAnimation.Update(gameTime);
 
 
@@ -58,6 +59,11 @@ namespace DoorHop.Players.Enemys
         {
             if (hero == null) return false;
             return hero.Bounds.Intersects(new Rectangle((int)positionBullet.X, (int)positionBullet.Y, bulletTexture.Width, bulletTexture.Height));
+        }
+
+        public void SetDirection(Vector2 direction)
+        {
+            directionHero = direction;
         }
     }
 }

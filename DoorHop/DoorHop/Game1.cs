@@ -40,12 +40,12 @@ namespace DoorHop
         protected override void Initialize()
         {
             base.Initialize();
-            
+
             if (enemies == null)
             {
                 enemies = new List<Enemy>();
             }
-            
+
             map = new Map();
             map.Generate(new int[,]
             {
@@ -70,7 +70,7 @@ namespace DoorHop
             inputReader = new KeyBoardReader();
             hero = new Hero(Content, inputReader, this);
 
-            walkEnemy = new WalkEnemy(Content,64,64);
+            walkEnemy = new WalkEnemy(Content, 64, 64);
             shootEnemy = new ShootEnemy(Content, 64, 64);
             enemies.Add(walkEnemy);
             enemies.Add(shootEnemy);
@@ -97,10 +97,10 @@ namespace DoorHop
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
-            
+
             // Teken eerst de achtergrond
             _spriteBatch.Draw(backgroundTexture, backgroundRect, Color.White);
-            
+
             // Dan de rest van je game elementen
             map.Draw(_spriteBatch);
             hero.Draw(_spriteBatch);
@@ -117,18 +117,18 @@ namespace DoorHop
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || 
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             if (hero != null && map != null)
             {
-                hero.Update(gameTime, map.CollisionTiles);
-                
+                hero.Update(gameTime, map.CollisionTiles, hero);
+
                 foreach (var enemy in enemies)
                 {
-                    enemy.Update(gameTime, map.CollisionTiles);
-                    
+                    enemy.Update(gameTime, map.CollisionTiles, hero);
+
                     if (hero.Bounds.Intersects(enemy.Bounds))
                     {
                         if (hero.Bounds.TouchTopOf(enemy.Bounds))
@@ -156,11 +156,11 @@ namespace DoorHop
 
             //voor check van dat enemy die tegen elkaar botsen
 
-                if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero))
+            if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero))
+            {
+                if (!hero.isDead) // Alleen damage doen als de hero nog leeft
                 {
-                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
-                    {
-                        hero.GetHit(1);
+                    hero.GetHit(1);
                     if (hero.isDead)
                     {
 
@@ -168,8 +168,8 @@ namespace DoorHop
                     }
                 }
             }
-            
-            
+
+
 
             base.Update(gameTime);
         }

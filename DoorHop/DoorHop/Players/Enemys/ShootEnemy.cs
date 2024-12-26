@@ -47,17 +47,17 @@ namespace DoorHop.Players.Enemys
             currentAnimation.AddAnimationFrames(0, 64, 64, 6);
             currentAnimation.SetSpeed(1.0f);
 
-            
+
         }
 
-        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
         {
             shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             // Controleer of de timer de shootInterval heeft overschreden
             if (shootTimer >= shootInterval)
             {
-                Shoot();
+                Shoot(hero);
                 shootTimer = 0f; // Reset de timer na het schieten
             }
 
@@ -78,10 +78,10 @@ namespace DoorHop.Players.Enemys
             canShoot = bullets.Count == 1;
 
             // Update bounds met dezelfde offsets als in de constructor
-            int collisionBoxWidth = ENEMY_WIDTH-5;
-            int collisionBoxHeight = ENEMY_HEIGHT-20;
-            int xOffset = (ENEMY_WIDTH - collisionBoxWidth)+5;
-            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight)-5;
+            int collisionBoxWidth = ENEMY_WIDTH - 5;
+            int collisionBoxHeight = ENEMY_HEIGHT - 20;
+            int xOffset = (ENEMY_WIDTH - collisionBoxWidth) + 5;
+            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight) - 5;
 
             bounds = new Rectangle(
                 (int)position.X + xOffset,
@@ -111,14 +111,22 @@ namespace DoorHop.Players.Enemys
 #endif
         }
 
-        private void Shoot()
+        private void Shoot(Hero hero)
         {
 
-            Bullet bullet = new Bullet(bulletTexture, position + new Vector2(20, 30));
+            if (hero == null) return; // Controleer of hero null is
+
+            // Bereken de richting naar de hero
+            Vector2 direction = hero.Position - position; // Neem het verschil in positie
+            direction.Normalize(); // Normaliseer de vector om een eenheidsvector te krijgen
+
+            // Maak een nieuwe kogel aan met de berekende richting
+            Bullet bullet = new Bullet(bulletTexture, position + new Vector2(20, 30)); // Startpositie van de kogel
+            bullet.SetDirection(direction); // Stel de richting in
             bullets.Add(bullet);
         }
 
-        
+
 
         public bool CollisionCheck(Hero hero)
         {

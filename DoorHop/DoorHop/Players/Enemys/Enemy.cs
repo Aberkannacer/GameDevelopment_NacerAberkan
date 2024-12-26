@@ -44,13 +44,13 @@ namespace DoorHop.Players.Enemys
         }
 
 
-        public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles);
+        public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero);
 
         public abstract void Draw(SpriteBatch spriteBatch);
 
         public Rectangle Bounds => bounds;
         public virtual void TakeDamage() => isAlive = false;
 
-        
+
     }
 }

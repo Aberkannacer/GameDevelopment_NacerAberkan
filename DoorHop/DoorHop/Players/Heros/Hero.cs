@@ -21,7 +21,7 @@ namespace DoorHop.Players.Heros
         public int Health { get; private set; }
         public Texture2D Texture { get; set; }
 
-        public Hero(ContentManager content, IInputReader inputReader, Game game) 
+        public Hero(ContentManager content, IInputReader inputReader, Game game)
             : base(content, inputReader, game)
         {
             Health = 3;
@@ -30,7 +30,7 @@ namespace DoorHop.Players.Heros
             playerTexture = Texture;
             LoadContent(content);
             UpdateBounds();
-            
+
             // Start waardes instellen
             SetAnimationSpeed(1f, 1f);  // Run sneller, idle langzamer
             SetMoveSpeed(3.5f);               // Bewegingssnelheid
@@ -51,14 +51,14 @@ namespace DoorHop.Players.Heros
             idleAnimation.AddAnimationFrames(0, 64, 64, 8);
 
             runAnimation = new Animatie(playerTexture, true);
-            runAnimation.AddAnimationFrames(1, 64, 64,8);
-            
+            runAnimation.AddAnimationFrames(1, 64, 64, 8);
+
             attackAnimation = new Animatie(playerTexture, false);
-            attackAnimation.AddAnimationFrames(2,64,64,5);
+            attackAnimation.AddAnimationFrames(2, 64, 64, 5);
             attackAnimation.SetSpeed(1f);
 
             jumpAnimation = new Animatie(playerTexture, false);
-            jumpAnimation.AddAnimationFrames(3,64,64,4);
+            jumpAnimation.AddAnimationFrames(3, 64, 64, 4);
 
             dieAnimation = new Animatie(playerTexture, false);
             dieAnimation.AddAnimationFrames(4, 64, 64, 6);
