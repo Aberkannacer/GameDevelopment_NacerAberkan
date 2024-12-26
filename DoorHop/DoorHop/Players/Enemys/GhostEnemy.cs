@@ -55,11 +55,6 @@ namespace DoorHop.Players.Enemys
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.FlipHorizontally, 0f);
 
-#if DEBUG
-            var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-            boundTexture.SetData(new[] { Color.Yellow * 1f });
-            spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
-#endif
         }
 
         public bool CollisionCheck(Hero hero)
