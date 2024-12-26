@@ -20,6 +20,7 @@ namespace DoorHop.Players.Enemys
         private Animatie bulletAnimation; // Voeg animatie toe
         public int bulletSpeed = 3;
         private Vector2 directionHero;
+        private Game game1;
 
         private const int bulletWidth = 64;
         private const int bulletHeight = 64;
@@ -73,13 +74,13 @@ namespace DoorHop.Players.Enemys
 
         public bool IsDeleted()
         {
-            return positionBullet.X > 800; // Verander dit naar de breedte van je scherm
+            return positionBullet.X < 0 || positionBullet.X > 800; // Verander dit naar de breedte van je scherm
         }
 
         public bool CollisionCheck(Hero hero)
         {
             if (hero == null) return false;
-            return hero.Bounds.Intersects(new Rectangle((int)positionBullet.X, (int)positionBullet.Y, bulletTexture.Width, bulletTexture.Height));
+            return hero.Bounds.Intersects(new Rectangle((int)positionBullet.X, (int)positionBullet.Y, bulletWidth, bulletHeight));
         }
 
         public void SetDirection(Vector2 direction)

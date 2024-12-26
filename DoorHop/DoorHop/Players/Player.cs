@@ -25,7 +25,7 @@ namespace DoorHop.Players
         protected Animatie dieAnimation;
         protected Game game;
 
-        protected Vector2 position;
+        public Vector2 position;
         protected Vector2 velocity;
         protected IInputReader inputReader;
         protected float moveSpeed = 5f;

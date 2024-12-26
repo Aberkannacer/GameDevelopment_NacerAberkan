@@ -15,7 +15,7 @@ namespace DoorHop
 {
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
+        private GraphicsDeviceManager graphics;
         private SpriteBatch _spriteBatch;
         private Hero hero;
         private WalkEnemy walkEnemy;
@@ -31,7 +31,9 @@ namespace DoorHop
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = 800; // Stel de breedte in
+            graphics.PreferredBackBufferHeight = 480;
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             enemies = new List<Enemy>();
@@ -96,6 +98,7 @@ namespace DoorHop
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+
             _spriteBatch.Begin();
 
             // Teken eerst de achtergrond
@@ -117,6 +120,7 @@ namespace DoorHop
 
         protected override void Update(GameTime gameTime)
         {
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
                 Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();

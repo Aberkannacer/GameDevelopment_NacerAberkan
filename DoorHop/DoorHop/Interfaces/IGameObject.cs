@@ -1,4 +1,5 @@
-﻿using DoorHop.Players.Heros;
+﻿using DoorHop.Players;
+using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
