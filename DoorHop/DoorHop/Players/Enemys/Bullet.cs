@@ -16,10 +16,13 @@ namespace DoorHop.Players.Enemys
     {
         public Texture2D bulletTexture;
         private Vector2 positionBullet;
-
+        protected Rectangle bounds;
         private Animatie bulletAnimation; // Voeg animatie toe
         public int bulletSpeed = 3;
         private Vector2 directionHero;
+
+        private const int bulletWidth = 64;
+        private const int bulletHeight = 64;
 
         public Bullet(Texture2D texture, Vector2 startPosition)
         {
@@ -34,12 +37,24 @@ namespace DoorHop.Players.Enemys
         }
 
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Hero hero)
         {
-            positionBullet += directionHero * bulletSpeed; // Beweeg de kogel in de richting
+            Vector2 direction = (hero.Position - positionBullet);
+            direction.Normalize(); // Normaliseer de richting
+            positionBullet += direction * bulletSpeed; // Beweeg de kogel in de richting
             bulletAnimation.Update(gameTime);
 
+            int collisionBoxWidth = bulletWidth;
+            int collisionBoxHeight = bulletHeight;
+            int xOffset = (bulletWidth - collisionBoxWidth);
+            int yOffset = (bulletHeight - collisionBoxHeight);
 
+            bounds = new Rectangle(
+                (int)positionBullet.X + xOffset,
+                (int)positionBullet.Y + yOffset,
+                collisionBoxWidth,
+                collisionBoxHeight
+            );
         }
         public void Draw(SpriteBatch spriteBatch)
         {
@@ -48,6 +63,12 @@ namespace DoorHop.Players.Enemys
 
             // Teken de kogel met de juiste effecten
             spriteBatch.Draw(bulletTexture, positionBullet, bulletAnimation.CurrentFrame.sourceRecatangle, Color.White, 0f, Vector2.Zero, 1f, effects, 0f);
+
+#if DEBUG
+            var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            boundTexture.SetData(new[] { Color.Yellow * 1f });
+            spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
+#endif
         }
 
         public bool IsDeleted()

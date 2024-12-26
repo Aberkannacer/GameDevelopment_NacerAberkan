@@ -21,6 +21,7 @@ namespace DoorHop.Players.Enemys
         private const int ENEMY_WIDTH = 64;
         private const int ENEMY_HEIGHT = 64;
         private bool canShoot = true;
+        
 
         private Vector2 bulletPosition;
 
@@ -63,7 +64,7 @@ namespace DoorHop.Players.Enemys
 
             foreach (var item in bullets)
             {
-                item.Update(gameTime);
+                item.Update(gameTime, hero);
 
                 if (item.CollisionCheck(hero))
                 {
@@ -111,18 +112,12 @@ namespace DoorHop.Players.Enemys
 #endif
         }
 
-        private void Shoot(Hero hero)
+        public void Shoot(Hero hero)
         {
-
-            if (hero == null) return; // Controleer of hero null is
-
-            // Bereken de richting naar de hero
-            Vector2 direction = hero.Position - position; // Neem het verschil in positie
-            direction.Normalize(); // Normaliseer de vector om een eenheidsvector te krijgen
-
-            // Maak een nieuwe kogel aan met de berekende richting
-            Bullet bullet = new Bullet(bulletTexture, position + new Vector2(20, 30)); // Startpositie van de kogel
-            bullet.SetDirection(direction); // Stel de richting in
+            Bullet bullet = new Bullet(bulletTexture, position);
+            Vector2 direction = (hero.Position - position); // Bepaal de richting naar de hero
+            direction.Normalize(); // Normaliseer de richting
+            bullet.SetDirection(direction);
             bullets.Add(bullet);
         }
 
