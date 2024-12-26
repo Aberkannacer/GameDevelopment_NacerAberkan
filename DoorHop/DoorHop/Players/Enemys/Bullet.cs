@@ -25,10 +25,12 @@ namespace DoorHop.Players.Enemys
         private const int bulletWidth = 64;
         private const int bulletHeight = 64;
 
-        public Bullet(Texture2D texture, Vector2 startPosition)
+        public Bullet(Texture2D texture, Vector2 startPosition, Vector2 direction)
         {
             this.positionBullet = startPosition;
             this.bulletTexture = texture;
+            this.directionHero = direction;
+            this.directionHero.Normalize();
 
             //voor bullet
             bulletAnimation = new Animatie(bulletTexture, true);
@@ -40,9 +42,7 @@ namespace DoorHop.Players.Enemys
 
         public void Update(GameTime gameTime, Hero hero)
         {
-            Vector2 direction = (hero.Position - positionBullet);
-            direction.Normalize(); // Normaliseer de richting
-            positionBullet += direction * bulletSpeed; // Beweeg de kogel in de richting
+            positionBullet += directionHero * bulletSpeed; // Beweeg in opgeslagen richting
             bulletAnimation.Update(gameTime);
 
             int collisionBoxWidth = bulletWidth;

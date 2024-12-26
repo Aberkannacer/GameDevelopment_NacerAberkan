@@ -62,21 +62,22 @@ namespace DoorHop.Players.Enemys
                 shootTimer = 0f; // Reset de timer na het schieten
             }
 
-            foreach (var item in bullets)
+            for (int i = bullets.Count - 1; i >= 0; i--)
             {
-                item.Update(gameTime, hero);
+                bullets[i].Update(gameTime, hero);
 
-                if (item.CollisionCheck(hero))
+                if (bullets[i].CollisionCheck(hero))
                 {
-                    hero.GetHit(1); // Geef 1 schade aan de hero
-                    bullets.Remove(item); // Verwijder de kogel
-                    break; // Stop met controleren na een botsing
+                    hero.GetHit(1);
+                    bullets.RemoveAt(i);
+                    continue;
+                }
+
+                if (bullets[i].IsDeleted())
+                {
+                    bullets.RemoveAt(i);
                 }
             }
-
-            bullets.RemoveAll(b => b.IsDeleted());
-
-            canShoot = bullets.Count == 1;
 
             // Update bounds met dezelfde offsets als in de constructor
             int collisionBoxWidth = ENEMY_WIDTH - 5;
@@ -114,10 +115,8 @@ namespace DoorHop.Players.Enemys
 
         public void Shoot(Hero hero)
         {
-            Bullet bullet = new Bullet(bulletTexture, position);
-            Vector2 direction = (hero.Position - position); // Bepaal de richting naar de hero
-            direction.Normalize(); // Normaliseer de richting
-            bullet.SetDirection(direction);
+            Vector2 direction = (hero.position - position); // Bepaal de richting naar de held
+            Bullet bullet = new Bullet(bulletTexture, position, direction);
             bullets.Add(bullet);
         }
 

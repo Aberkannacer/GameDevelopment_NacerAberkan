@@ -17,7 +17,6 @@ namespace DoorHop.Players.Heros
     {
         private const int SPRITE_WIDTH = 64;
         private const int SPRITE_HEIGHT = 64;
-        public Vector2 Position { get; set; }
         public int Health { get; private set; }
         public Texture2D Texture { get; set; }
 
