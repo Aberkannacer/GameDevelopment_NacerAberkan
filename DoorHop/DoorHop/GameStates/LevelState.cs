@@ -25,7 +25,7 @@ namespace DoorHop.GameStates
 
         public LevelState(Game1 game, ContentManager content) : base(game, content)
         {
-            currentLevel = new Level1(content, new Hero(content, new KeyBoardReader(), game));
+            currentLevel = new Level1(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice);
         }
 
         public override void LoadContent()

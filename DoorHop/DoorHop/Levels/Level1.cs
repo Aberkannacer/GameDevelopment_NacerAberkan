@@ -13,26 +13,25 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
 
 namespace DoorHop.Levels
 {
     internal class Level1 : Level
     {
+
         private WalkEnemy walkEnemy;
         private ShootEnemy shootEnemy;
         private GhostEnemy ghostEnemy;
-        private int collectedCoins; // Aantal verzamelde coins
-        private int totalCoins = 3;
+
 
         private SpriteFont font;
 
         private HealthHeart healthHeart;
 
+        
 
-        Game1 game;
-        private int[,] levelOne;
-
-        public Level1(ContentManager content, Hero hero) : base(content, hero)
+        public Level1(ContentManager content, Hero hero, GraphicsDevice graphicsDevice) : base(content, hero, graphicsDevice)
         {
             this.hero = hero;
             walkEnemy = new WalkEnemy(content, 64, 64);
@@ -50,20 +49,17 @@ namespace DoorHop.Levels
 
             healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
 
-
-            // Voeg coins toe aan de lijst
-            coins.Add(new Collectable(content, new Vector2(680, 30)));
-            coins.Add(new Collectable(content, new Vector2(440, 90)));
-            coins.Add(new Collectable(content, new Vector2(100, 270)));
+            //backgroundRect = new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
         }
+
 
         public override void Load()
         {
             base.Load();
-            //font = content.Load<SpriteFont>("MyFont");
+
             Tiles.Content = content;
 
-
+            font = content.Load<SpriteFont>("MyFont");
 
             map = new Map();
             levelOne = new int[,]
@@ -92,15 +88,7 @@ namespace DoorHop.Levels
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
-            if (collectedCoins == totalCoins) // totalCoins kan nu ook coins.Count zijn
-            {
-                map.ChangeTileValue(1, 0, levelOne);
-                map.Generate(levelOne, 30);
-                System.Diagnostics.Debug.WriteLine("Victory!");
-            }
-
+            
             if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero) || ghostEnemy.CollisionCheck(hero))
             {
                 if (!hero.isDead) // Alleen damage doen als de hero nog leeft
@@ -113,11 +101,16 @@ namespace DoorHop.Levels
                     }
                 }
             }
+
+
+
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+            spriteBatch.DrawString(font, $"To open the door: {collectedCoins}/{totalCoins}", new Vector2(10, 10), Color.White);
             map.Draw(spriteBatch);
         }
 

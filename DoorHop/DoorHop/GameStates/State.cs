@@ -8,6 +8,7 @@ namespace DoorHop.GameStates
 {
     public abstract class State
     {
+        protected GraphicsDevice graphicsDevice;
         protected ContentManager content;
         protected Game1 game;
         internal List<Button> buttons;

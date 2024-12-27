@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,12 +14,14 @@ namespace DoorHop.GameStates
 {
     internal class MenuState : State
     {
+        private SpriteFont menuFont;
         private StartButton startButton;
         private EndButton endButton;
         private Texture2D texture;
-        private GraphicsDevice graphicsDevice;
+
         public MenuState(Game1 game, ContentManager content, GraphicsDevice graphicsDevice) : base(game, content)
         {
+
             startButton = new StartButton(game, graphicsDevice, content, new Vector2(350,200 ), "Start");
             endButton = new EndButton(game, graphicsDevice, content, new Vector2(350, 250), "Quit");
             buttons.Add(startButton);
@@ -31,6 +34,7 @@ namespace DoorHop.GameStates
         {
 
             spriteBatch.Draw(texture, new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height), Color.White);
+            spriteBatch.DrawString(menuFont, "Welkom bij het spel DoorHop!", new Vector2(200, 50), Color.White, 0f, Vector2.Zero, 2.0f, SpriteEffects.None, 0f);
 
             foreach (Button item in buttons)
             {
@@ -41,7 +45,7 @@ namespace DoorHop.GameStates
 
         public override void LoadContent()
         {
-            
+            menuFont = content.Load<SpriteFont>("MyFont");
         }
 
         public override void PostUpdate(GameTime gameTime)

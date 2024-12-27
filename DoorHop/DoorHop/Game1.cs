@@ -49,7 +49,7 @@ namespace DoorHop
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            currentState = new MenuState(this, Content,GraphicsDevice);
+            currentState = new MenuState(this, Content, GraphicsDevice);
             currentState.LoadContent();
 
 
