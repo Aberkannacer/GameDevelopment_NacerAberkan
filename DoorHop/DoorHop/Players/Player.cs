@@ -231,16 +231,6 @@ namespace DoorHop.Players
 #endif
         }
 
-        public virtual void SetAnimationSpeed(float runSpeed, float idleSpeed)
-        {
-            runAnimation?.SetSpeed(runSpeed);
-            idleAnimation?.SetSpeed(idleSpeed);
-        }
-
-        public virtual void SetMoveSpeed(float speed)
-        {
-            moveSpeed = speed;
-        }
 
         public Rectangle Bounds => bounds;
 
@@ -273,10 +263,8 @@ namespace DoorHop.Players
             if (!isAttacking)
             {
                 isAttacking = true;
-                // Start de aanval animatie
-                // Zorg ervoor dat je de animatie start
+                attackAnimation.Reset();
             }
-
             foreach (var enemy in enemies)
             {
                 if (bounds.Intersects(enemy.Bounds)) // Controleer of de hero de vijand aanvalt
@@ -286,20 +274,6 @@ namespace DoorHop.Players
                 }
             }
         }
-        public void Die()
-        {
-            if (!isDead)
-            {
-                isDead = true;
-                currentAnimation = dieAnimation;
-                game.Exit();
-            }
 
-        }
-
-        /*public void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
-        {
-            throw new NotImplementedException();
-        }*/
     }
 }

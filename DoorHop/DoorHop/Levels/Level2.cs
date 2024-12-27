@@ -95,25 +95,6 @@ namespace DoorHop.Levels
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
 
-            foreach (var enemy in Enemies.ToList()) // Gebruik ToList() voor veilige verwijdering
-            {
-                if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero) || ghostEnemy.CollisionCheck(hero))
-                {
-                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
-                    {
-                        hero.GetHit(1);
-                    }
-                }
-
-                // Controleer of de hero op deze vijand springt
-                hero.JumpOnEnemy(enemy);
-
-                // Verwijder de vijand als deze dood is
-                if (!enemy.isAlive)
-                {
-                    Enemies.Remove(enemy);
-                }
-            }
 
 
 
