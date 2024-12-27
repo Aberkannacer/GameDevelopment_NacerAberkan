@@ -22,10 +22,10 @@ namespace DoorHop.Collectables
         private int collectableWidth = 20;
         private int collectableheight = 20;
 
-        public Collectable(ContentManager content, Texture2D texture, Vector2 startPosition)
+        public Collectable(ContentManager content, Vector2 startPosition)
         {
             this.positionCollectable = startPosition;
-            this.collectableTexture = texture;
+
             LoadContent(content);
         }
 
