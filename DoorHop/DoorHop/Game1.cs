@@ -34,7 +34,8 @@ namespace DoorHop
         //voor coin
         private List<Collectable> coins;
         private Texture2D texture;
-        private int collectedCoins = 0; // Aantal verzamelde coins
+        private int collectedCoins; // Aantal verzamelde coins
+        private int totalCoins = 3;
 
         Game game;
 
@@ -46,6 +47,7 @@ namespace DoorHop
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             enemies = new List<Enemy>();
+            coins = new List<Collectable>();
         }
 
         protected override void Initialize()
@@ -94,12 +96,12 @@ namespace DoorHop
 
             healthHeart = new HealthHeart(Content, hero, new Vector2(670, 10));
 
-            
-            coins = new List<Collectable>();
 
             // Voeg coins toe aan de lijst
-            coins.Add(new Collectable(Content, texture, new Vector2(100, 100))); // Voorbeeldpositie
-            coins.Add(new Collectable(Content, texture, new Vector2(200, 150)));
+            coins.Add(new Collectable(Content, texture, new Vector2(680, 30)));
+            coins.Add(new Collectable(Content, texture, new Vector2(440, 90)));
+            coins.Add(new Collectable(Content, texture, new Vector2(100, 270)));
+
 
         }
 
@@ -140,8 +142,8 @@ namespace DoorHop
                 coin.Draw(_spriteBatch);
             }
 
-            
-            _spriteBatch.DrawString(font, $"Open door: {collectedCoins}/{coins.Count}", new Vector2(50, 10), Color.White); // Gebruik coins.Count
+
+            _spriteBatch.DrawString(font, $"To open the door: {collectedCoins}/{totalCoins}", new Vector2(10, 10), Color.White); // Gebruik coins.Count
 
             _spriteBatch.End();
 
@@ -185,6 +187,16 @@ namespace DoorHop
                         }
                     }
                 }
+                foreach (var coin in coins.ToList()) // Gebruik ToList() voor veilige verwijdering
+                {
+                    coin.Update(gameTime, hero); // Update de coin
+
+                    if (coin.CollisionCheck(hero)) // Controleer of de hero de coin heeft verzameld
+                    {
+                        collectedCoins++; // Verhoog het aantal verzamelde coins
+                        coins.Remove(coin); // Verwijder de coin uit de lijst
+                    }
+                }
             }
 
 
@@ -203,19 +215,10 @@ namespace DoorHop
                 }
             }
 
-            foreach (var coin in coins.ToList()) // Gebruik ToList() voor veilige verwijdering
-            {
-                coin.Update(gameTime, hero); // Update de coin
-
-                if (coin.CollisionCheck(hero)) // Controleer of de hero de coin heeft verzameld
-                {
-                    collectedCoins++; // Verhoog het aantal verzamelde coins
-                    coins.Remove(coin); // Verwijder de coin uit de lijst
-                }
-            }
+            
 
             // Victory check
-            if (collectedCoins >= coins.Count()) // totalCoins kan nu ook coins.Count zijn
+            if (collectedCoins == totalCoins) // totalCoins kan nu ook coins.Count zijn
             {
                 System.Diagnostics.Debug.WriteLine("Victory!");
             }

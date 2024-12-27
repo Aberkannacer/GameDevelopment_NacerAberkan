@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\collectables\\collectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\collectables\\collectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\collectables\\collectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -68,7 +68,7 @@
               "RelativeDocumentMoniker": "DoorHop\\Collectables\\Collectable.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Collectables\\Collectable.cs",
               "RelativeToolTip": "DoorHop\\Collectables\\Collectable.cs",
-              "ViewState": "AQIAACQAAAAAAAAAAAAYwCsAAAAAAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T19:53:30.28Z",
               "EditorCaption": ""
@@ -83,8 +83,7 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\Bullet.cs",
               "ViewState": "AQIAADAAAAAAAAAAAAAYwE8AAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T01:24:04.938Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T01:24:04.938Z"
             },
             {
               "$type": "Document",
@@ -96,8 +95,7 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\WalkEnemy.cs",
               "ViewState": "AQIAADUAAAAAAAAAAAAgwBMAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T15:48:16.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T15:48:16.989Z"
             },
             {
               "$type": "Document",
@@ -133,8 +131,7 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\ShootEnemy.cs",
               "ViewState": "AQIAABEAAAAAAAAAAAAAwIQAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T00:57:31.846Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T00:57:31.846Z"
             },
             {
               "$type": "Document",
@@ -144,7 +141,7 @@
               "RelativeDocumentMoniker": "DoorHop\\Game1.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Game1.cs",
               "RelativeToolTip": "DoorHop\\Game1.cs",
-              "ViewState": "AQIAAL0AAAAAAAAAAAAowN0AAAAAAAAA",
+              "ViewState": "AQIAAMMAAAAAAAAAAAAQwNwAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-26T15:07:19.21Z",
               "EditorCaption": ""
@@ -183,8 +180,7 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\Enemy.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-26T00:57:27.322Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-26T00:57:27.322Z"
             }
           ]
         }
