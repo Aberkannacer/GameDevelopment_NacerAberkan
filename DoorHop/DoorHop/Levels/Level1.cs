@@ -33,6 +33,7 @@ namespace DoorHop.Levels
         private Texture2D doorTexture;
         private Door door;
 
+        public Door Door { get; private set; }
         public Level1(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game) : base(content, hero, graphicsDevice, game)
         {
             this.hero = hero;
@@ -106,7 +107,11 @@ namespace DoorHop.Levels
                     }
                 }
             }
-
+            if (hero.Bounds.Intersects(door.Bounds))
+            {
+                // Ga naar Level 2
+                game.ChangeState(new LevelState(game, content, 2)); // Zorg ervoor dat je de juiste state hebt voor Level 2
+            }
 
             base.Update(gameTime);
         }

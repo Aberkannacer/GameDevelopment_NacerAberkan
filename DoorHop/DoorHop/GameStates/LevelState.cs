@@ -27,15 +27,21 @@ namespace DoorHop.GameStates
         private int LevelWon = 0;
         private Hero hero;
 
-        public LevelState(Game1 game, ContentManager content) : base(game, content)
+        public LevelState(Game1 game, ContentManager content,int levelNumber) : base(game, content)
         {
+            hero = new Hero(content, new KeyBoardReader(), game);
             if (game == null)
             {
                 System.Diagnostics.Debug.WriteLine("Game is null in LevelState constructor!");
             }
-            level1 = new Level1(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice,game);
-            level2 = new Level2(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice, game);
-            currentLevel = level1;
+            if (levelNumber == 1)
+            {
+                currentLevel = new Level1(content, hero, game.GraphicsDevice, game);
+            }
+            else if (levelNumber == 2)
+            {
+                currentLevel = new Level2(content, hero, game.GraphicsDevice, game);
+            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -45,7 +51,14 @@ namespace DoorHop.GameStates
 
         public override void LoadContent()
         {
-            currentLevel.Load();
+            if (currentLevel != null)
+            {
+                currentLevel.Load(); // Zorg ervoor dat currentLevel niet null is
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("currentLevel is null in LoadContent!");
+            }
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -57,7 +70,7 @@ namespace DoorHop.GameStates
         {
             currentLevel.Update(gameTime);
 
-            if (currentLevel is Level2 level2 && hero.Bounds.Intersects(level2.Door.Bounds))
+            if (currentLevel is Level2 level2 && hero != null && level2.Door != null && hero.Bounds.Intersects(level2.Door.Bounds))
             {
                 System.Diagnostics.Debug.WriteLine("Hero has touched the door!");
                 game.ChangeState(new GameWonState(game, content));

@@ -17,7 +17,7 @@ namespace DoorHop.Buttons
         }
         protected override void OnClick()
         {
-            game.ChangeState(new LevelState(game, content));
+            game.ChangeState(new LevelState(game, content, 1));
         }
 
     }
