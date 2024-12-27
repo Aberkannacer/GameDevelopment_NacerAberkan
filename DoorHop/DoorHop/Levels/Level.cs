@@ -24,7 +24,7 @@ namespace DoorHop.Levels
         private Rectangle backgroundRect;
         protected Map map;
         protected ContentManager content;
-        protected List<Enemy> enemies;
+        protected List<Enemy> Enemies;
         protected List<Collectable> coins;
         protected Hero hero;
         protected int[,] levelOne;
@@ -38,6 +38,7 @@ namespace DoorHop.Levels
 
         protected Game1 game;
 
+
         protected Level(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game)
         {
             this.graphicsDevice = graphicsDevice;
@@ -46,7 +47,7 @@ namespace DoorHop.Levels
             this.hero = hero;
             this.game = game;
             map = new Map();
-            enemies = new List<Enemy>();
+            Enemies = new List<Enemy>();
             coins = new List<Collectable>();
 
             backgroundRect = new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
@@ -60,15 +61,15 @@ namespace DoorHop.Levels
 
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
             if (hero != null && map != null)
             {
-                hero.Update(gameTime, map.CollisionTiles, hero);
+                hero.Update(gameTime, map.CollisionTiles, hero, Enemies);
 
-                foreach (var enemy in enemies)
+                foreach (var enemy in Enemies)
                 {
-                    enemy.Update(gameTime, map.CollisionTiles, hero);
+                    enemy.Update(gameTime, map.CollisionTiles, hero, Enemies);
 
                     if (hero.Bounds.Intersects(enemy.Bounds))
                     {
@@ -127,7 +128,7 @@ namespace DoorHop.Levels
         {
             spriteBatch.Draw(backGround, backgroundRect, Color.White);
 
-            foreach (var enemy in enemies)
+            foreach (var enemy in Enemies)
             {
                 enemy.Draw(spriteBatch);
             }

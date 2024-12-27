@@ -32,7 +32,7 @@ namespace DoorHop.Players.Enemys
         }
 
 
-        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             Follow(hero);
 
@@ -47,7 +47,7 @@ namespace DoorHop.Players.Enemys
                 collisionBoxWidth,
                 collisionBoxHeight
             );
-
+            //hero.JumpOnEnemy(this);
             currentAnimation.Update(gameTime);
         }
 
@@ -58,12 +58,7 @@ namespace DoorHop.Players.Enemys
 
         }
 
-        public bool CollisionCheck(Hero hero)
-        {
-            if (hero == null) return false;
-            return bounds.Intersects(hero.Bounds);
-        }
-
+        
         private void Follow(Hero hero)
         {
             Vector2 direction = hero.position - position;

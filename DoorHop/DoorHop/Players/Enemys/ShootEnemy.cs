@@ -52,7 +52,7 @@ namespace DoorHop.Players.Enemys
 
         }
 
-        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -92,7 +92,7 @@ namespace DoorHop.Players.Enemys
                 collisionBoxWidth,
                 collisionBoxHeight
             );
-
+            //hero.JumpOnEnemy(this);
             currentAnimation.Update(gameTime);
         }
 
@@ -123,11 +123,7 @@ namespace DoorHop.Players.Enemys
 
 
 
-        public bool CollisionCheck(Hero hero)
-        {
-            if (hero == null) return false;
-            return bounds.Intersects(hero.Bounds);
-        }
+        
 
         public void RemoveBullet(Bullet bullet)
         {

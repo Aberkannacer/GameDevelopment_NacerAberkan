@@ -1,4 +1,5 @@
 ﻿using DoorHop.Players;
+using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ namespace DoorHop.Interfaces
     internal interface IGameObject
     {
         void LoadContent(ContentManager content);
-        void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero);
+        void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies);
         void Draw(SpriteBatch spriteBatch);
     }
 }

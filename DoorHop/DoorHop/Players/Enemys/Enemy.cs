@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace DoorHop.Players.Enemys
 {
-    internal abstract class Enemy : IGameObject
+    public abstract class Enemy : IGameObject
     {
         protected Texture2D texture;
         protected Animatie currentAnimation;
         protected Rectangle rectangle;
         protected Vector2 position;
-        protected bool isAlive;
+        public bool isAlive;
         protected Rectangle bounds;
         protected float moveSpeed;
 
@@ -45,12 +45,18 @@ namespace DoorHop.Players.Enemys
 
         public abstract void LoadContent(ContentManager content);
 
-        public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero);
+        public abstract void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies);
 
         public abstract void Draw(SpriteBatch spriteBatch);
 
         public Rectangle Bounds => bounds;
         public virtual void TakeDamage() => isAlive = false;
+
+        public virtual bool CollisionCheck(Hero hero)
+        {
+            if (hero == null) return false;
+            return bounds.Intersects(hero.Bounds);
+        }
 
 
     }

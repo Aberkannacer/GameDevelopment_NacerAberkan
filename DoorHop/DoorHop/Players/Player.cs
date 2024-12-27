@@ -1,6 +1,8 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
+using DoorHop.Levels;
+using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
@@ -24,9 +26,10 @@ namespace DoorHop.Players
         protected Animatie jumpAnimation;
         protected Animatie dieAnimation;
         protected Game game;
+        private Level level;
 
         public Vector2 position;
-        protected Vector2 velocity;
+        public Vector2 velocity;
         protected IInputReader inputReader;
         protected float moveSpeed = 5f;
         protected float jumpForce = -12f;
@@ -76,7 +79,7 @@ namespace DoorHop.Players
         }
 
 
-        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
+        public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             // Update invulnerability timer
             if (isInvulnerable)
@@ -113,7 +116,7 @@ namespace DoorHop.Players
             //attack logica
             if (inputReader.IsAttackButtonPressed())
             {
-                Attack();
+                Attack(enemies);
             }
 
             // Handle collisions (beweging gebeurt nu in HandleCollisions)
@@ -265,12 +268,22 @@ namespace DoorHop.Players
             }
         }
 
-        private void Attack()
+        public void Attack(List<Enemy> enemies)
         {
             if (!isAttacking)
             {
                 isAttacking = true;
-                attackAnimation.Reset();
+                // Start de aanval animatie
+                // Zorg ervoor dat je de animatie start
+            }
+
+            foreach (var enemy in enemies)
+            {
+                if (bounds.Intersects(enemy.Bounds)) // Controleer of de hero de vijand aanvalt
+                {
+                    enemy.TakeDamage(); // Verwijder de vijand of verlaag de gezondheid
+                                        // Voeg hier eventueel een animatie toe voor de aanval
+                }
             }
         }
         public void Die()
@@ -284,6 +297,9 @@ namespace DoorHop.Players
 
         }
 
-        
+        /*public void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero)
+        {
+            throw new NotImplementedException();
+        }*/
     }
 }

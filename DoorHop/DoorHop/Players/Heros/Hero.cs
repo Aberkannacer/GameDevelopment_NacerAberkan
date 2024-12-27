@@ -1,5 +1,6 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
+using DoorHop.Players.Enemys;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -116,18 +117,41 @@ namespace DoorHop.Players.Heros
             moveSpeed = speed;
         }
 
-        private void Attack()
-        {
-            if (!isAttacking)
-            {
-                isAttacking = true;
-            }
-        }
 
         public override void GetHit(int damage)
         {
             base.GetHit(damage);
             Health = (int)health;
+        }
+
+        public void JumpOnEnemy(Enemy enemy)
+        {
+            // Controleer of de hero boven de vijand is en dat de hero naar beneden beweegt
+            if (bounds.Bottom <= enemy.Bounds.Top && // Hero moet boven de vijand zijn
+                bounds.Right > enemy.Bounds.Left && // Hero moet horizontaal overlappen met de vijand
+                bounds.Left < enemy.Bounds.Right && // Hero moet horizontaal overlappen met de vijand
+                velocity.Y > 0) // Hero moet naar beneden bewegen
+            {
+                // De hero springt op de vijand
+                enemy.TakeDamage(); // Markeer de vijand als dood
+                Bounce(); // Roep de bounce methode aan om de hero omhoog te duwen
+            }
+        }
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
+        {
+            if (isAttacking)
+            {
+                if (inputReader.IsAttackButtonPressed())
+                {
+                    Attack(enemies); // Roep de aanvalsmethode aan met de lijst van vijanden
+                }
+            }
+            base.Update(gameTime, tiles, hero, enemies); // Roep de basis update aan en geef de parameters door
+
+            // Hier kun je de aanval logica toevoegen
+            
+
+            // ... andere logica voor de hero ...
         }
     }
 

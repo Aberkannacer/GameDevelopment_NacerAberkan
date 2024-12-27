@@ -26,7 +26,7 @@ namespace DoorHop.GameStates
         private Level currentLevel;
         private int LevelWon = 0;
         private Hero hero;
-
+        private List<TileMap.CollisionTiles> tiles;
         public LevelState(Game1 game, ContentManager content,int levelNumber) : base(game, content)
         {
             hero = new Hero(content, new KeyBoardReader(), game);
@@ -42,6 +42,7 @@ namespace DoorHop.GameStates
             {
                 currentLevel = new Level2(content, hero, game.GraphicsDevice, game);
             }
+            tiles = new List<TileMap.CollisionTiles>();
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -59,6 +60,7 @@ namespace DoorHop.GameStates
             {
                 System.Diagnostics.Debug.WriteLine("currentLevel is null in LoadContent!");
             }
+            tiles = new List<TileMap.CollisionTiles>();
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -68,7 +70,7 @@ namespace DoorHop.GameStates
 
         public override void Update(GameTime gameTime)
         {
-            currentLevel.Update(gameTime);
+            currentLevel.Update(gameTime, tiles);
 
             if (currentLevel is Level2 level2 && hero != null && level2.Door != null && hero.Bounds.Intersects(level2.Door.Bounds))
             {

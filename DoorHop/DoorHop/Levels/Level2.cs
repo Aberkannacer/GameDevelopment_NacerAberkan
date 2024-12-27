@@ -42,9 +42,9 @@ namespace DoorHop.Levels
             ghostEnemy = new GhostEnemy(content, 64, 64, new Vector2(700, 400));
 
 
-            enemies.Add(walkEnemy);
-            enemies.Add(shootEnemy);
-            enemies.Add(ghostEnemy);
+            Enemies.Add(walkEnemy);
+            Enemies.Add(shootEnemy);
+            Enemies.Add(ghostEnemy);
 
             coins.Add(new Collectable(content, new Vector2(680, 30)));
             coins.Add(new Collectable(content, new Vector2(440, 90)));
@@ -92,25 +92,32 @@ namespace DoorHop.Levels
 
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
 
-            if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero) || ghostEnemy.CollisionCheck(hero))
+            foreach (var enemy in Enemies.ToList()) // Gebruik ToList() voor veilige verwijdering
             {
-                if (!hero.isDead) // Alleen damage doen als de hero nog leeft
+                if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero) || ghostEnemy.CollisionCheck(hero))
                 {
-                    hero.GetHit(1);
-                    if (hero.isDead)
+                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
                     {
-
-                        System.Diagnostics.Debug.WriteLine("Game Over!");
+                        hero.GetHit(1);
                     }
+                }
+
+                // Controleer of de hero op deze vijand springt
+                hero.JumpOnEnemy(enemy);
+
+                // Verwijder de vijand als deze dood is
+                if (!enemy.isAlive)
+                {
+                    Enemies.Remove(enemy);
                 }
             }
 
 
 
-            base.Update(gameTime);
+            base.Update(gameTime, tiles);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

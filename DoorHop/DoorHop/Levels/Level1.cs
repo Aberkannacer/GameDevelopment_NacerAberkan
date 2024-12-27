@@ -42,9 +42,9 @@ namespace DoorHop.Levels
             ghostEnemy = new GhostEnemy(content, 64, 64, new Vector2(700, 400));
 
 
-            enemies.Add(walkEnemy);
-            enemies.Add(shootEnemy);
-            enemies.Add(ghostEnemy);
+            Enemies.Add(walkEnemy);
+            Enemies.Add(shootEnemy);
+            Enemies.Add(ghostEnemy);
 
             coins.Add(new Collectable(content, new Vector2(680, 30)));
             coins.Add(new Collectable(content, new Vector2(440, 90)));
@@ -92,28 +92,42 @@ namespace DoorHop.Levels
             
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
-            
-            if (walkEnemy.CollisionCheck(hero) || shootEnemy.CollisionCheck(hero) || ghostEnemy.CollisionCheck(hero))
+            //hero.Update(gameTime, tiles, hero, Enemies);
+            foreach (var enemy in Enemies.ToList()) // Gebruik ToList() voor veilige verwijdering
             {
-                if (!hero.isDead) // Alleen damage doen als de hero nog leeft
+                // Controleer of de hero op deze vijand springt
+                if (enemy.CollisionCheck(hero) && hero.velocity.Y > 0 && hero.Bounds.Bottom <= enemy.Bounds.Top)
                 {
-                    hero.GetHit(1);
-                    if (hero.isDead)
-                    {
+                    // De hero springt op de vijand
+                    enemy.TakeDamage(); // Markeer de vijand als dood
+                    //hero.Bounce(); // Roep de bounce methode aan om de hero omhoog te duwen
+                }
 
-                        System.Diagnostics.Debug.WriteLine("Game Over!");
+                // Controleer of de hero geraakt wordt door de vijand
+                if (enemy.CollisionCheck(hero))
+                {
+                    if (!hero.isDead) // Alleen damage doen als de hero nog leeft
+                    {
+                        hero.GetHit(1);
                     }
                 }
+
+                // Verwijder de vijand als deze dood is
+                if (!enemy.isAlive)
+                {
+                    Enemies.Remove(enemy);
+                }
             }
+
             if (hero.Bounds.Intersects(door.Bounds))
             {
                 // Ga naar Level 2
-                game.ChangeState(new LevelState(game, content, 2)); // Zorg ervoor dat je de juiste state hebt voor Level 2
+                game.ChangeState(new LevelState(game, content, 2));
             }
 
-            base.Update(gameTime);
+            base.Update(gameTime, tiles);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
