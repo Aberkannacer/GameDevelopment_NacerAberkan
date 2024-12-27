@@ -37,6 +37,9 @@ namespace DoorHop
         private int collectedCoins; // Aantal verzamelde coins
         private int totalCoins = 3;
 
+        //voor level 1
+        private int[,] levelOne;
+
         Game game;
 
         public Game1()
@@ -60,7 +63,7 @@ namespace DoorHop
             }
 
             map = new Map();
-            map.Generate(new int[,]
+            levelOne = new int[,]
             {
                 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
                 { 0,0,0,4,4,4,0,0,0,0,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0  },
@@ -73,12 +76,13 @@ namespace DoorHop
                 { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
                 { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0  },
                 { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4  },
-                { 4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0  },
-                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0  },
-                { 4,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0 },
-                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,0,0 },
+                { 4,0,4,4,4,0,0,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0  },
+                { 4,0,0,0,0,0,0,0,0,0,4,4,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0 },
+                { 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0 },
                 { 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2 },
-            }, 30);
+            };
+            map.Generate(levelOne, 30);
 
             inputReader = new KeyBoardReader();
             hero = new Hero(Content, inputReader, this);
@@ -220,6 +224,10 @@ namespace DoorHop
             // Victory check
             if (collectedCoins == totalCoins) // totalCoins kan nu ook coins.Count zijn
             {
+                Debug.WriteLine("Before Change: " + levelOne[1, 1]);
+                map.ChangeTileValue(1,0,levelOne) ;
+                map.Generate(levelOne, 30);
+                Debug.WriteLine("After Change: " + levelOne[1, 1]);
                 System.Diagnostics.Debug.WriteLine("Victory!");
             }
 

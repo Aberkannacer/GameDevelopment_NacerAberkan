@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,13 +35,15 @@ namespace DoorHop.TileMap
 
         public void Generate(int[,] map, int size)
         {
+            collisionTiles.Clear();
+
             for (int a = 0; a < map.GetLength(1); a++)
             {
                 for (int b = 0; b < map.GetLength(0); b++)
                 {
                     int number = map[b, a];
 
-                    if (number>0)
+                    if (number > 0)
                     {
                         collisionTiles.Add(new CollisionTiles(number, new Rectangle(a * size, b * size, size, size)));
                     }
@@ -59,8 +62,22 @@ namespace DoorHop.TileMap
             }
         }
 
-        
-        
+        public void ChangeTileValue(int oldValue, int newValue, int[,] map)
+        {
+            for (int y = 0; y < map.GetLength(0); y++)
+            {
+                for (int x = 0; x < map.GetLength(1); x++)
+                {
+                    if (map[y, x] == oldValue)
+                    {
+                        Debug.WriteLine($"Changing value at ({y}, {x}) from {oldValue} to {newValue}");
+                        map[y, x] = newValue; // Verander het getal
+                    }
+                }
+            }
+
+        }
+
 
     }
 }
