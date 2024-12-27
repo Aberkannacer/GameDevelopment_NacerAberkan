@@ -224,10 +224,8 @@ namespace DoorHop
             // Victory check
             if (collectedCoins == totalCoins) // totalCoins kan nu ook coins.Count zijn
             {
-                Debug.WriteLine("Before Change: " + levelOne[1, 1]);
                 map.ChangeTileValue(1,0,levelOne) ;
                 map.Generate(levelOne, 30);
-                Debug.WriteLine("After Change: " + levelOne[1, 1]);
                 System.Diagnostics.Debug.WriteLine("Victory!");
             }
 

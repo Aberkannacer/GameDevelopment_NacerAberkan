@@ -70,8 +70,7 @@ namespace DoorHop.TileMap
                 {
                     if (map[y, x] == oldValue)
                     {
-                        Debug.WriteLine($"Changing value at ({y}, {x}) from {oldValue} to {newValue}");
-                        map[y, x] = newValue; // Verander het getal
+                        map[y, x] = newValue;
                     }
                 }
             }
