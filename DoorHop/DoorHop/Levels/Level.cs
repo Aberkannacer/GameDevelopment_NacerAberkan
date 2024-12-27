@@ -19,8 +19,7 @@ namespace DoorHop.Levels
     internal abstract class Level
     {
         private Texture2D backGround;
-        private Texture2D doorTexture;
-        private Door door;
+        
 
         private Rectangle backgroundRect;
         protected Map map;
@@ -34,10 +33,12 @@ namespace DoorHop.Levels
         protected int totalCoins = 3;
 
         private HealthHeart healthHeart;
+        GraphicsDevice graphicsDevice;
+        Game1 game;
 
         protected Level(ContentManager content, Hero hero, GraphicsDevice graphicsDevice)
         {
-
+            this.graphicsDevice = graphicsDevice;
 
             this.content = content;
             this.hero = hero;
@@ -52,8 +53,7 @@ namespace DoorHop.Levels
         {
             backGround = content.Load<Texture2D>("background");
             healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
-            doorTexture = content.Load<Texture2D>("DoorTexture"); // Zorg ervoor dat je een deur texture hebt
-            door = new Door(doorTexture, new Vector2(400, 200));
+            
 
         }
 
@@ -108,12 +108,7 @@ namespace DoorHop.Levels
                 System.Diagnostics.Debug.WriteLine("Victory!");
             }
 
-            // Controleer of de speler bij de deur staat
-            if (hero.Bounds.Intersects(door.Bounds) && InputManager.IsActionButtonPressed()) // Zorg ervoor dat je een input manager hebt
-            {
-                // Ga naar level 2
-                game.ChangeState(new Level2State(game, content)); // Zorg ervoor dat je een Level2State hebt
-            }
+            
 
 
         }
@@ -121,7 +116,7 @@ namespace DoorHop.Levels
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(backGround, backgroundRect, Color.White);
-            door.Draw(spriteBatch);
+
             foreach (var enemy in enemies)
             {
                 enemy.Draw(spriteBatch);

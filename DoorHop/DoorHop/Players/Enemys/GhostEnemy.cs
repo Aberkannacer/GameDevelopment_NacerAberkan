@@ -16,10 +16,11 @@ namespace DoorHop.Players.Enemys
         private const int ENEMY_WIDTH = 64;
         private const int ENEMY_HEIGHT = 64;
         private float speedGhost = 2f;
-        public GhostEnemy(ContentManager content,int width, int height) : base(width, height)
+        public GhostEnemy(ContentManager content,int width, int height, Vector2  position) : base(width, height)
         {
             LoadContent(content);
-            position = new Vector2(700,400);
+            this.position = position;
+            //position = new Vector2(700,400);
         }
         public override void LoadContent(ContentManager content)
         {

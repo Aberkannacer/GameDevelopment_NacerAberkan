@@ -28,10 +28,11 @@ namespace DoorHop.Players.Enemys
         private float shootTimer;
         private const float shootInterval = 2.0f; // Interval in seconden
         public List<Bullet> Bullets => bullets;
-        public ShootEnemy(ContentManager content, int width, int height) : base(width, height)
+        public ShootEnemy(ContentManager content, int width, int height, Vector2 position) : base(width, height)
         {
             LoadContent(content);
-            position = new Vector2(500, 240);
+            this.position = position;
+            //position = new Vector2(500, 240);
             //bulletPosition = new Vector2(100, 100);
 
             bullets = new List<Bullet>();

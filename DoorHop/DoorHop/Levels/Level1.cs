@@ -29,14 +29,15 @@ namespace DoorHop.Levels
 
         private HealthHeart healthHeart;
 
-        
+        private Texture2D doorTexture;
+        private Door door;
 
         public Level1(ContentManager content, Hero hero, GraphicsDevice graphicsDevice) : base(content, hero, graphicsDevice)
         {
             this.hero = hero;
-            walkEnemy = new WalkEnemy(content, 64, 64);
-            shootEnemy = new ShootEnemy(content, 64, 64);
-            ghostEnemy = new GhostEnemy(content, 64, 64);
+            walkEnemy = new WalkEnemy(content, 64, 64, new Vector2(300, 386));
+            shootEnemy = new ShootEnemy(content, 64, 64, new Vector2(500, 240));
+            ghostEnemy = new GhostEnemy(content, 64, 64, new Vector2(700, 400));
 
 
             enemies.Add(walkEnemy);
@@ -58,6 +59,9 @@ namespace DoorHop.Levels
             base.Load();
 
             Tiles.Content = content;
+
+            doorTexture = content.Load<Texture2D>("door"); // Zorg ervoor dat je een deur texture hebt
+            door = new Door(doorTexture, new Vector2(700, 400));
 
             font = content.Load<SpriteFont>("MyFont");
 
@@ -101,7 +105,12 @@ namespace DoorHop.Levels
                     }
                 }
             }
-
+            // Controleer of de speler bij de deur staat
+            if (hero.Bounds.Intersects(door.Bounds)) // Zorg ervoor dat je een input manager hebt
+            {
+                // Ga naar level 2
+                //game.ChangeState(new Level2(content, hero, graphicsDevice)); // Zorg ervoor dat je een Level2State hebt
+            }
 
 
             base.Update(gameTime);
@@ -111,6 +120,7 @@ namespace DoorHop.Levels
         {
             base.Draw(spriteBatch);
             spriteBatch.DrawString(font, $"To open the door: {collectedCoins}/{totalCoins}", new Vector2(10, 10), Color.White);
+            door.Draw(spriteBatch);
             map.Draw(spriteBatch);
         }
 

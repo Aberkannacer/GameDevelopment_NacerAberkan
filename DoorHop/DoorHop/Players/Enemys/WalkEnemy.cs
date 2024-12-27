@@ -17,10 +17,12 @@ namespace DoorHop.Players.Enemys
     {
         private const int ENEMY_WIDTH = 38;
         private const int ENEMY_HEIGHT = 64;
-        public WalkEnemy(ContentManager content, int width, int height):base(width, height)
+        public WalkEnemy(ContentManager content, int width, int height, Vector2 position):base(width, height)
         {
-            position = new Vector2(300, 386);
+            this.position = position;
+            //position = new Vector2(300, 386);
             moveSpeed = 1.5f;
+
             LoadContent(content);
             
         }
