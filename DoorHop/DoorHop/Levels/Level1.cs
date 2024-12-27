@@ -1,4 +1,5 @@
 ﻿using DoorHop.Collectables;
+using DoorHop.GameStates;
 using DoorHop.Input;
 using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
@@ -109,7 +110,7 @@ namespace DoorHop.Levels
             if (hero.Bounds.Intersects(door.Bounds)) // Zorg ervoor dat je een input manager hebt
             {
                 // Ga naar level 2
-                //game.ChangeState(new Level2(content, hero, graphicsDevice)); // Zorg ervoor dat je een Level2State hebt
+                game.ChangeState(new LevelState(game, content)); // Zorg ervoor dat je een Level2State hebt
             }
 
 

@@ -33,8 +33,8 @@ namespace DoorHop.Levels
         protected int totalCoins = 3;
 
         private HealthHeart healthHeart;
-        GraphicsDevice graphicsDevice;
-        Game1 game;
+        public GraphicsDevice graphicsDevice;
+        protected Game1 game;
 
         protected Level(ContentManager content, Hero hero, GraphicsDevice graphicsDevice)
         {

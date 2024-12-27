@@ -36,6 +36,7 @@ namespace DoorHop
             IsMouseVisible = true;
 
         }
+        
 
         protected override void Initialize()
         {

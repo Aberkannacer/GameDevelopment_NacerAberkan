@@ -21,11 +21,15 @@ namespace DoorHop.GameStates
 {
     internal class LevelState:State
     {
-        private Level1 currentLevel;
+        private Level1 level1;
+        private Level2 level2;
+        private Level currentLevel;
 
         public LevelState(Game1 game, ContentManager content) : base(game, content)
         {
-            currentLevel = new Level1(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice);
+            level1 = new Level1(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice);
+            level2 = new Level2(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice);
+            currentLevel = level1;
         }
 
         public override void LoadContent()
