@@ -112,7 +112,13 @@ namespace DoorHop.Levels
                 System.Diagnostics.Debug.WriteLine("Victory!");
             }
 
-            
+            if (hero.isDead)
+            {
+                System.Diagnostics.Debug.WriteLine("Game Over!");
+                game.ChangeState(new GameLoseState(game,graphicsDevice ,game.Content)); // Ga naar GameLostState
+            }
+
+
 
 
         }
