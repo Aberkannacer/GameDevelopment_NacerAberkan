@@ -41,8 +41,8 @@ namespace DoorHop
         protected override void Initialize()
         {
             base.Initialize();
+            ChangeState(new MenuState(this, Content, graphics.GraphicsDevice));
 
-            
 
         }
 
@@ -89,6 +89,7 @@ namespace DoorHop
             _spriteBatch.Begin();
 
             currentState.Draw(gameTime, _spriteBatch);
+
             // Teken eerst de achtergrond
             _spriteBatch.Draw(backgroundTexture, backgroundRect, Color.White);
 

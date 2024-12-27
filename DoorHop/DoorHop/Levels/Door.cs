@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoorHop.Animation;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using SharpDX.Direct2D1.Effects;
 using System;
@@ -20,6 +22,7 @@ namespace DoorHop.Levels
             int doorWidth = texture.Width / 10; // Bijvoorbeeld, maak de deur half zo breed
             int doorHeight = texture.Height/10;
             this.bounds = new Rectangle((int)position.X, (int)position.Y, doorWidth, doorHeight);
+
         }
 
         public void Draw(SpriteBatch spriteBatch)

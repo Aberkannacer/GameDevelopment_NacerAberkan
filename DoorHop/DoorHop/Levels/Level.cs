@@ -34,14 +34,17 @@ namespace DoorHop.Levels
 
         private HealthHeart healthHeart;
         public GraphicsDevice graphicsDevice;
+
+
         protected Game1 game;
 
-        protected Level(ContentManager content, Hero hero, GraphicsDevice graphicsDevice)
+        protected Level(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game)
         {
             this.graphicsDevice = graphicsDevice;
 
             this.content = content;
             this.hero = hero;
+            this.game = game;
             map = new Map();
             enemies = new List<Enemy>();
             coins = new List<Collectable>();
@@ -103,6 +106,7 @@ namespace DoorHop.Levels
             }
             if (collectedCoins == totalCoins) // totalCoins kan nu ook coins.Count zijn
             {
+
                 map.ChangeTileValue(1, 0, levelOne);
                 map.Generate(levelOne, 30);
                 System.Diagnostics.Debug.WriteLine("Victory!");

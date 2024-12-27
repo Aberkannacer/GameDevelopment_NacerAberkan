@@ -24,22 +24,18 @@ namespace DoorHop.GameStates
         private Level1 level1;
         private Level2 level2;
         private Level currentLevel;
+        private int LevelWon = 0;
+        private Hero hero;
 
         public LevelState(Game1 game, ContentManager content) : base(game, content)
         {
-            level1 = new Level1(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice);
-            level2 = new Level2(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice);
+            if (game == null)
+            {
+                System.Diagnostics.Debug.WriteLine("Game is null in LevelState constructor!");
+            }
+            level1 = new Level1(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice,game);
+            level2 = new Level2(content, new Hero(content, new KeyBoardReader(), game), game.GraphicsDevice, game);
             currentLevel = level1;
-        }
-
-        public override void LoadContent()
-        {
-            currentLevel.Load();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            currentLevel.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -47,9 +43,25 @@ namespace DoorHop.GameStates
             currentLevel.Draw(spriteBatch);
         }
 
+        public override void LoadContent()
+        {
+            currentLevel.Load();
+        }
+
         public override void PostUpdate(GameTime gameTime)
         {
             
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            currentLevel.Update(gameTime);
+
+            if (currentLevel is Level2 level2 && hero.Bounds.Intersects(level2.Door.Bounds))
+            {
+                System.Diagnostics.Debug.WriteLine("Hero has touched the door!");
+                game.ChangeState(new GameWonState(game, content));
+            }
         }
     }
 }

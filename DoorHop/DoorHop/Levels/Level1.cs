@@ -33,7 +33,7 @@ namespace DoorHop.Levels
         private Texture2D doorTexture;
         private Door door;
 
-        public Level1(ContentManager content, Hero hero, GraphicsDevice graphicsDevice) : base(content, hero, graphicsDevice)
+        public Level1(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game) : base(content, hero, graphicsDevice, game)
         {
             this.hero = hero;
             walkEnemy = new WalkEnemy(content, 64, 64, new Vector2(300, 386));
@@ -61,7 +61,7 @@ namespace DoorHop.Levels
 
             Tiles.Content = content;
 
-            doorTexture = content.Load<Texture2D>("door"); // Zorg ervoor dat je een deur texture hebt
+            doorTexture = content.Load<Texture2D>("door");
             door = new Door(doorTexture, new Vector2(700, 400));
 
             font = content.Load<SpriteFont>("MyFont");
@@ -105,12 +105,6 @@ namespace DoorHop.Levels
                         System.Diagnostics.Debug.WriteLine("Game Over!");
                     }
                 }
-            }
-            // Controleer of de speler bij de deur staat
-            if (hero.Bounds.Intersects(door.Bounds)) // Zorg ervoor dat je een input manager hebt
-            {
-                // Ga naar level 2
-                game.ChangeState(new LevelState(game, content)); // Zorg ervoor dat je een Level2State hebt
             }
 
 
