@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DoorHop")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a6d11c91fef59651201e19ea02277f9b105ed62c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9a988fe3296844b096d2ca220d1627377bcad57b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DoorHop")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DoorHop")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

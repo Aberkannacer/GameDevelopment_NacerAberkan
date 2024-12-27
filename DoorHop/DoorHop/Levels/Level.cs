@@ -67,6 +67,34 @@ namespace DoorHop.Levels
             {
                 hero.Update(gameTime, map.CollisionTiles, hero, Enemies);
 
+                #region enemy killen als je op hun springt
+                foreach (var enemy in Enemies.ToList()) // Gebruik ToList() voor veilige verwijdering
+                {
+                    // Controleer of de hero op deze vijand springt
+                    if (enemy.CollisionCheck(hero) && hero.velocity.Y > 0 && hero.Bounds.Bottom <= enemy.Bounds.Top + 10)
+                    {
+                        // De hero springt op de vijand
+                        enemy.TakeDamage(); // Markeer de vijand als dood
+
+                        // Geef de hero een bounce effect door zijn velocity aan te passen
+                        hero.velocity.Y = -10f; // Pas dit aan op basis van je bounce kracht
+                    }
+                    else if (enemy.CollisionCheck(hero))
+                    {
+                        // Controleer of de hero geraakt wordt door de vijand
+                        if (!hero.isDead) // Alleen damage doen als de hero nog leeft
+                        {
+                            hero.GetHit(1);
+                        }
+                    }
+
+                    // Verwijder de vijand als deze dood is
+                    if (!enemy.isAlive)
+                    {
+                        Enemies.Remove(enemy);
+                    }
+                }
+                #endregion
                 foreach (var enemy in Enemies)
                 {
                     enemy.Update(gameTime, map.CollisionTiles, hero, Enemies);
