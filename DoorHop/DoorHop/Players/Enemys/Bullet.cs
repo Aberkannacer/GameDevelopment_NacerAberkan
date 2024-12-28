@@ -22,8 +22,8 @@ namespace DoorHop.Players.Enemys
         private Vector2 directionHero;
         private Game game1;
 
-        private const int bulletWidth = 64;
-        private const int bulletHeight = 64;
+        private const int bulletWidth = 16;
+        private const int bulletHeight = 16;
 
         public Bullet(Texture2D texture, Vector2 startPosition, Vector2 direction)
         {

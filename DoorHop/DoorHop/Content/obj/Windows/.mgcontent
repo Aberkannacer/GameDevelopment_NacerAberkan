@@ -26,9 +26,13 @@
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile2.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile3.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile4.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile5.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile6.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/WonScreen.jpg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

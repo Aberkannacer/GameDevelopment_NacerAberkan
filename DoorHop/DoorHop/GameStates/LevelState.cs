@@ -33,11 +33,11 @@ namespace DoorHop.GameStates
             {
                 System.Diagnostics.Debug.WriteLine("Game is null in LevelState constructor!");
             }
-            if (levelNumber == 2)
+            if (levelNumber == 1)
             {
                 currentLevel = new Level1(content, hero, game.GraphicsDevice, game);
             }
-            else if (levelNumber == 1)
+            else if (levelNumber == 2)
             {
                 currentLevel = new Level2(content, hero, game.GraphicsDevice, game);
             }

@@ -63,3 +63,5 @@ C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\door.xnb
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\WonScreen.xnb
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\gameOverScreen.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile5.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile6.xnb
