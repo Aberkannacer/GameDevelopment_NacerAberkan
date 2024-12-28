@@ -1,4 +1,5 @@
 ﻿using DoorHop.Collectables;
+using DoorHop.GameStates;
 using DoorHop.Input;
 using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
@@ -19,7 +20,6 @@ namespace DoorHop.Levels
 {
     internal class Level2 : Level
     {
-
         private WalkEnemy walkEnemy;
         private ShootEnemy shootEnemy;
         private GhostEnemy ghostEnemy;
@@ -37,8 +37,10 @@ namespace DoorHop.Levels
         public Level2(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game) : base(content, hero, graphicsDevice, game)
         {
             this.hero = hero;
+            hero.position = new Vector2(200, 200);
+
             walkEnemy = new WalkEnemy(content, 64, 64, new Vector2(300, 386));
-            shootEnemy = new ShootEnemy(content, 64, 64, new Vector2(500, 240));
+            shootEnemy = new ShootEnemy(content, 64, 64, new Vector2(325, 240));
             ghostEnemy = new GhostEnemy(content, 64, 64, new Vector2(700, 400));
 
 
@@ -46,9 +48,9 @@ namespace DoorHop.Levels
             Enemies.Add(shootEnemy);
             Enemies.Add(ghostEnemy);
 
-            coins.Add(new Collectable(content, new Vector2(680, 30)));
-            coins.Add(new Collectable(content, new Vector2(440, 90)));
-            coins.Add(new Collectable(content, new Vector2(100, 270)));
+            coins.Add(new Collectable(content, new Vector2(680, 200)));
+            coins.Add(new Collectable(content, new Vector2(440, 100)));
+            coins.Add(new Collectable(content, new Vector2(400, 270)));
 
             healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
 
@@ -63,28 +65,28 @@ namespace DoorHop.Levels
             Tiles.Content = content;
 
             doorTexture = content.Load<Texture2D>("door"); // Zorg ervoor dat je een deur texture hebt
-            door = new Door(doorTexture, new Vector2(700, 400));
+            door = new Door(doorTexture, new Vector2(70, 400));
 
             font = content.Load<SpriteFont>("MyFont");
 
             map = new Map();
             levelOne = new int[,]
             {
-                {4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0},
+                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0},
+                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4},
+                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,0,0,0,4},
+                {4,0,0,0,0,0,0,0,0,0,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,4,4,4,4,4,0,0,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,4},
+                {4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+                {4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
                 {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2},
             };
             map.Generate(levelOne, 30);
@@ -95,7 +97,11 @@ namespace DoorHop.Levels
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
 
-
+            if (hero.Bounds.Intersects(door.Bounds))
+            {
+                // Ga naar Level 2
+                game.ChangeState(new GameWonState(game,graphicsDevice ,game.Content));
+            }
 
 
             base.Update(gameTime, tiles);
@@ -104,7 +110,7 @@ namespace DoorHop.Levels
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            spriteBatch.DrawString(font, $"To open the door: {collectedCoins}/{totalCoins}", new Vector2(10, 10), Color.White);
+            spriteBatch.DrawString(font, $"To open the door: {collectedCoins}/{totalCoins}", new Vector2(350, 40), Color.Black);
             map.Draw(spriteBatch);
             door.Draw(spriteBatch);
         }

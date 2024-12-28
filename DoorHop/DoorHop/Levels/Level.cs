@@ -164,8 +164,10 @@ namespace DoorHop.Levels
             {
                 coin.Draw(spriteBatch);
             }
-            hero.Draw(spriteBatch);
             healthHeart.Draw(spriteBatch);
+            hero.Draw(spriteBatch);
+            
+
         }
     }
 }

@@ -38,7 +38,7 @@ namespace DoorHop.Players.Enemys
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             position.X += moveSpeed;
-            if (position.X > 420 || position.X < 0) //loopt 420 naar positie x rechts en keert terug als die naar links gaat 0
+            if (position.X > 550 || position.X < 0) //loopt 420 naar positie x rechts en keert terug als die naar links gaat 0
             {
                 moveSpeed = -moveSpeed;
             }

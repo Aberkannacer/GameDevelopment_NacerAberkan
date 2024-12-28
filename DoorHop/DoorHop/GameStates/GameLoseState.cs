@@ -17,7 +17,7 @@ namespace DoorHop.GameStates
     internal class GameLoseState : State
     {
         private Rectangle backgroundRect;
-        private Texture2D gameovertexture;
+        private Texture2D gameOverTexture;
         private StartButton startButton;
         private EndButton endButton;
 
@@ -33,13 +33,13 @@ namespace DoorHop.GameStates
         }
         public virtual void Load()
         {
-            gameovertexture = content.Load<Texture2D>("gameOverScreen");
+            gameOverTexture = content.Load<Texture2D>("gameOverScreen");
 
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(gameovertexture, backgroundRect, Color.White);
+            spriteBatch.Draw(gameOverTexture, backgroundRect, Color.White);
             foreach (var item in buttons)
             {
                 item.Draw(spriteBatch);

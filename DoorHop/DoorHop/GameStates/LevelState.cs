@@ -21,24 +21,23 @@ namespace DoorHop.GameStates
 {
     internal class LevelState:State
     {
-        private Level1 level1;
-        private Level2 level2;
+
         private Level currentLevel;
         private int LevelWon = 0;
         private Hero hero;
         private List<TileMap.CollisionTiles> tiles;
         public LevelState(Game1 game, ContentManager content,int levelNumber) : base(game, content)
         {
-            hero = new Hero(content, new KeyBoardReader(), game);
+            hero = new Hero(content, new KeyBoardReader(), game, new Vector2());
             if (game == null)
             {
                 System.Diagnostics.Debug.WriteLine("Game is null in LevelState constructor!");
             }
-            if (levelNumber == 1)
+            if (levelNumber == 2)
             {
                 currentLevel = new Level1(content, hero, game.GraphicsDevice, game);
             }
-            else if (levelNumber == 2)
+            else if (levelNumber == 1)
             {
                 currentLevel = new Level2(content, hero, game.GraphicsDevice, game);
             }
@@ -72,11 +71,7 @@ namespace DoorHop.GameStates
         {
             currentLevel.Update(gameTime, tiles);
 
-            if (currentLevel is Level2 level2 && hero != null && level2.Door != null && hero.Bounds.Intersects(level2.Door.Bounds))
-            {
-                System.Diagnostics.Debug.WriteLine("Hero has touched the door!");
-                game.ChangeState(new GameWonState(game, content));
-            }
+            
         }
     }
 }

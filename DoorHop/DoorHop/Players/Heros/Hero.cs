@@ -21,9 +21,10 @@ namespace DoorHop.Players.Heros
         public int Health { get; private set; }
         public Texture2D Texture { get; set; }
 
-        public Hero(ContentManager content, IInputReader inputReader, Game game)
+        public Hero(ContentManager content, IInputReader inputReader, Game game, Vector2 position)
             : base(content, inputReader, game)
         {
+            this.position = position;
             Health = 3;
             health = 3;
             healthMax = 3;

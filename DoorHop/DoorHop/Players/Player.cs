@@ -26,7 +26,6 @@ namespace DoorHop.Players
         protected Animatie jumpAnimation;
         protected Animatie dieAnimation;
         protected Game game;
-        private Level level;
 
         public Vector2 position;
         public Vector2 velocity;
@@ -58,7 +57,8 @@ namespace DoorHop.Players
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
-            position = new Vector2(200, 200);
+            //this.position = position;
+            //position = new Vector2(200, 200);
             velocity = Vector2.Zero;
             moveSpeed = 5f;
             isJumping = false;

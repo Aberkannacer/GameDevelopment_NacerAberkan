@@ -81,9 +81,9 @@ namespace DoorHop.Players.Enemys
             }
 
             // Update bounds met dezelfde offsets als in de constructor
-            int collisionBoxWidth = ENEMY_WIDTH - 5;
+            int collisionBoxWidth = ENEMY_WIDTH - 4;
             int collisionBoxHeight = ENEMY_HEIGHT - 20;
-            int xOffset = (ENEMY_WIDTH - collisionBoxWidth) + 5;
+            int xOffset = (ENEMY_WIDTH - collisionBoxWidth) + 3;
             int yOffset = (ENEMY_HEIGHT - collisionBoxHeight) - 5;
 
             bounds = new Rectangle(
