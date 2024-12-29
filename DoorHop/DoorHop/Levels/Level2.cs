@@ -99,7 +99,7 @@ namespace DoorHop.Levels
 
             if (hero.Bounds.Intersects(door.Bounds))
             {
-                // Ga naar Level 2
+                // gewonnen
                 game.ChangeState(new GameWonState(game,graphicsDevice ,game.Content));
             }
 

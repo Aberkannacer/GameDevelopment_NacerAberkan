@@ -140,16 +140,11 @@ namespace DoorHop.Levels
                 map.Generate(levelOne, 30);
                 System.Diagnostics.Debug.WriteLine("Victory!");
             }
-
             if (hero.isDead)
             {
-                System.Diagnostics.Debug.WriteLine("Game Over!");
-                game.ChangeState(new GameLoseState(game,graphicsDevice ,game.Content)); // Ga naar GameLostState
+                // Ga naar Game Lose State
+                game.ChangeState(new GameLoseState(game, game.GraphicsDevice, game.Content));
             }
-
-
-
-
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
