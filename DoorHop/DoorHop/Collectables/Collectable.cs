@@ -15,24 +15,28 @@ namespace DoorHop.Collectables
 {
     internal class Collectable
     {
+        //textures & bound
         private Texture2D collectableTexture;
         private Rectangle bounds;
         private Vector2 positionCollectable;
         protected Animatie coinAnimation;
-        private int collectableWidth = 20;
-        private int collectableheight = 20;
+        //width & height
+        private int collectableWidth;
+        private int collectableheight;
 
         public Collectable(ContentManager content, Vector2 startPosition)
         {
             this.positionCollectable = startPosition;
-
+            collectableWidth = 20;
+            collectableheight = 20;
             LoadContent(content);
         }
 
         public void LoadContent(ContentManager content)
         {
+            //texture
             collectableTexture = content.Load<Texture2D>("Coin");
-
+            //animation coin
             coinAnimation = new Animatie(collectableTexture, true);
             coinAnimation.AddAnimationFrames(0, 20, 100, 5);
             coinAnimation.SetSpeed(1.0f);
@@ -40,9 +44,10 @@ namespace DoorHop.Collectables
 
         public void Update(GameTime gameTime, Hero hero)
         {
+            //update animation
             coinAnimation.Update(gameTime);
 
-
+            //collision
             int collisionBoxWidth = collectableWidth;
             int collisionBoxHeight = collectableheight;
             int xOffset = (collectableWidth - collisionBoxWidth);
@@ -57,25 +62,20 @@ namespace DoorHop.Collectables
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Teken de kogel met de juiste effecten
             spriteBatch.Draw(collectableTexture, positionCollectable, coinAnimation.CurrentFrame.sourceRecatangle, 
                 Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
-
-#if DEBUG
+            //debug
+            /*#if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             boundTexture.SetData(new[] { Color.Yellow * 1f });
             spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
-#endif
+            #endif
+            */
         }
-
         public bool CollisionCheck(Hero hero)
         {
             if (hero == null) return false;
             return hero.Bounds.Intersects(new Rectangle((int)positionCollectable.X, (int)positionCollectable.Y, collectableWidth, collectableheight));
         }
-
-        
-
-
     }
 }
