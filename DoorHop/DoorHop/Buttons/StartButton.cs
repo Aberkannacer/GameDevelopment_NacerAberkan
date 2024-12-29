@@ -3,11 +3,6 @@ using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Buttons
 {
@@ -23,6 +18,5 @@ namespace DoorHop.Buttons
             hero.Reset();
             game.ChangeState(new LevelState(game, content, 1, hero));
         }
-
     }
 }
