@@ -8,9 +8,14 @@ namespace DoorHop.GameStates
 {
     public abstract class State
     {
+        //texutres
         protected GraphicsDevice graphicsDevice;
         protected ContentManager content;
+        //game
         protected Game1 game;
+        //rectangle
+        protected Rectangle backgroundRect;
+        //button
         internal List<Button> buttons;
 
         public State(Game1 game, ContentManager content)
@@ -20,11 +25,7 @@ namespace DoorHop.GameStates
             buttons = new List<Button>();
         }
         public abstract void Update(GameTime gameTime);
-
         public abstract void LoadContent();
-
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
-
-        public abstract void PostUpdate(GameTime gameTime);
     }
 }

@@ -79,7 +79,6 @@ namespace DoorHop
 
                 currentState.Update(gameTime);
 
-                currentState.PostUpdate(gameTime);
             }
 
             base.Update(gameTime);
