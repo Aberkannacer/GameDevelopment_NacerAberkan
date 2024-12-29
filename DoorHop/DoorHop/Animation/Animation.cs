@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 
@@ -9,10 +8,11 @@ namespace DoorHop.Animation
 
     public class Animatie
     {
+        //textures
         private Texture2D texture;
         private List<AnimationFrame> animations;
-        private AnimationFrame animationFrame;
         private int currentAnimation;
+        //timer & speed
         private float timer;
         private float speed;
         private bool isLooping;
@@ -28,7 +28,6 @@ namespace DoorHop.Animation
             currentAnimation = 0;
             timer = 0;
         }
-
         public void AddAnimationFrames(int row, int frameWidth, int frameHeight, int numberOfFrames)
         {
             animations.Clear();
@@ -46,14 +45,12 @@ namespace DoorHop.Animation
 
             CurrentFrame = animations[0];
         }
-
         public void Reset()
         {
             currentAnimation = 0;
             timer = 0;
             CurrentFrame = animations[0];
         }
-
         public void Update(GameTime gameTime)
         {
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -67,7 +64,6 @@ namespace DoorHop.Animation
                     // Blijf op het laatste frame voor non-looping animaties
                     return;
                 }
-
                 // Update naar het volgende frame
                 currentAnimation++;
                 if (isLooping)
@@ -82,12 +78,10 @@ namespace DoorHop.Animation
                 CurrentFrame = animations[currentAnimation];
             }
         }
-
         public void SetSpeed(float newSpeed) => speed = newSpeed;
         public bool IsAnimationFinished()
         {
             return !isLooping && currentAnimation >= animations.Count - 1;
         }
-
     }
 }
