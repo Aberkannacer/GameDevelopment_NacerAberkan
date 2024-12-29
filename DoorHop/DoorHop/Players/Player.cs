@@ -6,6 +6,7 @@ using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 
@@ -23,31 +24,27 @@ namespace DoorHop.Players
         protected Animatie attackAnimation;
         protected Animatie jumpAnimation;
         protected Animatie dieAnimation;
+        //game
         protected Game game;
-
+        //vectors
         public Vector2 position;
         public Vector2 velocity;
+        //input
         protected IInputReader inputReader;
+        //attributen
         protected float moveSpeed;
         protected float jumpForce;
         protected bool isMoving;
         protected bool isJumping;
         protected bool isGrounded;
-        protected bool isFacingRight = true;
+        protected bool isFacingRight;
         protected bool isAttacking;
-        public bool isDead;
-        protected Rectangle bounds;
-
-        //voor de health
-        public float health, healthMax;
-
         public bool dead;
-
-        protected float gravity;
-        protected float maxFallSpeed;
+        //bounds & collision
+        protected Rectangle bounds;
         protected int collisionWidth;
         protected int collisionHeight;
-
+        //ontkwetsbaar
         protected bool isInvulnerable;
         protected float invulnerabilityTimer;
         protected float invulnerabilityDuration;
@@ -55,24 +52,21 @@ namespace DoorHop.Players
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
+
             velocity = Vector2.Zero;
+
             moveSpeed = 5f;
             isJumping = false;
             isMoving = false;
             isGrounded = false;
-            gravity = 0.5f;
-            maxFallSpeed = 7f;
+            isFacingRight = true;
 
             collisionWidth = 48;
             collisionHeight = 48;
 
             isInvulnerable = false;
             invulnerabilityTimer = 0f;
-            invulnerabilityDuration = 1.5f; // 1.5 seconden onkwetsbaar na hit
-
-            //voor health
-            health = 3;
-            healthMax = 3;
+            invulnerabilityDuration = 1.5f;
 
             this.game = game;
         }
@@ -80,7 +74,7 @@ namespace DoorHop.Players
 
         public virtual void LoadContent(ContentManager content)
         {
-            throw new NotImplementedException();
+            
         }
 
 
@@ -104,27 +98,13 @@ namespace DoorHop.Players
 
             isMoving = Math.Abs(velocity.X) > 0;
 
-            // Spring logica
-            if (inputReader.IsJumpKeyPressed() && isGrounded)
-            {
-                velocity.Y = jumpForce;
-                isJumping = true;
-                isGrounded = false;
-            }
-
-            // Zwaartekracht
-            if (!isGrounded)
-            {
-                velocity.Y = Math.Min(velocity.Y + gravity, maxFallSpeed);
-            }
-
-            //attack logica
+            //attacken van enemies
             if (inputReader.IsAttackButtonPressed())
             {
                 Attack(enemies);
             }
 
-            // Handle collisions (beweging gebeurt nu in HandleCollisions)
+            // Handle collisions
             HandleCollisions(tiles);
             UpdateAnimation(gameTime);
         }
@@ -133,7 +113,6 @@ namespace DoorHop.Players
         {
             isGrounded = false;
 
-            // Sla de originele positie op voor horizontale beweging
             float originalX = position.X;
             position.X += velocity.X;
             UpdateBounds();
@@ -142,7 +121,6 @@ namespace DoorHop.Players
             {
                 if (bounds.Intersects(tile.Rectangle))
                 {
-                    // Herstel positie bij collision
                     position.X = originalX;
                     velocity.X = 0;
                     UpdateBounds();
@@ -150,7 +128,6 @@ namespace DoorHop.Players
                 }
             }
 
-            // Sla de originele positie op voor verticale beweging
             float originalY = position.Y;
             position.Y += velocity.Y;
             UpdateBounds();
@@ -193,19 +170,9 @@ namespace DoorHop.Players
         {
             if (currentAnimation?.CurrentFrame != null)
             {
-                spriteBatch.Draw(
-                    playerTexture,
-                    position,
-                    currentAnimation.CurrentFrame.sourceRecatangle,
-                    Color.White,
-                    0f,
-                    Vector2.Zero,
-                    1f,
-                    isFacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally,
-                    0f
-                );
+                spriteBatch.Draw(playerTexture, position, currentAnimation.CurrentFrame.sourceRecatangle,
+                    Color.White, 0f, Vector2.Zero, 1f, isFacingRight ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
             }
-
             // Debug collision bounds
             /*
 #if DEBUG
@@ -225,23 +192,6 @@ namespace DoorHop.Players
             isGrounded = false;
         }
 
-
-        public virtual void GetHit(int damage)
-        {
-            if (!isInvulnerable)
-            {
-                health -= damage;
-                isInvulnerable = true;
-                invulnerabilityTimer = invulnerabilityDuration;
-
-                if (health <= 0)
-                {
-                    health = 0;
-                    isDead = true;
-                }
-            }
-        }
-
         public void Attack(List<Enemy> enemies)
         {
             if (!isAttacking)
@@ -251,13 +201,11 @@ namespace DoorHop.Players
             }
             foreach (var enemy in enemies)
             {
-                if (bounds.Intersects(enemy.Bounds)) // Controleer of de hero de vijand aanvalt
+                if (bounds.Intersects(enemy.Bounds)) // Controleert of de hero de vijand aanvalt of gewoon in zijn collision komt
                 {
-                    enemy.TakeDamage(); // Verwijder de vijand of verlaag de gezondheid
-                                        // Voeg hier eventueel een animatie toe voor de aanval
+                    enemy.TakeDamage(); // enemy wordt verwijderd
                 }
             }
         }
-
     }
 }

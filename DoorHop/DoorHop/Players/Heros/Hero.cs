@@ -4,34 +4,53 @@ using DoorHop.Players.Enemys;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using SharpDX.Direct3D9;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace DoorHop.Players.Heros
 {
     public class Hero : Player
     {
+        //sprite
         private int spriteWidth;
         private int spriteHeight;
-        public int Health { get; private set; }
+        //grafity
+        private float gravity;
+        private float maxFallSpeed;
+        //healt & death
+        private float health;
+        public bool isDead;
+
 
         public Hero(ContentManager content, IInputReader inputReader, Game game, Vector2 position)
             : base(content, inputReader, game)
         {
+            //positie
             this.position = position;
+            //sprite
             spriteWidth = 64;
             spriteHeight = 64;
+            //health
             Health = 3; //dit is een int
             health = 3; //dit is een float
-            healthMax = 3;
+            //grafity
+            gravity = 0.5f;
+            maxFallSpeed = 7f;
+
             LoadContent(content);
             UpdateBounds();
             SetMoveSpeed(3f);// Bewegingssnelheid
-            SetJumpForce(-15f);// Sprongkracht
+            SetJumpForce(-13f);// Sprongkracht
         }
 
-
-        public void SetJumpForce(float force)
+        public int Health { get; private set; }
+        public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
-            jumpForce = force;
+            base.Update(gameTime, tiles, hero, enemies);
+            Jump();
+            Grafity();
         }
 
         public override void LoadContent(ContentManager content)
@@ -56,7 +75,6 @@ namespace DoorHop.Players.Heros
 
             currentAnimation = idleAnimation;
         }
-
         protected override void UpdateBounds()
         {
             int boundsWidth = (int)(spriteWidth * 0.8f);
@@ -97,21 +115,50 @@ namespace DoorHop.Players.Heros
             currentAnimation.Update(gameTime);
         }
 
+        public void SetJumpForce(float force)
+        {
+            jumpForce = force;
+        }
 
         public void SetMoveSpeed(float speed)
         {
             moveSpeed = speed;
         }
 
-
-        public override void GetHit(int damage)
+        public void GetHit(int damage)
         {
-            base.GetHit(damage);
+            if (!isInvulnerable)
+            {
+                health -= damage;
+                isInvulnerable = true;
+                invulnerabilityTimer = invulnerabilityDuration;
+
+                if (health <= 0)
+                {
+                    health = 0;
+                    isDead = true;
+                }
+            }
             Health = (int)health;
+        }
+        public void Jump()
+        {
+            if (inputReader.IsJumpKeyPressed() && isGrounded)
+            {
+                velocity.Y = jumpForce;
+                isJumping = true;
+                isGrounded = false;
+            }
+        }
+        public void Grafity()
+        {
+            if (!isGrounded)
+            {
+                velocity.Y = Math.Min(velocity.Y + gravity, maxFallSpeed);
+            }
         }
 
         
-
     }
 
 }
