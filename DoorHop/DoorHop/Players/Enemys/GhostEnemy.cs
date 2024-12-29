@@ -20,7 +20,10 @@ namespace DoorHop.Players.Enemys
         {
             LoadContent(content);
             this.position = position;
+            //scoreValue = 100;
             //position = new Vector2(700,400);
+            //Score = 250;
+            score = 100;
         }
         public override void LoadContent(ContentManager content)
         {

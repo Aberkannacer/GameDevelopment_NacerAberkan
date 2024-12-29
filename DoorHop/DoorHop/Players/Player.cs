@@ -3,6 +3,7 @@ using DoorHop.Input;
 using DoorHop.Interfaces;
 using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
+using DoorHop.Score;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -49,6 +50,7 @@ namespace DoorHop.Players
         protected float invulnerabilityTimer;
         protected float invulnerabilityDuration;
 
+
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
@@ -67,6 +69,7 @@ namespace DoorHop.Players
             isInvulnerable = false;
             invulnerabilityTimer = 0f;
             invulnerabilityDuration = 1.5f;
+
 
             this.game = game;
         }

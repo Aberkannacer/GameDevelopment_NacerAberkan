@@ -1,6 +1,7 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Players.Enemys;
+using DoorHop.Score;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -23,6 +24,9 @@ namespace DoorHop.Players.Heros
         private float health;
         public bool isDead;
 
+        private int totalScore; // Totale score van de hero
+
+        public int TotalScore => totalScore; // Eigenschap om de totale score te krijgen
 
         public Hero(ContentManager content, IInputReader inputReader, Game game, Vector2 position)
             : base(content, inputReader, game)
@@ -33,12 +37,14 @@ namespace DoorHop.Players.Heros
             spriteWidth = 64;
             spriteHeight = 64;
             //health
+            isDead = false;
             Health = 3; //dit is een int
             health = 3; //dit is een float
             //grafity
             gravity = 0.5f;
             maxFallSpeed = 7f;
 
+            totalScore = 0;
             LoadContent(content);
             UpdateBounds();
             SetMoveSpeed(3f);// Bewegingssnelheid
@@ -46,6 +52,7 @@ namespace DoorHop.Players.Heros
         }
 
         public int Health { get; private set; }
+
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             base.Update(gameTime, tiles, hero, enemies);
@@ -157,8 +164,23 @@ namespace DoorHop.Players.Heros
                 velocity.Y = Math.Min(velocity.Y + gravity, maxFallSpeed);
             }
         }
+        public void AddScore(int score)
+        {
+            totalScore += score; // Voeg de score toe
 
-        
+            System.Diagnostics.Debug.WriteLine($"Score added: {score}, Total Score: {totalScore}");
+        }
+
+        public void Reset()
+        {
+            isDead = false;
+            Health = 3;
+            health = 3;
+            totalScore = 0;
+        }
+
+
+
     }
 
 }

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace DoorHop.Levels
         private Rectangle backgroundRect;
         protected Map map;
         protected ContentManager content;
-        protected List<Enemy> Enemies;
+        protected List<Enemy> enemies;
         protected List<Collectable> coins;
         protected Hero hero;
         protected int[,] levelOne;
@@ -32,7 +33,7 @@ namespace DoorHop.Levels
         protected int collectedCoins;
         protected int totalCoins = 3;
 
-        private HealthHeart healthHeart;
+        public HealthHeart healthHeart;
         public GraphicsDevice graphicsDevice;
 
 
@@ -47,7 +48,8 @@ namespace DoorHop.Levels
             this.hero = hero;
             this.game = game;
             map = new Map();
-            Enemies = new List<Enemy>();
+            enemies = new List<Enemy>();
+            //this.enemies = enemies;
             coins = new List<Collectable>();
 
             backgroundRect = new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
@@ -60,15 +62,25 @@ namespace DoorHop.Levels
             
 
         }
-
+        protected void CheckEnemyCollisions()
+        {
+            foreach (var enemy in enemies.ToList())
+            {
+                if (!enemy.isAlive)
+                {
+                    hero.AddScore(enemy.Score); // Voeg de score van de vijand toe aan de hero
+                    enemies.Remove(enemy); // Verwijder de vijand
+                }
+            }
+        }
         public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
             if (hero != null && map != null)
             {
-                hero.Update(gameTime, map.CollisionTiles, hero, Enemies);
-
+                hero.Update(gameTime, map.CollisionTiles, hero, enemies);
+                healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
                 #region enemy killen als je op hun springt
-                foreach (var enemy in Enemies.ToList()) // Gebruik ToList() voor veilige verwijdering
+                foreach (var enemy in enemies.ToList()) // Gebruik ToList() voor veilige verwijdering
                 {
                     // Controleer of de hero op deze vijand springt
                     if (enemy.CollisionCheck(hero) && hero.velocity.Y > 0 && hero.Bounds.Bottom <= enemy.Bounds.Top + 10)
@@ -88,16 +100,12 @@ namespace DoorHop.Levels
                         }
                     }
 
-                    // Verwijder de vijand als deze dood is
-                    if (!enemy.isAlive)
-                    {
-                        Enemies.Remove(enemy);
-                    }
+
                 }
                 #endregion
-                foreach (var enemy in Enemies)
+                foreach (var enemy in enemies)
                 {
-                    enemy.Update(gameTime, map.CollisionTiles, hero, Enemies);
+                    enemy.Update(gameTime, map.CollisionTiles, hero, enemies);
 
                     if (hero.Bounds.Intersects(enemy.Bounds))
                     {
@@ -108,6 +116,7 @@ namespace DoorHop.Levels
                         }
                     }
 
+
                     if (enemy is ShootEnemy shootEnemy)
                     {
                         for (int i = shootEnemy.Bullets.Count - 1; i >= 0; i--)
@@ -117,6 +126,7 @@ namespace DoorHop.Levels
                             {
                                 hero.GetHit(1);
                                 shootEnemy.RemoveBullet(bullet);
+                                
                             }
                         }
                     }
@@ -138,20 +148,22 @@ namespace DoorHop.Levels
 
                 map.ChangeTileValue(1, 0, levelOne);
                 map.Generate(levelOne, 30);
-                System.Diagnostics.Debug.WriteLine("Victory!");
+
             }
             if (hero.isDead)
             {
+                hero.isDead = false;
                 // Ga naar Game Lose State
-                game.ChangeState(new GameLoseState(game, game.GraphicsDevice, game.Content));
+                game.ChangeState(new GameLoseState(game, game.GraphicsDevice, game.Content, hero));
             }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            
             spriteBatch.Draw(backGround, backgroundRect, Color.White);
 
-            foreach (var enemy in Enemies)
+            foreach (var enemy in enemies)
             {
                 enemy.Draw(spriteBatch);
             }

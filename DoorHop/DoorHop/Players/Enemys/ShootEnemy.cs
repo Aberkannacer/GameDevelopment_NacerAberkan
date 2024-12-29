@@ -28,6 +28,7 @@ namespace DoorHop.Players.Enemys
         private float shootTimer;
         private const float shootInterval = 2.0f; // Interval in seconden
         public List<Bullet> Bullets => bullets;
+
         public ShootEnemy(ContentManager content, int width, int height, Vector2 position) : base(width, height)
         {
             LoadContent(content);
@@ -38,7 +39,12 @@ namespace DoorHop.Players.Enemys
             bullets = new List<Bullet>();
 
             shootTimer = 2f; // dit moet op 2 voor dat de kogel gelijk kan schieten
+            //Score = 250;
+            //scoreValue = 100;
+            score = 100;
         }
+
+
         public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("ShootEnemy");

@@ -20,43 +20,32 @@ namespace DoorHop.Levels
 {
     internal class Level1 : Level
     {
-
-        private WalkEnemy walkEnemy;
-        private ShootEnemy shootEnemy;
-        private GhostEnemy ghostEnemy;
-
-
         private SpriteFont font;
-
-        private HealthHeart healthHeart;
-
         private Texture2D doorTexture;
         private Door door;
 
+
         public Door Door { get; private set; }
+
         public Level1(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game) : base(content, hero, graphicsDevice, game)
         {
             this.hero = hero;
             hero.position = new Vector2(25,100);
 
-            walkEnemy = new WalkEnemy(content, 64, 64, new Vector2(300, 386));
-            shootEnemy = new ShootEnemy(content, 64, 64, new Vector2(565, 270));
-            ghostEnemy = new GhostEnemy(content, 64, 64, new Vector2(700, 400));
-
-
-            Enemies.Add(walkEnemy);
-            Enemies.Add(shootEnemy);
-            Enemies.Add(ghostEnemy);
+            CreateEnemies();
+            
 
             coins.Add(new Collectable(content, new Vector2(730, 120)));
             coins.Add(new Collectable(content, new Vector2(470, 120)));
             coins.Add(new Collectable(content, new Vector2(100, 270)));
 
-            //healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
-
-            //backgroundRect = new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
         }
-
+        private void CreateEnemies()
+        {
+            enemies.Add(new WalkEnemy(content, 64, 64, new Vector2(300, 386)));
+            enemies.Add(new ShootEnemy(content, 64, 64, new Vector2(565, 270)));
+            enemies.Add(new GhostEnemy(content, 64, 64, new Vector2(700, 400)));
+        }
 
         public override void Load()
         {
@@ -96,13 +85,15 @@ namespace DoorHop.Levels
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
+            CheckEnemyCollisions();
+
             if (hero.Bounds.Intersects(door.Bounds))
             {
+                
                 // Ga naar Level 2
-                game.ChangeState(new LevelState(game, content, 2));
+                game.ChangeState(new LevelState(game, content, 2, hero));
                 
             }
-
             base.Update(gameTime, tiles);
         }
 

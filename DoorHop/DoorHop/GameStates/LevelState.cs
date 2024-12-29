@@ -26,9 +26,11 @@ namespace DoorHop.GameStates
         private int LevelWon = 0;
         private Hero hero;
         private List<TileMap.CollisionTiles> tiles;
-        public LevelState(Game1 game, ContentManager content,int levelNumber) : base(game, content)
+        private int Score = 0;
+        //private List<Enemy> enemies;
+        public LevelState(Game1 game, ContentManager content,int levelNumber, Hero hero) : base(game, content)
         {
-            hero = new Hero(content, new KeyBoardReader(), game, new Vector2());
+            //hero = new Hero(content, new KeyBoardReader(), game, new Vector2());
             if (game == null)
             {
                 System.Diagnostics.Debug.WriteLine("Game is null in LevelState constructor!");
@@ -70,7 +72,6 @@ namespace DoorHop.GameStates
         public override void Update(GameTime gameTime)
         {
             currentLevel.Update(gameTime, tiles);
-
             
         }
     }

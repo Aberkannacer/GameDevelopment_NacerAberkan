@@ -33,29 +33,31 @@ namespace DoorHop.Levels
         private Door door;
         
         public Door Door { get; private set; }
-
         public Level2(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game) : base(content, hero, graphicsDevice, game)
         {
-            //this.hero = hero;
+            this.hero = hero;
+            //this.Score = score;
             hero.position = new Vector2(80, 80);
 
-            walkEnemy = new WalkEnemy(content, 64, 64, new Vector2(300, 386));
-            shootEnemy = new ShootEnemy(content, 64, 64, new Vector2(355, 240));
-            ghostEnemy = new GhostEnemy(content, 64, 64, new Vector2(700, 350));
+            CreateEnemies();
 
 
-            Enemies.Add(walkEnemy);
-            Enemies.Add(shootEnemy);
-            Enemies.Add(ghostEnemy);
 
             coins.Add(new Collectable(content, new Vector2(620, 250)));
             coins.Add(new Collectable(content, new Vector2(215, 60)));
             coins.Add(new Collectable(content, new Vector2(490, 50)));
 
-            healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
+            //healthHeart = new HealthHeart(content, hero, new Vector2(670, 10));
 
             //Door = new Door(doorTexture, new Vector2(700, 400));
         }
+        private void CreateEnemies()
+        {
+            enemies.Add(new WalkEnemy(content, 64, 64, new Vector2(300, 386)));
+            enemies.Add(new ShootEnemy(content, 64, 64, new Vector2(355, 240)));
+            enemies.Add(new GhostEnemy(content, 64, 64, new Vector2(700, 350)));
+        }
+
 
 
         public override void Load()
@@ -96,13 +98,15 @@ namespace DoorHop.Levels
 
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles)
         {
+            CheckEnemyCollisions();
 
             if (hero.Bounds.Intersects(door.Bounds))
             {
                 // gewonnen
-                game.ChangeState(new GameWonState(game,graphicsDevice ,game.Content));
-            }
+                game.ChangeState(new GameWonState(game,graphicsDevice ,game.Content, hero));
 
+            }
+            
 
             base.Update(gameTime, tiles);
         }

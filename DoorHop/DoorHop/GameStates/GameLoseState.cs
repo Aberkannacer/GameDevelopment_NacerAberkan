@@ -1,15 +1,7 @@
 ﻿using DoorHop.Buttons;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Taskbar;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrayNotify;
 using DoorHop.Players.Heros;
 
 namespace DoorHop.GameStates
@@ -18,15 +10,17 @@ namespace DoorHop.GameStates
     {
         private Rectangle backgroundRect;
         private Texture2D gameOverTexture;
-        private StartButton startButton;
-        private EndButton endButton;
+        private StartButton playAgainButton;
+        private EndButton endButton; 
 
-        public GameLoseState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, content)
+        private Hero hero;
+        public GameLoseState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, Hero hero) : base(game, content)
         {
+            this.hero = hero;
             //int xpos = ScreenSettings.ScreenWidth / 2 - 50;
-            startButton = new StartButton(game, graphicsDevice, content, new Vector2(350, 200), "Play Again");
+            playAgainButton = new StartButton(game, graphicsDevice, content, new Vector2(350, 200), "Play Again", hero);
             endButton = new EndButton(game, graphicsDevice, content, new Vector2(350, 250), "Quit");
-            buttons.Add(startButton);
+            buttons.Add(playAgainButton);
             buttons.Add(endButton);
             Load();
             backgroundRect = new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
@@ -34,7 +28,7 @@ namespace DoorHop.GameStates
         public virtual void Load()
         {
             gameOverTexture = content.Load<Texture2D>("gameOverScreen");
-
+            
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

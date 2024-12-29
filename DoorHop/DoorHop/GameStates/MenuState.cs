@@ -1,4 +1,6 @@
 ﻿using DoorHop.Buttons;
+using DoorHop.Input;
+using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,10 +21,11 @@ namespace DoorHop.GameStates
         private EndButton endButton;
         private Texture2D texture;
 
+        private Hero hero;
         public MenuState(Game1 game, ContentManager content, GraphicsDevice graphicsDevice) : base(game, content)
         {
-
-            startButton = new StartButton(game, graphicsDevice, content, new Vector2(350,200 ), "Start");
+            hero = new Hero(content, new KeyBoardReader(), game, new Vector2(100, 100));
+            startButton = new StartButton(game, graphicsDevice, content, new Vector2(350,200 ), "Start", hero);
             endButton = new EndButton(game, graphicsDevice, content, new Vector2(350, 250), "Quit");
             buttons.Add(startButton);
             buttons.Add(endButton);
