@@ -4,38 +4,28 @@ using DoorHop.Players.Enemys;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.XAudio2;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Players.Heros
 {
     public class Hero : Player
     {
-        private const int SPRITE_WIDTH = 64;
-        private const int SPRITE_HEIGHT = 64;
+        private int spriteWidth;
+        private int spriteHeight;
         public int Health { get; private set; }
-        public Texture2D Texture { get; set; }
 
         public Hero(ContentManager content, IInputReader inputReader, Game game, Vector2 position)
             : base(content, inputReader, game)
         {
             this.position = position;
-            Health = 3;
-            health = 3;
+            spriteWidth = 64;
+            spriteHeight = 64;
+            Health = 3; //dit is een int
+            health = 3; //dit is een float
             healthMax = 3;
-            playerTexture = Texture;
             LoadContent(content);
             UpdateBounds();
-
-            // Start waardes instellen
-            SetAnimationSpeed(1f, 1f);  // Run sneller, idle langzamer
-            SetMoveSpeed(3.5f);               // Bewegingssnelheid
-            SetJumpForce(-15f);             // Sprongkracht
+            SetMoveSpeed(3f);// Bewegingssnelheid
+            SetJumpForce(-15f);// Sprongkracht
         }
 
 
@@ -56,7 +46,7 @@ namespace DoorHop.Players.Heros
 
             attackAnimation = new Animatie(playerTexture, false);
             attackAnimation.AddAnimationFrames(2, 64, 64, 5);
-            attackAnimation.SetSpeed(1f);
+            attackAnimation.SetSpeed(0.8f);
 
             jumpAnimation = new Animatie(playerTexture, false);
             jumpAnimation.AddAnimationFrames(3, 64, 64, 4);
@@ -69,9 +59,9 @@ namespace DoorHop.Players.Heros
 
         protected override void UpdateBounds()
         {
-            int boundsWidth = (int)(SPRITE_WIDTH * 0.8f);
-            int boundsHeight = SPRITE_HEIGHT;
-            int boundsX = (int)(position.X + (SPRITE_WIDTH - boundsWidth) / 2);
+            int boundsWidth = (int)(spriteWidth * 0.8f);
+            int boundsHeight = spriteHeight;
+            int boundsX = (int)(position.X + (spriteWidth - boundsWidth) / 2);
             int boundsY = (int)position.Y;
 
             bounds = new Rectangle(boundsX, boundsY, boundsWidth, boundsHeight);
@@ -107,11 +97,6 @@ namespace DoorHop.Players.Heros
             currentAnimation.Update(gameTime);
         }
 
-        public void SetAnimationSpeed(float runSpeed, float idleSpeed)
-        {
-            runAnimation?.SetSpeed(runSpeed);
-            idleAnimation?.SetSpeed(idleSpeed);
-        }
 
         public void SetMoveSpeed(float speed)
         {

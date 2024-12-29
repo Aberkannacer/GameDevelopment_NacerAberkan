@@ -1,24 +1,22 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
-using DoorHop.Levels;
 using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
-using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 
 namespace DoorHop.Players
 {
     public abstract class Player : IGameObject
     {
+        //texture
         protected Texture2D playerTexture;
+        //animations
         protected Animatie currentAnimation;
         protected Animatie runAnimation;
         protected Animatie idleAnimation;
@@ -30,8 +28,8 @@ namespace DoorHop.Players
         public Vector2 position;
         public Vector2 velocity;
         protected IInputReader inputReader;
-        protected float moveSpeed = 5f;
-        protected float jumpForce = -12f;
+        protected float moveSpeed;
+        protected float jumpForce;
         protected bool isMoving;
         protected bool isJumping;
         protected bool isGrounded;
@@ -45,25 +43,32 @@ namespace DoorHop.Players
 
         public bool dead;
 
-        protected const float gravity = 0.6f;
-        protected const float maxFallSpeed = 12f;
-        protected const int COLLISION_WIDTH = 48;
-        protected const int COLLISION_HEIGHT = 48;
+        protected float gravity;
+        protected float maxFallSpeed;
+        protected int collisionWidth;
+        protected int collisionHeight;
 
-        protected bool isInvulnerable = false;
-        protected float invulnerabilityTimer = 0f;
-        protected const float INVULNERABILITY_DURATION = 1.5f; // 1.5 seconden onkwetsbaar na hit
+        protected bool isInvulnerable;
+        protected float invulnerabilityTimer;
+        protected float invulnerabilityDuration;
 
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
-            //this.position = position;
-            //position = new Vector2(200, 200);
             velocity = Vector2.Zero;
             moveSpeed = 5f;
             isJumping = false;
             isMoving = false;
             isGrounded = false;
+            gravity = 0.5f;
+            maxFallSpeed = 7f;
+
+            collisionWidth = 48;
+            collisionHeight = 48;
+
+            isInvulnerable = false;
+            invulnerabilityTimer = 0f;
+            invulnerabilityDuration = 1.5f; // 1.5 seconden onkwetsbaar na hit
 
             //voor health
             health = 3;
@@ -175,35 +180,13 @@ namespace DoorHop.Players
             bounds = new Rectangle(
                 (int)position.X,
                 (int)position.Y,
-                COLLISION_WIDTH,
-                COLLISION_HEIGHT
+                collisionWidth,
+                collisionHeight
             );
         }
 
         protected virtual void UpdateAnimation(GameTime gameTime)
         {
-            if (isAttacking)
-            {
-                currentAnimation = attackAnimation;
-            }
-            if (isMoving)
-            {
-                currentAnimation = runAnimation;
-            }
-            if (isJumping)
-            {
-                currentAnimation = jumpAnimation;
-            }
-            if (isDead)
-            {
-                currentAnimation = dieAnimation;
-            }
-            else
-            {
-                currentAnimation = idleAnimation;
-            }
-
-            currentAnimation?.Update(gameTime);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -224,11 +207,12 @@ namespace DoorHop.Players
             }
 
             // Debug collision bounds
+            /*
 #if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             boundTexture.SetData(new[] { Color.Red * 0.5f });
             spriteBatch.Draw(boundTexture, bounds, Color.Red * 0.3f);
-#endif
+#endif*/
         }
 
 
@@ -248,7 +232,7 @@ namespace DoorHop.Players
             {
                 health -= damage;
                 isInvulnerable = true;
-                invulnerabilityTimer = INVULNERABILITY_DURATION;
+                invulnerabilityTimer = invulnerabilityDuration;
 
                 if (health <= 0)
                 {

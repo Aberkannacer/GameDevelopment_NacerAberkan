@@ -24,7 +24,7 @@ namespace DoorHop.GameStates
         public GameLoseState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game, content)
         {
             //int xpos = ScreenSettings.ScreenWidth / 2 - 50;
-            startButton = new StartButton(game, graphicsDevice, content, new Vector2(350, 200), "Start");
+            startButton = new StartButton(game, graphicsDevice, content, new Vector2(350, 200), "Play Again");
             endButton = new EndButton(game, graphicsDevice, content, new Vector2(350, 250), "Quit");
             buttons.Add(startButton);
             buttons.Add(endButton);
