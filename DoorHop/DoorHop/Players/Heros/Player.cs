@@ -1,18 +1,12 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
-using DoorHop.Levels;
 using DoorHop.Players.Enemys;
-using DoorHop.Score;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
-
 
 namespace DoorHop.Players.Heros
 {
@@ -51,43 +45,33 @@ namespace DoorHop.Players.Heros
         protected bool isInvulnerable;
         protected float invulnerabilityTimer;
         protected float invulnerabilityDuration;
-
-
-
-
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
-
+            //velo
             velocity = Vector2.Zero;
-
-            moveSpeed = 5f;
+            //attributen
             isJumping = false;
             isMoving = false;
             isGrounded = false;
             isFacingRight = true;
-
+            //speed
+            moveSpeed = 5f;
+            //collision
             collisionWidth = 48;
             collisionHeight = 48;
-
+            //ontkwetsbaar
             isInvulnerable = false;
             invulnerabilityTimer = 0f;
             invulnerabilityDuration = 1.5f;
-
-
+            //game
             this.game = game;
         }
-
-
         public virtual void LoadContent(ContentManager content)
         {
-
         }
-
-
         public virtual void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
-            // Update invulnerability timer
             if (isInvulnerable)
             {
                 invulnerabilityTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -96,7 +80,6 @@ namespace DoorHop.Players.Heros
                     isInvulnerable = false;
                 }
             }
-
             Vector2 input = inputReader.ReadInput();
             velocity.X = input.X * moveSpeed;
 
@@ -104,18 +87,15 @@ namespace DoorHop.Players.Heros
             else if (input.X > 0) isFacingRight = true;
 
             isMoving = Math.Abs(velocity.X) > 0;
-
             //attacken van enemies
             if (inputReader.IsAttackButtonPressed())
             {
                 Attack(enemies);
             }
-
             // Handle collisions
             HandleCollisions(tiles);
             UpdateAnimation(gameTime);
         }
-
         protected virtual void HandleCollisions(List<TileMap.CollisionTiles> tiles)
         {
             isGrounded = false;
@@ -123,7 +103,6 @@ namespace DoorHop.Players.Heros
             float originalX = position.X;
             position.X += velocity.X;
             UpdateBounds();
-
             foreach (var tile in tiles)
             {
                 if (bounds.Intersects(tile.Rectangle))
@@ -134,7 +113,6 @@ namespace DoorHop.Players.Heros
                     break;
                 }
             }
-
             float originalY = position.Y;
             position.Y += velocity.Y;
             UpdateBounds();
@@ -158,7 +136,6 @@ namespace DoorHop.Players.Heros
                 }
             }
         }
-
         protected virtual void UpdateBounds()
         {
             bounds = new Rectangle(
@@ -168,11 +145,9 @@ namespace DoorHop.Players.Heros
                 collisionHeight
             );
         }
-
         protected virtual void UpdateAnimation(GameTime gameTime)
         {
         }
-
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (currentAnimation?.CurrentFrame != null)
@@ -182,23 +157,19 @@ namespace DoorHop.Players.Heros
             }
             // Debug collision bounds
             /*
-#if DEBUG
+            #if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             boundTexture.SetData(new[] { Color.Red * 0.5f });
             spriteBatch.Draw(boundTexture, bounds, Color.Red * 0.3f);
-#endif*/
+            #endif*/
         }
-
-
         public Rectangle Bounds => bounds;
-
         public virtual void Bounce()
         {
             velocity.Y = jumpForce / 2;
             isJumping = true;
             isGrounded = false;
         }
-
         public void Attack(List<Enemy> enemies)
         {
             if (!isAttacking)
@@ -209,10 +180,9 @@ namespace DoorHop.Players.Heros
             }
             foreach (var enemy in enemies)
             {
-                if (bounds.Intersects(enemy.Bounds)) // Controleert of de hero de vijand aanvalt of gewoon in zijn collision komt
+                if (bounds.Intersects(enemy.Bounds))
                 {
-                    enemy.TakeDamage(); // enemy wordt verwijderd
-                    
+                    enemy.TakeDamage();
                 }
             }
         }

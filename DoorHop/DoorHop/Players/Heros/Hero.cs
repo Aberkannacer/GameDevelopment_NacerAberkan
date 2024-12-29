@@ -1,17 +1,13 @@
 ﻿using DoorHop.Animation;
-using DoorHop.Collectables;
 using DoorHop.Input;
 using DoorHop.Players.Enemys;
-using DoorHop.Score;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 
 namespace DoorHop.Players.Heros
 {
@@ -24,12 +20,12 @@ namespace DoorHop.Players.Heros
         private float gravity;
         private float maxFallSpeed;
         //healt & death
-        private bool hasBeenHitRecently = false;
         private float health;
+        public int Health { get; private set; }
         public bool isDead;
         //score
-        private int totalScore; // Totale score van de hero
-        public int TotalScore => totalScore; // Eigenschap om de totale score te krijgen
+        private int totalScore;
+        public int TotalScore => totalScore; 
         //sound
         private SoundEffect coinSound;
         private SoundEffect hitSound;
@@ -52,24 +48,19 @@ namespace DoorHop.Players.Heros
             //grafity
             gravity = 0.5f;
             maxFallSpeed = 7f;
-
+            //score
             totalScore = 0;
             LoadContent(content);
             UpdateBounds();
             SetMoveSpeed(3f);// Bewegingssnelheid
             SetJumpForce(-13f);// Sprongkracht
         }
-
-        public int Health { get; private set; }
-
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             base.Update(gameTime, tiles, hero, enemies);
             Jump();
             Grafity();
-
         }
-
         public override void LoadContent(ContentManager content)
         {
             playerTexture = content.Load<Texture2D>("Player");
@@ -96,7 +87,6 @@ namespace DoorHop.Players.Heros
             hitSound = content.Load<SoundEffect>("Kill");
             deathSound = content.Load<SoundEffect>("Death");
             getHitSound = content.Load<SoundEffect>("GettingHit");
-            
             winSound = content.Load<Song>("WinSound");
         }
         protected override void UpdateBounds()
@@ -108,7 +98,6 @@ namespace DoorHop.Players.Heros
 
             bounds = new Rectangle(boundsX, boundsY, boundsWidth, boundsHeight);
         }
-
         protected override void UpdateAnimation(GameTime gameTime)
         {
             if (isAttacking)
@@ -139,17 +128,14 @@ namespace DoorHop.Players.Heros
 
             currentAnimation.Update(gameTime);
         }
-
         public void SetJumpForce(float force)
         {
             jumpForce = force;
         }
-
         public void SetMoveSpeed(float speed)
         {
             moveSpeed = speed;
         }
-
         public void GetHit(int damage)
         {
             if (!isInvulnerable)
@@ -157,7 +143,6 @@ namespace DoorHop.Players.Heros
                 health -= damage;
                 isInvulnerable = true;
                 invulnerabilityTimer = invulnerabilityDuration;
-                
 
                 if (health <= 0)
                 {
@@ -168,7 +153,6 @@ namespace DoorHop.Players.Heros
                 GetHitSound();
             }
             Health = (int)health;
-            
         }
         public void Jump()
         {
@@ -188,8 +172,7 @@ namespace DoorHop.Players.Heros
         }
         public void AddScore(int score)
         {
-            totalScore += score; // Voeg de score toe
-
+            totalScore += score;
             System.Diagnostics.Debug.WriteLine($"Score added: {score}, Total Score: {totalScore}");
         }
 
@@ -205,7 +188,6 @@ namespace DoorHop.Players.Heros
             isDead = false;
             Health = 3;
             health = 3;
-
         }
         public void CollectCoin()
         {
@@ -223,7 +205,6 @@ namespace DoorHop.Players.Heros
         {
             getHitSound.Play();
         }
-        
         public void WinSound()
         {
             MediaPlayer.Play(winSound);
