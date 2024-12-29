@@ -3,48 +3,35 @@ using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Players.Enemys
 {
     internal class ShootEnemy : Enemy
     {
+        //textures
         private List<Bullet> bullets;
         private Texture2D bulletTexture;
-        private Animatie bulletAnimation;
-        private const int ENEMY_WIDTH = 64;
-        private const int ENEMY_HEIGHT = 64;
-        private bool canShoot = true;
-        
-
-        private Vector2 bulletPosition;
-
+        //shoot
         private float shootTimer;
-        private const float shootInterval = 2.0f; // Interval in seconden
+        private float shootInterval = 2.0f; // Interval in seconden
+        //bullet
         public List<Bullet> Bullets => bullets;
 
         public ShootEnemy(ContentManager content, int width, int height, Vector2 position) : base(width, height)
         {
-            LoadContent(content);
             this.position = position;
-            //position = new Vector2(500, 240);
-            //bulletPosition = new Vector2(100, 100);
-
+            //enemy
+            enemyWidth = 64;
+            enemyHeight = 64;
+            //bullet
             bullets = new List<Bullet>();
-
-            shootTimer = 2f; // dit moet op 2 voor dat de kogel gelijk kan schieten
-            //Score = 250;
-            //scoreValue = 100;
+            //shoot
+            shootTimer = 2f;
+            //score
             score = 100;
+            LoadContent(content);
         }
-
-
         public override void LoadContent(ContentManager content)
         {
             texture = content.Load<Texture2D>("ShootEnemy");
@@ -54,21 +41,16 @@ namespace DoorHop.Players.Enemys
             currentAnimation = new Animatie(texture, true);
             currentAnimation.AddAnimationFrames(0, 64, 64, 6);
             currentAnimation.SetSpeed(1.0f);
-
-
         }
-
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // Controleer of de timer de shootInterval heeft overschreden
             if (shootTimer >= shootInterval)
             {
                 Shoot(hero);
-                shootTimer = 0f; // Reset de timer na het schieten
+                shootTimer = 0f;
             }
-
             for (int i = bullets.Count - 1; i >= 0; i--)
             {
                 bullets[i].Update(gameTime, hero);
@@ -79,18 +61,16 @@ namespace DoorHop.Players.Enemys
                     bullets.RemoveAt(i);
                     continue;
                 }
-
                 if (bullets[i].IsDeleted())
                 {
                     bullets.RemoveAt(i);
                 }
             }
-
-            // Update bounds met dezelfde offsets als in de constructor
-            int collisionBoxWidth = ENEMY_WIDTH - 4;
-            int collisionBoxHeight = ENEMY_HEIGHT - 20;
-            int xOffset = (ENEMY_WIDTH - collisionBoxWidth) + 3;
-            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight) - 5;
+           
+            int collisionBoxWidth = enemyWidth - 4;
+            int collisionBoxHeight = enemyHeight - 20;
+            int xOffset = (enemyWidth - collisionBoxWidth) + 3;
+            int yOffset = (enemyHeight - collisionBoxHeight) - 5;
 
             bounds = new Rectangle(
                 (int)position.X + xOffset,
@@ -98,44 +78,33 @@ namespace DoorHop.Players.Enemys
                 collisionBoxWidth,
                 collisionBoxHeight
             );
-            //hero.JumpOnEnemy(this);
             currentAnimation.Update(gameTime);
         }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
 
-
             foreach (var item in bullets)
             {
                 item.Draw(spriteBatch);
             }
-
-#if DEBUG
+            /*#if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             boundTexture.SetData(new[] { Color.Yellow * 1f });
             spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
-#endif
+            #endif*/
         }
-
         public void Shoot(Hero hero)
         {
-            Vector2 direction = (hero.position - position); // Bepaal de richting naar de held
+            //zorgt voor de beweging naar de hero
+            Vector2 direction = (hero.position - position);
             Bullet bullet = new Bullet(bulletTexture, position, direction);
             bullets.Add(bullet);
         }
-
-
-
-        
-
         public void RemoveBullet(Bullet bullet)
         {
             bullets.Remove(bullet);
         }
-
-
     }
 }

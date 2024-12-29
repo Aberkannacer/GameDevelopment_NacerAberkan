@@ -1,48 +1,44 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Players.Enemys
 {
     public class Bullet
     {
+        //textures
         public Texture2D bulletTexture;
+        private Animatie bulletAnimation;
+        //bound position
         private Vector2 positionBullet;
         protected Rectangle bounds;
-        private Animatie bulletAnimation; // Voeg animatie toe
+        //bullet
         public int bulletSpeed = 3;
+        //hero
         private Vector2 directionHero;
-        private Game game1;
-
-        private const int bulletWidth = 16;
-        private const int bulletHeight = 16;
+        //width&height
+        private int bulletWidth;
+        private int bulletHeight;
 
         public Bullet(Texture2D texture, Vector2 startPosition, Vector2 direction)
         {
+            //bullet
             this.positionBullet = startPosition;
             this.bulletTexture = texture;
+            bulletWidth = 16;
+            bulletHeight = 16;
+            //hero
             this.directionHero = direction;
             this.directionHero.Normalize();
-
-            //voor bullet
+            //animatie voor bullet
             bulletAnimation = new Animatie(bulletTexture, true);
             bulletAnimation.AddAnimationFrames(16, 16, 16, 5);
             bulletAnimation.SetSpeed(1f);
-
         }
-
-
         public void Update(GameTime gameTime, Hero hero)
         {
-            positionBullet += directionHero * bulletSpeed; // Beweeg in opgeslagen richting
+            positionBullet += directionHero * bulletSpeed;
             bulletAnimation.Update(gameTime);
 
             int collisionBoxWidth = bulletWidth;
@@ -59,30 +55,27 @@ namespace DoorHop.Players.Enemys
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            // Bepaal of de kogel naar links of rechts beweegt
             SpriteEffects effects = bulletSpeed > 0 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-
-            // Teken de kogel met de juiste effecten
-            spriteBatch.Draw(bulletTexture, positionBullet, bulletAnimation.CurrentFrame.sourceRecatangle, Color.White, 0f, Vector2.Zero, 1f, effects, 0f);
-
-#if DEBUG
+            spriteBatch.Draw(bulletTexture, positionBullet, bulletAnimation.CurrentFrame.sourceRecatangle, 
+                Color.White, 0f, Vector2.Zero, 1f, effects, 0f);
+            //debug
+            /*
+            #if DEBUG
             var boundTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             boundTexture.SetData(new[] { Color.Yellow * 1f });
             spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
-#endif
+            #endif*/
         }
-
         public bool IsDeleted()
         {
-            return positionBullet.X < 0 || positionBullet.X > 800; // Verander dit naar de breedte van je scherm
+            //hier wordt de bullet verwijderd naarmate hij naar de breedte van de scherm gaat 
+            //deze is ingesteld in de game klasse
+            return positionBullet.X < 0 || positionBullet.X > 800;
         }
-
         public bool CollisionCheck(Hero hero)
         {
             if (hero == null) return false;
             return hero.Bounds.Intersects(new Rectangle((int)positionBullet.X, (int)positionBullet.Y, bulletWidth, bulletHeight));
         }
-
-        
     }
 }

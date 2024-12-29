@@ -3,27 +3,25 @@ using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Players.Enemys
 {
     internal class GhostEnemy:Enemy
     {
-        private const int ENEMY_WIDTH = 64;
-        private const int ENEMY_HEIGHT = 64;
-        private float speedGhost = 2f;
+        private float speedGhost;
         public GhostEnemy(ContentManager content,int width, int height, Vector2  position) : base(width, height)
         {
-            LoadContent(content);
+            //enemy
+            enemyHeight = 64;
+            enemyWidth = 64;
+            //speed
+            speedGhost = 2f;
+            //posiiton
             this.position = position;
-            //scoreValue = 100;
-            //position = new Vector2(700,400);
-            //Score = 250;
+            //score
             score = 100;
+            LoadContent(content);
         }
         public override void LoadContent(ContentManager content)
         {
@@ -33,16 +31,14 @@ namespace DoorHop.Players.Enemys
             currentAnimation.AddAnimationFrames(0, 32, 32, 4);
             currentAnimation.SetSpeed(1.0f);
         }
-
-
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             Follow(hero);
 
-            int collisionBoxWidth = ENEMY_WIDTH;
-            int collisionBoxHeight = ENEMY_HEIGHT;
-            int xOffset = (ENEMY_WIDTH - collisionBoxWidth);
-            int yOffset = (ENEMY_HEIGHT - collisionBoxHeight);
+            int collisionBoxWidth = enemyWidth;
+            int collisionBoxHeight = enemyHeight;
+            int xOffset = (enemyWidth - collisionBoxWidth);
+            int yOffset = (enemyHeight - collisionBoxHeight);
 
             bounds = new Rectangle(
                 (int)position.X + xOffset,
@@ -50,29 +46,22 @@ namespace DoorHop.Players.Enemys
                 collisionBoxWidth,
                 collisionBoxHeight
             );
-            //hero.JumpOnEnemy(this);
             currentAnimation.Update(gameTime);
         }
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 2f, SpriteEffects.FlipHorizontally, 0f);
-
         }
-
-        
         private void Follow(Hero hero)
         {
             Vector2 direction = hero.position - position;
             if (direction.Length() > 0)
             {
-                direction.Normalize(); // Normaliseer de richting
-                position += direction * speedGhost; // Beweeg naar de hero
+                direction.Normalize();
+                //beweging naar de hero
+                position += direction * speedGhost;
             }
         }
-
-        
-
     }
 }
