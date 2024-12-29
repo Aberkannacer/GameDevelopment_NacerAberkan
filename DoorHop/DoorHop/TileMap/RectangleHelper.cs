@@ -16,7 +16,8 @@ namespace DoorHop.TileMap
                     r1.Right > r2.Left + 2 &&
                     r1.Left < r2.Right - 2);
         }
-
+        //dit is niet meer nodig eerst wel
+        /*
         public static bool TouchBottomOf(this Rectangle r1, Rectangle r2)
         {
             return (r1.Top <= r2.Bottom &&
@@ -39,6 +40,6 @@ namespace DoorHop.TileMap
                     r1.Left >= r2.Right - 1 &&
                     r1.Bottom > r2.Top + 2 &&
                     r1.Top < r2.Bottom - 2);
-        }
+        }*/
     }
 }

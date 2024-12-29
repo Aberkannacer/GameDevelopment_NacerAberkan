@@ -1,16 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.TileMap
 {
     internal class RectangleBorderHelper
     {
-        //helpt te zoeken naar de transparante gedeelte van de player en of enemy
         public static Rectangle GetNonTransparentBoundingBox(Texture2D texture, Rectangle sourceRectangle) 
         {
             Color[] textureData = new Color[sourceRectangle.Width * sourceRectangle.Height];
@@ -35,12 +30,10 @@ namespace DoorHop.TileMap
                     }
                 }
             }
-
             if (left > right || top > bottom)
             {
                 return new Rectangle(0, 0, 0, 0);
             }
-
             return new Rectangle(left, top, right - left + 1, bottom - top + 1);
         }
     }

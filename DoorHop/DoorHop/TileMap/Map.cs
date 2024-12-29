@@ -1,42 +1,24 @@
-﻿using DoorHop.Players.Heros;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.TileMap
 {
     public class Map
     {
+        //width & height
         private int width, height;
+        //list van tiles
         private List<CollisionTiles> collisionTiles;
-
         public List<CollisionTiles> CollisionTiles
         {
             get { return collisionTiles ?? new List<CollisionTiles>(); }
         }
-        
-        public int Width 
-        {
-            get { return width; } 
-        }
-        public int Height 
-        {
-            get { return height; } 
-        }
-
+        //map
         public Map()
         {
             collisionTiles = new List<CollisionTiles>();
         }
-
         public void Generate(int[,] map, int size)
         {
             collisionTiles.Clear();
@@ -57,7 +39,6 @@ namespace DoorHop.TileMap
                 }
             }
         }
-
         public void Draw(SpriteBatch sprite)
         {
             foreach (CollisionTiles item in collisionTiles)
