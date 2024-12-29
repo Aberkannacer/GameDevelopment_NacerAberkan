@@ -1,7 +1,9 @@
-﻿using DoorHop.Players.Heros;
+﻿using DoorHop.Levels;
+using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,27 +20,30 @@ namespace DoorHop.GameStates
         private Texture2D gameWinTexture;
         private SpriteFont font;
         private Game1 game;
-        private float timer; // Timer voor automatische overgang
-        private const float transitionTime = 3f; // Tijd in seconden voor de overgang
-        
+        private float timer;
+        private float transitionTime;
+        private Song backgroundMusic;
+
         public GameWonState(Game1 game, GraphicsDevice graphicsDevice,ContentManager content, Hero hero) : base(game, content)
         {
             this.hero = hero;
             this.game = game;
-            
+            transitionTime = 5.5f;
 
             backgroundRect = new Rectangle(0, 0, graphicsDevice.Viewport.Width, graphicsDevice.Viewport.Height);
+            
             Load();
         }
         public virtual void Load()
         {
-            font = content.Load<SpriteFont>("MyFont"); // Zorg ervoor dat je een font hebt
+            font = content.Load<SpriteFont>("MyFont");
             gameWinTexture = content.Load<Texture2D>("WonScreen");
-
+            
         }
 
         public override void LoadContent()
         {
+            backgroundMusic = content.Load<Song>("BackgroundMusic");
             
         }
 
@@ -48,10 +53,12 @@ namespace DoorHop.GameStates
 
             if (timer >= transitionTime)
             {
-                
-                // Ga terug naar het menu of een andere staat
+                BackgroundMusic();
+                //terug naar menu
                 game.ChangeState(new MenuState(game, content, game.GraphicsDevice));
+                
             }
+            
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -63,6 +70,12 @@ namespace DoorHop.GameStates
 
         public override void PostUpdate(GameTime gameTime)
         {
+        }
+        public void BackgroundMusic()
+        {
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
         }
     }
 }

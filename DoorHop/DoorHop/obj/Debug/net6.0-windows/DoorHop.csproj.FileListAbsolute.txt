@@ -65,3 +65,15 @@ C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\gameOverScreen.xnb
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile5.xnb
 C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Tile6.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\BackgroundMusic.wma
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\BackgroundMusic.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Coin.wma
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Kill.wma
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Kill.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Coinsound.wma
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Coinsound.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\Death.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\GettingHit.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\WinSound.wma
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\WinSound.xnb
+C:\Users\aberk\Documents\GameDevelopment_NacerAberkan\DoorHop\DoorHop\bin\Debug\net6.0-windows\Content\HittingWall.xnb

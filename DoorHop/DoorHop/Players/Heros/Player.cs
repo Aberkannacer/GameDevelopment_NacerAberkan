@@ -1,18 +1,20 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Interfaces;
+using DoorHop.Levels;
 using DoorHop.Players.Enemys;
-using DoorHop.Players.Heros;
 using DoorHop.Score;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
 
 
-namespace DoorHop.Players
+namespace DoorHop.Players.Heros
 {
     public abstract class Player : IGameObject
     {
@@ -51,6 +53,8 @@ namespace DoorHop.Players
         protected float invulnerabilityDuration;
 
 
+
+
         protected Player(ContentManager content, IInputReader inputReader, Game game)
         {
             this.inputReader = inputReader;
@@ -77,7 +81,7 @@ namespace DoorHop.Players
 
         public virtual void LoadContent(ContentManager content)
         {
-            
+
         }
 
 
@@ -200,6 +204,7 @@ namespace DoorHop.Players
             if (!isAttacking)
             {
                 isAttacking = true;
+                
                 attackAnimation.Reset();
             }
             foreach (var enemy in enemies)
@@ -207,6 +212,7 @@ namespace DoorHop.Players
                 if (bounds.Intersects(enemy.Bounds)) // Controleert of de hero de vijand aanvalt of gewoon in zijn collision komt
                 {
                     enemy.TakeDamage(); // enemy wordt verwijderd
+                    
                 }
             }
         }

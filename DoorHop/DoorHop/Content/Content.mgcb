@@ -37,6 +37,12 @@
 /processorParam:TextureFormat=Color
 /build:BackGroundMainMenu.jpg
 
+#begin BackgroundMusic.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:BackgroundMusic.mp3
+
 #begin Bullet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -60,6 +66,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Coin.png
+
+#begin Coinsound.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Coinsound.mp3
+
+#begin Death.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Death.mp3
 
 #begin door.png
 /importer:TextureImporter
@@ -133,6 +151,12 @@
 /processorParam:TextureFormat=Color
 /build:gameOverScreen.jpg
 
+#begin GettingHit.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:GettingHit.mp3
+
 #begin GhostEnemy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -156,6 +180,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Heart.png
+
+#begin HittingWall.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:HittingWall.mp3
+
+#begin Kill.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Kill.mp3
 
 #begin MyFont.spritefont
 /importer:FontDescriptionImporter
@@ -295,6 +331,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Tile6.png
+
+#begin WinSound.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:WinSound.mp3
 
 #begin WonScreen.jpg
 /importer:TextureImporter

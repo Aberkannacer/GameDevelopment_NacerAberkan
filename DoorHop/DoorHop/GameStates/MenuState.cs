@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,7 @@ namespace DoorHop.GameStates
         private Texture2D texture;
 
         private Hero hero;
+        private Song backgroundMusic;
         public MenuState(Game1 game, ContentManager content, GraphicsDevice graphicsDevice) : base(game, content)
         {
             hero = new Hero(content, new KeyBoardReader(), game, new Vector2(100, 100));
@@ -31,6 +33,7 @@ namespace DoorHop.GameStates
             buttons.Add(endButton);
             this.graphicsDevice = graphicsDevice;
             texture = content.Load<Texture2D>("BackGroundMainMenu");
+            
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -49,6 +52,8 @@ namespace DoorHop.GameStates
         public override void LoadContent()
         {
             menuFont = content.Load<SpriteFont>("MyFont");
+            backgroundMusic = content.Load<Song>("BackgroundMusic");
+            BackgroundMusic();
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -63,6 +68,13 @@ namespace DoorHop.GameStates
                 item.Update(gameTime);
 
             }
+
+        }
+        public void BackgroundMusic()
+        {
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Volume = 0.1f;
         }
     }
 }

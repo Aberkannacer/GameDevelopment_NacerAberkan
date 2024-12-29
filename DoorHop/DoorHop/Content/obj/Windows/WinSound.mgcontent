@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <SourceFile>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/WinSound.mp3</SourceFile>
+  <SourceTime>2024-12-29T20:10:40.1084464+01:00</SourceTime>
+  <DestFile>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/bin/Windows/WinSound.xnb</DestFile>
+  <DestTime>2024-12-29T20:11:17.0318837+01:00</DestTime>
+  <Importer>Mp3Importer</Importer>
+  <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
+  <Processor>SongProcessor</Processor>
+  <ProcessorTime>2022-07-26T13:44:56+02:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput>
+    <string>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/bin/Windows/WinSound.wma</string>
+  </BuildOutput>
+</PipelineBuildEvent>

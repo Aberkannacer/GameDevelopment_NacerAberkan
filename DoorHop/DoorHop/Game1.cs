@@ -12,6 +12,7 @@ using DoorHop.Input;
 using System.Diagnostics;
 using DoorHop.Collectables;
 using DoorHop.GameStates;
+using Microsoft.Xna.Framework.Media;
 
 namespace DoorHop
 {
@@ -26,6 +27,8 @@ namespace DoorHop
 
         private State currentState;
         private State nextState;
+
+        
 
         public Game1()
         {
@@ -58,7 +61,8 @@ namespace DoorHop
 
             backgroundTexture = Content.Load<Texture2D>("background");
 
-
+            
+            
 
 
         }
@@ -106,5 +110,6 @@ namespace DoorHop
         {
             nextState = state;
         }
+        
     }
 }

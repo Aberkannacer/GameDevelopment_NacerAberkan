@@ -6,16 +6,22 @@
   <SourceFiles>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/background.jpg</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/BackGroundMainMenu.jpg</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/BackgroundMusic.mp3</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Bullet.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Coin.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Coinsound.mp3</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Death.mp3</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/door.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/EnemyWalk-Attack.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/EnemyWalk-Dead.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/EnemyWalk-Idle.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/EnemyWalk-Run.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/gameOverScreen.jpg</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/GettingHit.mp3</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/GhostEnemy.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Heart.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/HittingWall.mp3</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Kill.mp3</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/MyFont.spritefont</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Player.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Player2.png</File>
@@ -28,9 +34,17 @@
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile4.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile5.png</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/Tile6.png</File>
+    <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/WinSound.mp3</File>
     <File>C:/Users/aberk/Documents/GameDevelopment_NacerAberkan/DoorHop/DoorHop/Content/WonScreen.jpg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

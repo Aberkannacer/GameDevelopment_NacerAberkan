@@ -28,6 +28,7 @@ namespace DoorHop.Levels
         protected List<Enemy> enemies;
         protected List<Collectable> coins;
         protected Hero hero;
+        private Player player;
         protected int[,] levelOne;
 
         protected int collectedCoins;
@@ -87,7 +88,7 @@ namespace DoorHop.Levels
                     {
                         // De hero springt op de vijand
                         enemy.TakeDamage(); // Markeer de vijand als dood
-
+                        hero.KillSound();
                         // Geef de hero een bounce effect door zijn velocity aan te passen
                         hero.velocity.Y = -10f; // Pas dit aan op basis van je bounce kracht
                     }
@@ -97,6 +98,7 @@ namespace DoorHop.Levels
                         if (!hero.isDead) // Alleen damage doen als de hero nog leeft
                         {
                             hero.GetHit(1);
+                            
                         }
                     }
 
@@ -113,6 +115,7 @@ namespace DoorHop.Levels
                         {
                             hero.Bounce();
                             enemy.TakeDamage();
+                            hero.KillSound();
                         }
                     }
 
@@ -125,6 +128,7 @@ namespace DoorHop.Levels
                             if (bullet.CollisionCheck(hero))
                             {
                                 hero.GetHit(1);
+                                hero.GetHitSound();
                                 shootEnemy.RemoveBullet(bullet);
                                 
                             }
@@ -139,21 +143,20 @@ namespace DoorHop.Levels
                     {
                         collectedCoins++; // Verhoog het aantal verzamelde coins
                         coins.Remove(coin); // Verwijder de coin uit de lijst
+                        hero.CollectCoin();
                     }
                 }
 
             }
             if (collectedCoins == totalCoins) // totalCoins kan nu ook coins.Count zijn
             {
-
                 map.ChangeTileValue(1, 0, levelOne);
                 map.Generate(levelOne, 30);
-
             }
             if (hero.isDead)
             {
                 hero.isDead = false;
-                // Ga naar Game Lose State
+                hero.DeathSound();
                 game.ChangeState(new GameLoseState(game, game.GraphicsDevice, game.Content, hero));
             }
         }

@@ -89,8 +89,9 @@ namespace DoorHop.Levels
 
             if (hero.Bounds.Intersects(door.Bounds))
             {
-                
+
                 // Ga naar Level 2
+                hero.ResetLevel2();
                 game.ChangeState(new LevelState(game, content, 2, hero));
                 
             }

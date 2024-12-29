@@ -1,10 +1,13 @@
 ﻿using DoorHop.Animation;
+using DoorHop.Collectables;
 using DoorHop.Input;
 using DoorHop.Players.Enemys;
 using DoorHop.Score;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using SharpDX.Direct3D9;
 using System;
 using System.Collections.Generic;
@@ -21,12 +24,18 @@ namespace DoorHop.Players.Heros
         private float gravity;
         private float maxFallSpeed;
         //healt & death
+        private bool hasBeenHitRecently = false;
         private float health;
         public bool isDead;
-
+        //score
         private int totalScore; // Totale score van de hero
-
         public int TotalScore => totalScore; // Eigenschap om de totale score te krijgen
+        //sound
+        private SoundEffect coinSound;
+        private SoundEffect hitSound;
+        private SoundEffect deathSound;
+        private SoundEffect getHitSound;
+        private Song winSound;
 
         public Hero(ContentManager content, IInputReader inputReader, Game game, Vector2 position)
             : base(content, inputReader, game)
@@ -58,6 +67,7 @@ namespace DoorHop.Players.Heros
             base.Update(gameTime, tiles, hero, enemies);
             Jump();
             Grafity();
+
         }
 
         public override void LoadContent(ContentManager content)
@@ -81,6 +91,13 @@ namespace DoorHop.Players.Heros
             dieAnimation.AddAnimationFrames(4, 64, 64, 6);
 
             currentAnimation = idleAnimation;
+
+            coinSound = content.Load<SoundEffect>("Coinsound");
+            hitSound = content.Load<SoundEffect>("Kill");
+            deathSound = content.Load<SoundEffect>("Death");
+            getHitSound = content.Load<SoundEffect>("GettingHit");
+            
+            winSound = content.Load<Song>("WinSound");
         }
         protected override void UpdateBounds()
         {
@@ -100,6 +117,7 @@ namespace DoorHop.Players.Heros
                 if (currentAnimation.IsAnimationFinished())
                 {
                     isAttacking = false;
+                    KillSound();
                 }
             }
             else if (isJumping)
@@ -139,14 +157,18 @@ namespace DoorHop.Players.Heros
                 health -= damage;
                 isInvulnerable = true;
                 invulnerabilityTimer = invulnerabilityDuration;
+                
 
                 if (health <= 0)
                 {
                     health = 0;
                     isDead = true;
+                    
                 }
+                GetHitSound();
             }
             Health = (int)health;
+            
         }
         public void Jump()
         {
@@ -178,9 +200,35 @@ namespace DoorHop.Players.Heros
             health = 3;
             totalScore = 0;
         }
+        public void ResetLevel2()
+        {
+            isDead = false;
+            Health = 3;
+            health = 3;
 
-
-
+        }
+        public void CollectCoin()
+        {
+            coinSound.Play();
+        }
+        public void KillSound()
+        {
+            hitSound.Play();
+        }
+        public void DeathSound()
+        {
+            deathSound.Play();
+        }
+        public void GetHitSound()
+        {
+            getHitSound.Play();
+        }
+        
+        public void WinSound()
+        {
+            MediaPlayer.Play(winSound);
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Volume = 0.5f;
+        }
     }
-
 }

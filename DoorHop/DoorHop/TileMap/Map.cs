@@ -1,9 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DoorHop.Players.Heros;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -61,7 +65,6 @@ namespace DoorHop.TileMap
                 item.Draw(sprite);
             }
         }
-
         public void ChangeTileValue(int oldValue, int newValue, int[,] map)
         {
             for (int y = 0; y < map.GetLength(0); y++)
@@ -71,12 +74,10 @@ namespace DoorHop.TileMap
                     if (map[y, x] == oldValue)
                     {
                         map[y, x] = newValue;
+
                     }
                 }
             }
-
         }
-
-
     }
 }

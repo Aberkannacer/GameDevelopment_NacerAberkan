@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\players\\heros\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\heros\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\gamestates\\gamelosestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\gamestates\\gamelosestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\gamestates\\gamewonstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\gamestates\\gamewonstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\gamestates\\gamewonstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\gamestates\\levelstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\gamestates\\levelstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\game1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\levels\\level2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\levels\\level2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\levels\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\levels\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\players\\heros\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\heros\\hero.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\tilemap\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\tilemap\\map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\gamestates\\menustate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\gamestates\\menustate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\players\\heros\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\heros\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\buttons\\startbutton.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,19 +43,19 @@
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\levels\\level1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\players\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\collectables\\collectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\collectables\\collectable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\levels\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\levels\\level.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\gamestates\\gamelosestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\gamestates\\gamelosestate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\levels\\level2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\levels\\level2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\gamestates\\levelstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\gamestates\\levelstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\players\\enemys\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\players\\enemys\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\enemys\\enemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -51,15 +63,15 @@
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\enemys\\ghostenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\players\\enemys\\walkenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\players\\enemys\\walkenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\enemys\\walkenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\players\\enemys\\shootenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\players\\enemys\\shootenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\players\\enemys\\shootenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|c:\\users\\aberk\\documents\\gamedevelopment_naceraberkan\\doorhop\\doorhop\\score\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\doorhop\\score\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3D7953FE-821B-47E4-9025-061532D59BC5}|DoorHop\\DoorHop.csproj|solutionrelative:doorhop\\score\\scoremanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -70,17 +82,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Level.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Levels\\Level.cs",
               "RelativeDocumentMoniker": "DoorHop\\Levels\\Level.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Levels\\Level.cs",
               "RelativeToolTip": "DoorHop\\Levels\\Level.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAcwCMAAAAaAAAA",
+              "ViewState": "AQIAADMAAAAAAAAAAAAwwEEAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-27T20:11:39.199Z",
               "IsPinned": true,
@@ -88,13 +100,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "GameWonState.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\GameWonState.cs",
               "RelativeDocumentMoniker": "DoorHop\\GameStates\\GameWonState.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\GameWonState.cs",
               "RelativeToolTip": "DoorHop\\GameStates\\GameWonState.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAgwDwAAAAMAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAUwBAAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-29T02:53:01.187Z",
               "IsPinned": true,
@@ -102,13 +114,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "Hero.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Heros\\Hero.cs",
               "RelativeDocumentMoniker": "DoorHop\\Players\\Heros\\Hero.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Heros\\Hero.cs",
               "RelativeToolTip": "DoorHop\\Players\\Heros\\Hero.cs",
-              "ViewState": "AQIAAKMAAAAAAAAAAAAIwK8AAAAbAAAA",
+              "ViewState": "AQIAANkAAAAAAAAAAAAiwOkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-29T00:15:08.614Z",
               "IsPinned": true,
@@ -116,7 +128,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "Enemy.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Enemys\\Enemy.cs",
               "RelativeDocumentMoniker": "DoorHop\\Players\\Enemys\\Enemy.cs",
@@ -125,18 +137,17 @@
               "ViewState": "AQIAAAwAAAAAAAAAAAAiwBwAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-29T02:48:02.432Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "Level2.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Levels\\Level2.cs",
               "RelativeDocumentMoniker": "DoorHop\\Levels\\Level2.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Levels\\Level2.cs",
               "RelativeToolTip": "DoorHop\\Levels\\Level2.cs",
-              "ViewState": "AQIAAGIAAAAAAAAAAAA6wGUAAAAAAAAA",
+              "ViewState": "AQIAAFsAAAAAAAAAAAAcwGwAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-27T20:12:32.708Z",
               "IsPinned": true,
@@ -144,15 +155,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Level1.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Levels\\Level1.cs",
               "RelativeDocumentMoniker": "DoorHop\\Levels\\Level1.cs",
               "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Levels\\Level1.cs",
               "RelativeToolTip": "DoorHop\\Levels\\Level1.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAIA0wBkAAAAAAAAA",
+              "ViewState": "AQIAAEMAAAAAAAAAAAAewF0AAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-27T20:11:34.394Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Player.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Heros\\Player.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Players\\Heros\\Player.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Heros\\Player.cs",
+              "RelativeToolTip": "DoorHop\\Players\\Heros\\Player.cs",
+              "ViewState": "AQIAACsAAAAAAAAAAAAswDkAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T00:20:24.376Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -166,20 +191,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MenuState.cs",
-              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\MenuState.cs",
-              "RelativeDocumentMoniker": "DoorHop\\GameStates\\MenuState.cs",
-              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\MenuState.cs",
-              "RelativeToolTip": "DoorHop\\GameStates\\MenuState.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAewBsAAABtAAAA",
+              "DocumentIndex": 5,
+              "Title": "Map.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Map.cs",
+              "RelativeDocumentMoniker": "DoorHop\\TileMap\\Map.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\TileMap\\Map.cs",
+              "RelativeToolTip": "DoorHop\\TileMap\\Map.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T23:44:38.113Z",
+              "WhenOpened": "2024-12-29T20:02:18.795Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
+              "Title": "Game1.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Game1.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Game1.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Game1.cs",
+              "RelativeToolTip": "DoorHop\\Game1.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAG4AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T17:59:26.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "StartButton.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Buttons\\StartButton.cs",
               "RelativeDocumentMoniker": "DoorHop\\Buttons\\StartButton.cs",
@@ -192,7 +230,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
+              "Title": "MenuState.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\MenuState.cs",
+              "RelativeDocumentMoniker": "DoorHop\\GameStates\\MenuState.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\MenuState.cs",
+              "RelativeToolTip": "DoorHop\\GameStates\\MenuState.cs",
+              "ViewState": "AQIAACQAAAAAAAAAAAAwwBcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-28T23:44:38.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Collectable.cs",
+              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Collectables\\Collectable.cs",
+              "RelativeDocumentMoniker": "DoorHop\\Collectables\\Collectable.cs",
+              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Collectables\\Collectable.cs",
+              "RelativeToolTip": "DoorHop\\Collectables\\Collectable.cs",
+              "ViewState": "AQIAADgAAAAAAAAAAAAgwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-29T18:06:48.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "LevelState.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\LevelState.cs",
               "RelativeDocumentMoniker": "DoorHop\\GameStates\\LevelState.cs",
@@ -200,12 +264,11 @@
               "RelativeToolTip": "DoorHop\\GameStates\\LevelState.cs",
               "ViewState": "AQIAAA4AAAAAAAAAAIAwwEkAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T00:01:25.03Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T00:01:25.03Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
               "Title": "GameLoseState.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\GameStates\\GameLoseState.cs",
               "RelativeDocumentMoniker": "DoorHop\\GameStates\\GameLoseState.cs",
@@ -213,25 +276,11 @@
               "RelativeToolTip": "DoorHop\\GameStates\\GameLoseState.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAB2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-28T23:31:21.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-28T23:31:21.004Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Player.cs",
-              "RelativeDocumentMoniker": "DoorHop\\Players\\Player.cs",
-              "ToolTip": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Player.cs",
-              "RelativeToolTip": "DoorHop\\Players\\Player.cs",
-              "ViewState": "AQIAACAAAAAAAAAAAAAtwNAAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T00:20:24.376Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "GhostEnemy.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Enemys\\GhostEnemy.cs",
               "RelativeDocumentMoniker": "DoorHop\\Players\\Enemys\\GhostEnemy.cs",
@@ -239,12 +288,11 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\GhostEnemy.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAuwBEAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T00:32:51.847Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T00:32:51.847Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "WalkEnemy.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Enemys\\WalkEnemy.cs",
               "RelativeDocumentMoniker": "DoorHop\\Players\\Enemys\\WalkEnemy.cs",
@@ -252,12 +300,11 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\WalkEnemy.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAowBIAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T02:50:37.067Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T02:50:37.067Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
               "Title": "ShootEnemy.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Players\\Enemys\\ShootEnemy.cs",
               "RelativeDocumentMoniker": "DoorHop\\Players\\Enemys\\ShootEnemy.cs",
@@ -265,12 +312,11 @@
               "RelativeToolTip": "DoorHop\\Players\\Enemys\\ShootEnemy.cs",
               "ViewState": "AQIAAB0AAAAAAAAAAAAkwB4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T02:50:06.898Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T02:50:06.898Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "ScoreManager.cs",
               "DocumentMoniker": "C:\\Users\\aberk\\Documents\\GameDevelopment_NacerAberkan\\DoorHop\\DoorHop\\Score\\ScoreManager.cs",
               "RelativeDocumentMoniker": "DoorHop\\Score\\ScoreManager.cs",
@@ -278,8 +324,7 @@
               "RelativeToolTip": "DoorHop\\Score\\ScoreManager.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-29T03:23:45.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-29T03:23:45.019Z"
             }
           ]
         }

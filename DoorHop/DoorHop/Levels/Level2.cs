@@ -102,6 +102,9 @@ namespace DoorHop.Levels
 
             if (hero.Bounds.Intersects(door.Bounds))
             {
+                hero.WinSound();
+                hero.ResetLevel2();
+                
                 // gewonnen
                 game.ChangeState(new GameWonState(game,graphicsDevice ,game.Content, hero));
 
