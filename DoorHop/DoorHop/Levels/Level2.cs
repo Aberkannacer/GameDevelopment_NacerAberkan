@@ -1,5 +1,7 @@
 ﻿using DoorHop.Collectables;
+using DoorHop.Factory;
 using DoorHop.GameStates;
+using DoorHop.Interfaces;
 using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
 using DoorHop.TileMap;
@@ -17,11 +19,15 @@ namespace DoorHop.Levels
         //door
         private Texture2D doorTexture;
         private Door door;
-        
+        //factory pattern
+        private readonly IGameObjectFactory gameObjectFactory;
+
         public Level2(ContentManager content, Hero hero, GraphicsDevice graphicsDevice, Game1 game) : base(content, hero, graphicsDevice, game)
         {
             this.hero = hero;
             hero.position = new Vector2(80, 80);
+            //gameobject
+            gameObjectFactory = new ObjectFactory();
             //enemies
             CreateEnemies();
             //coins
@@ -29,15 +35,15 @@ namespace DoorHop.Levels
         }
         private void CreateEnemies()
         {
-            enemies.Add(new WalkEnemy(content, 64, 64, new Vector2(300, 386)));
-            enemies.Add(new ShootEnemy(content, 64, 64, new Vector2(355, 240)));
-            enemies.Add(new GhostEnemy(content, 64, 64, new Vector2(700, 350)));
+            enemies.Add(gameObjectFactory.CreateEnemy("walkEnemy", content, new Vector2(300, 386)));
+            enemies.Add(gameObjectFactory.CreateEnemy("shootEnemy", content, new Vector2(355, 240)));
+            enemies.Add(gameObjectFactory.CreateEnemy("ghostEnemy", content, new Vector2(700, 350)));
         }
         private void CreateCoins()
         {
-            coins.Add(new Collectable(content, new Vector2(620, 250)));
-            coins.Add(new Collectable(content, new Vector2(215, 60)));
-            coins.Add(new Collectable(content, new Vector2(490, 50)));
+            coins.Add(gameObjectFactory.CreateCoin(new Vector2(620, 250), content));
+            coins.Add(gameObjectFactory.CreateCoin(new Vector2(215, 60), content));
+            coins.Add(gameObjectFactory.CreateCoin(new Vector2(490, 50), content));
         }
         public override void Load()
         {
