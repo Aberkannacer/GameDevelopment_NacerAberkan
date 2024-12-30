@@ -24,7 +24,7 @@ namespace DoorHop.Input
         public bool IsJumpKeyPressed()
         {
             KeyboardState keyboardState = Keyboard.GetState();
-            return keyboardState.IsKeyDown(Keys.Space);
+            return keyboardState.IsKeyDown(Keys.Space | Keys.Up);
         }
         public bool IsAttackButtonPressed()
         {

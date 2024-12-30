@@ -14,11 +14,12 @@ namespace DoorHop.Players.Enemys
         //textures & rectangle
         protected Texture2D texture;
         protected Animatie currentAnimation;
+        protected Animatie deathAnimation;
         protected Rectangle rectangle;
         protected Rectangle bounds;
         //position
         protected Vector2 position;
-        //hero attributen
+        //enemy attributen
         public bool isAlive;
         //snelheid enemy
         protected float moveSpeed;
