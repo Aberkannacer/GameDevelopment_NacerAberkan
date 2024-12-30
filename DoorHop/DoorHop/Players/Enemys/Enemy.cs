@@ -25,9 +25,13 @@ namespace DoorHop.Players.Enemys
         protected float moveSpeed;
         //score
         protected int score;
-        //
+        //enemy groote
         protected int enemyWidth;
         protected int enemyHeight;
+        //death
+        protected bool isDead;
+        protected float deathAnimationTimer;
+        protected float deathAnimationDuration;
         public int Score
         {
             get { return score; }

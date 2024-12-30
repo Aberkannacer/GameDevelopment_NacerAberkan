@@ -11,10 +11,7 @@ namespace DoorHop.Players.Enemys
     {
         //speed ghost
         private float speedGhost;
-        //death
-        private bool isDead = false;
-        private float deathAnimationTimer;
-        private float deathAnimationDuration;
+        
         public GhostEnemy(ContentManager content,int width, int height, Vector2  position) : base(width, height)
         {
             //enemy
@@ -23,6 +20,7 @@ namespace DoorHop.Players.Enemys
             //speed
             speedGhost = 2f;
             //death
+            isDead = false;
             deathAnimationTimer = 0;
             deathAnimationDuration = 0.1f;
             //posiiton

@@ -28,9 +28,14 @@ namespace DoorHop.Players.Enemys
             bullets = new List<Bullet>();
             //shoot
             shootTimer = 2f;
+            //death
+            isDead = false;
+            deathAnimationTimer = 0;
+            deathAnimationDuration = 0.5f;
             //score
             score = 100;
             LoadContent(content);
+
         }
         public override void LoadContent(ContentManager content)
         {
@@ -41,32 +46,49 @@ namespace DoorHop.Players.Enemys
             currentAnimation = new Animatie(texture, true);
             currentAnimation.AddAnimationFrames(0, 64, 64, 6);
             currentAnimation.SetSpeed(1.0f);
+
+            deathAnimation = new Animatie(texture, false);
+            deathAnimation.AddAnimationFrames(3, 64, 64, 8);
         }
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
-            shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (shootTimer >= shootInterval)
+            //regelen van de dood animatie
+            if (isDead)
             {
-                Shoot(hero);
-                shootTimer = 0f;
-            }
-            for (int i = bullets.Count - 1; i >= 0; i--)
-            {
-                bullets[i].Update(gameTime, hero);
-
-                if (bullets[i].CollisionCheck(hero))
+                position.Y -= 0.2f;
+                deathAnimationTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (deathAnimationTimer >= deathAnimationDuration)
                 {
-                    hero.GetHit(1);
-                    bullets.RemoveAt(i);
-                    continue;
-                }
-                if (bullets[i].IsDeleted())
-                {
-                    bullets.RemoveAt(i);
+                    isAlive = false;
+                    return;
                 }
             }
-           
+            else
+            {
+                shootTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                if (shootTimer >= shootInterval)
+                {
+                    Shoot(hero);
+                    shootTimer = 0f;
+                }
+                for (int i = bullets.Count - 1; i >= 0; i--)
+                {
+                    bullets[i].Update(gameTime, hero);
+
+                    if (bullets[i].CollisionCheck(hero))
+                    {
+                        hero.GetHit(1);
+                        bullets.RemoveAt(i);
+                        continue;
+                    }
+                    if (bullets[i].IsDeleted())
+                    {
+                        bullets.RemoveAt(i);
+                    }
+                }
+            }
+            //collision           
             int collisionBoxWidth = enemyWidth - 4;
             int collisionBoxHeight = enemyHeight - 20;
             int xOffset = (enemyWidth - collisionBoxWidth) + 3;
@@ -79,11 +101,21 @@ namespace DoorHop.Players.Enemys
                 collisionBoxHeight
             );
             currentAnimation.Update(gameTime);
+            deathAnimation.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
+            //als dood is dan teken je de doodanimatie
+            if (isDead)
+            {
+                spriteBatch.Draw(texture, position, deathAnimation.CurrentFrame.sourceRecatangle,
                 Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            }
+            else
+            {
+                spriteBatch.Draw(texture, position, currentAnimation.CurrentFrame.sourceRecatangle,
+                Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.FlipHorizontally, 0f);
+            }
 
             foreach (var item in bullets)
             {
@@ -105,6 +137,10 @@ namespace DoorHop.Players.Enemys
         public void RemoveBullet(Bullet bullet)
         {
             bullets.Remove(bullet);
+        }
+        public override void TakeDamage()
+        {
+            isDead = true;
         }
     }
 }
