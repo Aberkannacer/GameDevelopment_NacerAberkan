@@ -17,6 +17,10 @@ namespace DoorHop.Players.Enemys
             enemyWidth = 38;
             //speed
             moveSpeed = 1.5f;
+            //death
+            isDead = false;
+            deathAnimationTimer = 0;
+            deathAnimationDuration = 0.5f;
             //score
             score = 100;
             LoadContent(content);
@@ -28,15 +32,31 @@ namespace DoorHop.Players.Enemys
             currentAnimation = new Animatie(texture, true);
             currentAnimation.AddAnimationFrames(1, 64, 32, 8);
             currentAnimation.SetSpeed(1.0f);
+
+            deathAnimation = new Animatie(texture, false);
+            deathAnimation.AddAnimationFrames(4, 64, 32, 5);
         }
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
-            position.X += moveSpeed;
-            if (position.X > 700 || position.X < 0) //loopt 420 naar positie x rechts en keert terug als die naar links gaat 0
+            //regelen van de dood animatie
+            if (isDead)
             {
-                moveSpeed = -moveSpeed;
+                deathAnimationTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (deathAnimationTimer >= deathAnimationDuration)
+                {
+                    isAlive = false;
+                    return;
+                }
             }
-
+            else
+            {
+                position.X += moveSpeed;
+                if (position.X > 700 || position.X < 0) //loopt 420 naar positie x rechts en keert terug als die naar links gaat 0
+                {
+                    moveSpeed = -moveSpeed;
+                }
+            }
+            //collision
             int collisionBoxWidth = enemyWidth;
             int collisionBoxHeight = enemyHeight / 2;
             int xOffset;
@@ -56,12 +76,22 @@ namespace DoorHop.Players.Enemys
                 collisionBoxWidth,
                 collisionBoxHeight
             );
-            currentAnimation?.Update(gameTime);
+            currentAnimation.Update(gameTime);
+            deathAnimation.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, currentAnimation?.CurrentFrame.sourceRecatangle,
-                Color.White, 0f, Vector2.Zero, 2f,moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+            //als dood is dan teken je de doodanimatie
+            if (isDead)
+            {
+                spriteBatch.Draw(texture, position, deathAnimation.CurrentFrame.sourceRecatangle,
+                Color.White, 0f, Vector2.Zero, 2f, moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+            }
+            else
+            {
+                spriteBatch.Draw(texture, position, currentAnimation?.CurrentFrame.sourceRecatangle,
+                    Color.White, 0f, Vector2.Zero, 2f, moveSpeed > 0 ? SpriteEffects.None : SpriteEffects.FlipHorizontally, 0f);
+            }
 
             // Debug collision bounds
             /*#if DEBUG
@@ -69,6 +99,10 @@ namespace DoorHop.Players.Enemys
             boundTexture.SetData(new[] { Color.Yellow * 1f });
             spriteBatch.Draw(boundTexture, bounds, Color.Yellow * 0.5f);
             #endif*/
+        }
+        public override void TakeDamage()
+        {
+            isDead = true;
         }
     }
 }

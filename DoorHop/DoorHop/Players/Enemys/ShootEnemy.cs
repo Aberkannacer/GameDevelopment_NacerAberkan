@@ -49,13 +49,13 @@ namespace DoorHop.Players.Enemys
 
             deathAnimation = new Animatie(texture, false);
             deathAnimation.AddAnimationFrames(3, 64, 64, 8);
+
         }
         public override void Update(GameTime gameTime, List<TileMap.CollisionTiles> tiles, Hero hero, List<Enemy> enemies)
         {
             //regelen van de dood animatie
             if (isDead)
             {
-                position.Y -= 0.2f;
                 deathAnimationTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
                 if (deathAnimationTimer >= deathAnimationDuration)
                 {
