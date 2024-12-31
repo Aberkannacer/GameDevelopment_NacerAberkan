@@ -1,6 +1,4 @@
-﻿using DoorHop.Collectables;
-using DoorHop.Input;
-using DoorHop.Levels;
+﻿using DoorHop.Levels;
 using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

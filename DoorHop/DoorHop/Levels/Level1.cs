@@ -1,8 +1,6 @@
-﻿using DoorHop.Collectables;
-using DoorHop.Factory;
+﻿using DoorHop.Factory;
 using DoorHop.GameStates;
 using DoorHop.Interfaces;
-using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
 using DoorHop.TileMap;
 using Microsoft.Xna.Framework;

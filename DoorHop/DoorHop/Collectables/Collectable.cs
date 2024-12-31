@@ -1,15 +1,8 @@
 ﻿using DoorHop.Animation;
-using DoorHop.Players.Enemys;
 using DoorHop.Players.Heros;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using SharpDX.Direct3D9;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DoorHop.Collectables
 {

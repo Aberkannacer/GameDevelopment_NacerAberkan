@@ -2,7 +2,6 @@
 using DoorHop.Input;
 using DoorHop.Interfaces;
 using DoorHop.Players.Enemys;
-using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

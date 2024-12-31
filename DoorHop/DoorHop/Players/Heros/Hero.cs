@@ -1,7 +1,6 @@
 ﻿using DoorHop.Animation;
 using DoorHop.Input;
 using DoorHop.Players.Enemys;
-using DoorHop.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
